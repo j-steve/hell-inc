@@ -1,0 +1,27 @@
+# =============== #
+# Unity generated #
+# =============== #
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+.collabignore
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+/.vs/
+*.sln
+*.csproj
+#NuGet
+packages/
+
+# ================= #
+# Game Output Files #
+# ================= #
+Installer/*
+*.zip
+
+
+
+
+
