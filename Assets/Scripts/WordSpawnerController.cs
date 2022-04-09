@@ -37,8 +37,8 @@ public class WordSpawnerController : MonoBehaviour
     const int MAX_CHAR_WIDTH_PIXELS = 5;
     const int MAX_CHAR_HEIGHT_PIXELS = 8;
 
-    [SerializeField] GameObject pixelPrefab;
-    [SerializeField] GameObject wordPrefab;
+    [SerializeField] WordPixelController pixelPrefab;
+    [SerializeField] WordController wordPrefab;
     [SerializeField] float wordRate = 99999999999999999;
     //[SerializeField] Queue<char> wordBuffer;
     Queue<string> wordList = new Queue<string>();
@@ -72,8 +72,9 @@ public class WordSpawnerController : MonoBehaviour
 
     void SpawnWord(string word)
     {
-        GameObject wordObj = Instantiate(wordPrefab, transform);
+        WordController wordObj = Instantiate(wordPrefab, transform);
         wordObj.name = "Word: ";
+        wordObj.color = Random.ColorHSV();
         int charOffset = 0;
         foreach (char nextChar in word) {
             wordObj.name += nextChar;
@@ -85,7 +86,7 @@ public class WordSpawnerController : MonoBehaviour
         wordObj.GetComponent<Rigidbody>().useGravity = false;
     }
 
-     int SpawnLetter(char character, int charOffset, GameObject parent)
+     int SpawnLetter(char character, int charOffset, WordController parentWord)
     {
         Debug.LogFormat("Spawning letter \"{0}\"", character);
         if (!CHAR_PIXELS.ContainsKey(character)) {
@@ -99,8 +100,9 @@ public class WordSpawnerController : MonoBehaviour
                 int pixelIndex = pixelCol * MAX_CHAR_HEIGHT_PIXELS + pixelRow;
                 //Debug.LogFormat("Fetching {0} for row {1} col {2}", pixelIndex, pixelRow, pixelCol);
                 if (charPixels[pixelIndex] == '1') {
-                    GameObject pixel = Instantiate(pixelPrefab, new Vector3(pixelCol + charOffset, -pixelRow, 1),  Quaternion.identity, parent.transform);
+                    WordPixelController pixel = Instantiate(pixelPrefab, new Vector3(pixelCol + charOffset, -pixelRow, 1),  Quaternion.identity, parentWord.transform);
                     pixel.name = "Pixel " + character;
+                    pixel.GetComponent<Renderer>().material.color = parentWord.color;
                     if (pixelCol > charWidth) { charWidth = pixelCol; }
                 }
             }
