@@ -1,10 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Utilities
 {
-    
+    public static int GetRandomSeed()
+    {
+        string date = DateTime.Now.ToShortDateString();
+        return Convert.ToInt32(date);
+    }
 }
 
 public class ItemInfo
@@ -47,8 +52,9 @@ public class EnemyInfo
     public EnemyInfo()
     {
         Traits = new List<Trait>();
-        int randomConversation = Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
-        int randomEscape = Random.Range(0, DatabaseManager.Instance.EscapeTraits.Count);
+        UnityEngine.Random.InitState(Utilities.GetRandomSeed());
+        int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
+        int randomEscape = UnityEngine.Random.Range(0, DatabaseManager.Instance.EscapeTraits.Count);
 
         Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
         Traits.Add(DatabaseManager.Instance.EscapeTraits[randomEscape]);
@@ -135,5 +141,5 @@ public class Conversation
 
 public enum TraitType
 {
-    Conversation = 0, Escape = 1, Boss = 2
+    Conversation = 0, Wanted = 1, Boss = 2
 }

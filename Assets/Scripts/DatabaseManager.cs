@@ -9,7 +9,7 @@ public class DatabaseManager
     static DatabaseManager db;
 
     List<Trait> conversationTraits;
-    List<Trait> escapeTraits;
+    List<Trait> wantedTraits;
     Trait bossTrait;
     List<ItemInfo> items;
     List<GossipInfo> gossips;
@@ -29,7 +29,7 @@ public class DatabaseManager
     public List<Trait> ConversationTraits { get => conversationTraits; set => conversationTraits = value; }
     public List<ItemInfo> Items { get => items; set => items = value; }
     public List<GossipInfo> Gossips { get => gossips; set => gossips = value; }
-    public List<Trait> EscapeTraits { get => escapeTraits; set => escapeTraits = value; }
+    public List<Trait> EscapeTraits { get => wantedTraits; set => wantedTraits = value; }
     public Trait BossTrait { get => bossTrait; set => bossTrait = value; }
 
     private void LoadItems()
@@ -102,7 +102,7 @@ public class DatabaseManager
                         type = TraitType.Conversation;
                         break;
                     case "Escape":
-                        type = TraitType.Escape;
+                        type = TraitType.Wanted;
                         break;
                     default:
                         type = TraitType.Conversation;
@@ -151,7 +151,7 @@ public class DatabaseManager
                     case TraitType.Conversation:
                         tempConversation.Add(trait);
                         break;
-                    case TraitType.Escape:
+                    case TraitType.Wanted:
                         tempEscape.Add(trait);
                         break;
                 }
