@@ -13,12 +13,14 @@ public class DatabaseManager
     Trait bossTrait;
     List<ItemInfo> items;
     List<GossipInfo> gossips;
+    List<Conversation> conversations;
 
     private DatabaseManager()
     {
         LoadItems();
         LoadGossips();
         LoadTraits();
+        loadConversations();
     }
 
     public static DatabaseManager Instance
@@ -31,7 +33,33 @@ public class DatabaseManager
     public List<GossipInfo> Gossips { get => gossips; set => gossips = value; }
     public List<Trait> EscapeTraits { get => wantedTraits; set => wantedTraits = value; }
     public Trait BossTrait { get => bossTrait; set => bossTrait = value; }
+    public List<Conversation> Conversations { get => conversations; set => conversations = value; }
 
+    private void loadConversations()
+    {
+        List<Conversation> temp = new List<Conversation>();
+        using (XmlReader read = XmlReader.Create(@"Assets/Database/Conversations.xml"))
+        {
+            read.ReadToFollowing("conversation");
+            do
+            {
+                read.ReadToFollowing("text");
+                string text = read.ReadElementContentAsString();
+                read.ReadToFollowing("bestResponse");
+                Enum.TryParse(read.ReadElementContentAsString(), out Emoji best);
+                read.ReadToFollowing("goodResponse");
+                Enum.TryParse(read.ReadElementContentAsString(), out Emoji good);
+                read.ReadToFollowing("worstResponse");
+                Enum.TryParse(read.ReadElementContentAsString(), out Emoji worst);
+                Conversation conversation = new Conversation(text, best, good, worst);
+
+                temp.Add(conversation);
+
+            } while (read.ReadToFollowing("conversation"));
+        }
+
+        Conversations = temp;
+    }
     private void LoadItems()
     {
         List<ItemInfo> temp = new List<ItemInfo>();
@@ -91,23 +119,7 @@ public class DatabaseManager
                 read.ReadToFollowing("name");
                 string name = read.ReadElementContentAsString();
                 read.ReadToFollowing("type");
-                string traitType = read.ReadElementContentAsString();
-                TraitType type;
-                switch (traitType)
-                {
-                    case "Boss":
-                        type = TraitType.Boss;
-                        break;
-                    case "Conversation":
-                        type = TraitType.Conversation;
-                        break;
-                    case "Escape":
-                        type = TraitType.Wanted;
-                        break;
-                    default:
-                        type = TraitType.Conversation;
-                        break;
-                }
+                Enum.TryParse(read.ReadElementContentAsString(), out TraitType type);
                 read.ReadToFollowing("conversationTextSize");
                 float conversationTextSize = read.ReadElementContentAsFloat();
                 read.ReadToFollowing("conversationTextSpeed");

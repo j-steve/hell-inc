@@ -128,15 +128,28 @@ public class CombatModifiers
 
 public class Conversation
 {
-    string name;
-    string comment1;
-    List<string> answer1;
-    string comment2;
-    List<string> answer2;
-    string comment3;
-    List<string> answer3;
-    string comment4;
-    List<string> answer4;
+    string text;
+    Emoji bestResponse;
+    Emoji goodResponse;
+    Emoji worstResponse;
+
+    public Conversation(string text, Emoji bestResponse, Emoji goodResponse, Emoji worstResponse)
+    {
+        this.text = text;
+        this.bestResponse = bestResponse;
+        this.goodResponse = goodResponse;
+        this.worstResponse = worstResponse;
+    }
+
+    public string Text { get => text; set => text = value; }
+    public Emoji BestResponse { get => bestResponse; set => bestResponse = value; }
+    public Emoji GoodResponse { get => goodResponse; set => goodResponse = value; }
+    public Emoji WorstResponse { get => worstResponse; set => worstResponse = value; }
+}
+
+public enum Emoji
+{
+    Happy = 0, Love = 1, Neutral = 2, Crying = 3, Shocked = 4, Anger = 5
 }
 
 public enum TraitType

@@ -1,0 +1,20 @@
+<conversations>
+<conversation>
+<text>I just bought a new car</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Love</goodresponse>
+<worstresponse>Shocked</worstresponse>
+</conversation>
+<conversation>
+<text>I just bought a new car but crashed it</text>
+<bestresponse>Sadness</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>My daughter just got locked up in jail trafficking drugs</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+</conversations>
