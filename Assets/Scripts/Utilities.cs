@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Utilities
 {
-    public static int GetRandomSeed()
+    public static int GetDailySeed()
     {
         string date = DateTime.Now.ToShortDateString();
         return Convert.ToInt32(date);
@@ -52,7 +52,7 @@ public class EnemyInfo
     public EnemyInfo()
     {
         Traits = new List<Trait>();
-        UnityEngine.Random.InitState(Utilities.GetRandomSeed());
+        UnityEngine.Random.InitState(Utilities.GetDailySeed());
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
         int randomEscape = UnityEngine.Random.Range(0, DatabaseManager.Instance.EscapeTraits.Count);
 
