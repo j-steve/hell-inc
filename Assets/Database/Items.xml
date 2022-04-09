@@ -1,0 +1,12 @@
+<items>
+<item>
+<name>Cake</name>
+<description>A slice of stale carrot cake, the dessert you would expect to find in Hell.</description>
+<sprite>Cake.png</sprite>
+</item>
+<item>
+<name>Calculator</name>
+<description>A TI-666 graphing calculator powered by the souls of former math teachers.</description>
+<sprite>Calculator.png</sprite>
+</item>
+</items>
