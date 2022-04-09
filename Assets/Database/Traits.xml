@@ -33,7 +33,7 @@
 </trait>
 <trait>
 <name>Cake Lover</name>
-<type>Escape</type>
+<type>Wanted</type>
 <conversationTextSize>1</conversationTextSize>
 <conversationTextSpeed>1</conversationTextSpeed>
 <runAwayChance>0</runAwayChance>

@@ -31,7 +31,7 @@ public class DatabaseManager
     public List<Trait> ConversationTraits { get => conversationTraits; set => conversationTraits = value; }
     public List<ItemInfo> Items { get => items; set => items = value; }
     public List<GossipInfo> Gossips { get => gossips; set => gossips = value; }
-    public List<Trait> EscapeTraits { get => wantedTraits; set => wantedTraits = value; }
+    public List<Trait> WantedTraits { get => wantedTraits; set => wantedTraits = value; }
     public Trait BossTrait { get => bossTrait; set => bossTrait = value; }
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
 
@@ -45,11 +45,11 @@ public class DatabaseManager
             {
                 read.ReadToFollowing("text");
                 string text = read.ReadElementContentAsString();
-                read.ReadToFollowing("bestResponse");
+                read.ReadToFollowing("bestresponse");
                 Enum.TryParse(read.ReadElementContentAsString(), out Emoji best);
-                read.ReadToFollowing("goodResponse");
+                read.ReadToFollowing("goodresponse");
                 Enum.TryParse(read.ReadElementContentAsString(), out Emoji good);
-                read.ReadToFollowing("worstResponse");
+                read.ReadToFollowing("worstresponse");
                 Enum.TryParse(read.ReadElementContentAsString(), out Emoji worst);
                 Conversation conversation = new Conversation(text, best, good, worst);
 
@@ -109,7 +109,7 @@ public class DatabaseManager
     private void LoadTraits()
     {
         List<Trait> tempConversation = new List<Trait>(); 
-        List<Trait> tempEscape = new List<Trait>();
+        List<Trait> tempWanted = new List<Trait>();
 
         using (XmlReader read = XmlReader.Create(@"Assets/Database/Traits.xml"))
         {
@@ -164,7 +164,7 @@ public class DatabaseManager
                         tempConversation.Add(trait);
                         break;
                     case TraitType.Wanted:
-                        tempEscape.Add(trait);
+                        tempWanted.Add(trait);
                         break;
                 }
 
@@ -172,6 +172,6 @@ public class DatabaseManager
         }
 
         ConversationTraits = tempConversation;
-        EscapeTraits = tempEscape;
+        WantedTraits = tempWanted;
     }
 }
