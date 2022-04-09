@@ -47,7 +47,7 @@ public class WordSpawnerController : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        wordList = new Queue<string>("This is some random words dude".ToLowerInvariant().Split(" "));
+        wordList = new Queue<string>("the quick brown fox jumps over the lazy dog This is some random words dude omg can you believe how many words are here there are like a thousand words".ToLowerInvariant().Split(" "));
         //wordBuffer = new Queue<char>(("This is some random words dude".ToLowerInvariant().Split(" ")).ToCharArray())) ;
     }
 
@@ -72,9 +72,8 @@ public class WordSpawnerController : MonoBehaviour
 
     void SpawnWord(string word)
     {
-        WordController wordObj = Instantiate(wordPrefab, transform);
+        WordController wordObj = WordController.Create(wordPrefab, transform);
         wordObj.name = "Word: ";
-        wordObj.color = Random.ColorHSV();
         int charOffset = 0;
         foreach (char nextChar in word) {
             wordObj.name += nextChar;
@@ -82,8 +81,7 @@ public class WordSpawnerController : MonoBehaviour
                 charOffset += SpawnLetter(nextChar, charOffset, wordObj) + 2;
             }
         }
-        wordObj.GetComponent<Rigidbody>().AddForce(new Vector3(-1000, 1));
-        wordObj.GetComponent<Rigidbody>().useGravity = false;
+        
     }
 
      int SpawnLetter(char character, int charOffset, WordController parentWord)
@@ -98,9 +96,9 @@ public class WordSpawnerController : MonoBehaviour
         for (int pixelCol = 0; pixelCol < MAX_CHAR_WIDTH_PIXELS; pixelCol++) {
             for (int pixelRow = 0; pixelRow < MAX_CHAR_HEIGHT_PIXELS; pixelRow++) {
                 int pixelIndex = pixelCol * MAX_CHAR_HEIGHT_PIXELS + pixelRow;
-                //Debug.LogFormat("Fetching {0} for row {1} col {2}", pixelIndex, pixelRow, pixelCol);
                 if (charPixels[pixelIndex] == '1') {
-                    WordPixelController pixel = Instantiate(pixelPrefab, new Vector3(pixelCol + charOffset, -pixelRow, 1),  Quaternion.identity, parentWord.transform);
+                    Vector3 spawnPosition = new Vector3(pixelCol + charOffset + transform.position.x, -pixelRow + transform.position.y, transform.position.z);
+                    WordPixelController pixel = Instantiate(pixelPrefab, spawnPosition,  Quaternion.identity, parentWord.transform);
                     pixel.name = "Pixel " + character;
                     pixel.GetComponent<Renderer>().material.color = parentWord.color;
                     if (pixelCol > charWidth) { charWidth = pixelCol; }
