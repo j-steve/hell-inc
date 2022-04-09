@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     bool lockPlayer = false;
     List<ItemInfo> itemInventory;
     List<GossipInfo> gossipInventory;
-    int Stamina;
+    int Stamina = 100;
     int Attentiveness; //Conversation speed/size
     int Professionalism; //Mini game character speed/bullet size
     int ConflictResolution;
@@ -67,8 +67,20 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    Movement = PlayerMovement.Forward;
-                    EndPosition = transform.position.z + moveDistance;
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+                    {
+                        if (hit.collider.tag == "Enemy")
+                        {
+                            //Iniatiate combat
+                        }
+                    }
+                    else
+                    {
+                        Movement = PlayerMovement.Forward;
+                        EndPosition = transform.position.z + moveDistance;
+                        Stamina--;
+                    }
                 }
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
                 {
@@ -78,8 +90,20 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    Movement = PlayerMovement.Back;
-                    EndPosition = transform.position.z - moveDistance;
+                    RaycastHit hit;
+                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+                    {
+                        if (hit.collider.tag == "Enemy")
+                        {
+                            //Iniatiate combat
+                        }
+                    }
+                    else
+                    {
+                        Movement = PlayerMovement.Back;
+                        EndPosition = transform.position.z - moveDistance;
+                        Stamina--;
+                    }
                 }
             }
             else if (Movement == PlayerMovement.Left)
@@ -122,6 +146,11 @@ public class Player : MonoBehaviour
             }
         }
         lastY = transform.rotation.y;
+
+        if(Stamina <= 0)
+        {
+            //Day is over or game is lost if its the final day
+        }
     }
 
     public enum PlayerMovement
