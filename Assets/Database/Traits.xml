@@ -1,0 +1,50 @@
+<traits>
+<trait>
+<name>Big Bad Boss</name>
+<type>Boss</type>
+<conversationTextSize>.1</conversationTextSize>
+<conversationTextSpeed>10</conversationTextSpeed>
+<runAwayChance>0</runAwayChance>
+<gossipReward>0</gossipReward>
+<itemReward>0</itemReward>
+<miniGameSpeed>10</miniGameSpeed>
+<miniGameSize>.1</miniGameSize>
+<numberOfConversations>3</numberOfConversations>
+<friendshipPoints>1</friendshipPoints>
+<healthLoss>5</healthLoss>
+<item></item>
+<gossip></gossip>
+</trait>
+<trait>
+<name>Body Blocker</name>
+<type>Conversation</type>
+<conversationTextSize>1</conversationTextSize>
+<conversationTextSpeed>1</conversationTextSpeed>
+<runAwayChance>0</runAwayChance>
+<gossipReward>0</gossipReward>
+<itemReward>0</itemReward>
+<miniGameSpeed>1</miniGameSpeed>
+<miniGameSize>1</miniGameSize>
+<numberOfConversations>0</numberOfConversations>
+<friendshipPoints>1</friendshipPoints>
+<healthLoss>1</healthLoss>
+<item></item>
+<gossip></gossip>
+</trait>
+<trait>
+<name>Cake Lover</name>
+<type>Escape</type>
+<conversationTextSize>1</conversationTextSize>
+<conversationTextSpeed>1</conversationTextSpeed>
+<runAwayChance>0</runAwayChance>
+<gossipReward>0</gossipReward>
+<itemReward>0</itemReward>
+<miniGameSpeed>1</miniGameSpeed>
+<miniGameSize>1</miniGameSize>
+<numberOfConversations>0</numberOfConversations>
+<friendshipPoints>1</friendshipPoints>
+<healthLoss>1</healthLoss>
+<item>Cake</item>
+<gossip>Birthday Party</gossip>
+</trait>
+</traits>
