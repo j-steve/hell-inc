@@ -8,7 +8,7 @@ public class Utilities
     public static int GetDailySeed()
     {
         string date = DateTime.Now.ToShortDateString();
-        return Convert.ToInt32(date);
+        return Convert.ToInt32(date.Replace("/", ""));
     }
 }
 
@@ -48,19 +48,39 @@ public class GossipInfo
 public class EnemyInfo
 {
     List<Trait> traits;
+    List<Conversation> conversations;
 
     public EnemyInfo()
     {
         Traits = new List<Trait>();
+        Conversations = new List<Conversation>();
+
         UnityEngine.Random.InitState(Utilities.GetDailySeed());
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
-        int randomEscape = UnityEngine.Random.Range(0, DatabaseManager.Instance.EscapeTraits.Count);
-
+        int randomWanted = UnityEngine.Random.Range(0, DatabaseManager.Instance.WantedTraits.Count);
         Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
-        Traits.Add(DatabaseManager.Instance.EscapeTraits[randomEscape]);
+        Traits.Add(DatabaseManager.Instance.WantedTraits[randomWanted]);
+        List<int> randomNumbers = new List<int>();
+
+        int numOfConversations = 3;
+
+        do
+        {
+            int random = UnityEngine.Random.Range(0, DatabaseManager.Instance.Conversations.Count);
+
+            if(!randomNumbers.Contains(random))
+            {
+                Conversations.Add(DatabaseManager.Instance.Conversations[random]);
+                randomNumbers.Add(random);
+                numOfConversations--;
+            }
+        } while (numOfConversations > 0);
+
+        ;
     }
 
     public List<Trait> Traits { get => traits; set => traits = value; }
+    public List<Conversation> Conversations { get => conversations; set => conversations = value; }
 }
 
 public class Trait
