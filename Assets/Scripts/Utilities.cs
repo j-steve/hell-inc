@@ -13,29 +13,16 @@ public class Utilities
 
     public static void SetSettings(Settings s)
     {
-        try
-        {
-            PlayerPrefs.SetFloat("MasterVolume", s.MasterVolume);
-            PlayerPrefs.SetFloat("SoundEffectVolume", s.SoundEffectVolume);
-            PlayerPrefs.SetFloat("MouseSensitivity", s.MouseSensitivity);
-            PlayerPrefs.SetInt("MouseInversion", s.MouseInversion);
-            PlayerPrefs.Save();
-        }catch(Exception e)
-        {
-            ;
-        }
+        PlayerPrefs.SetFloat("MasterVolume", s.MasterVolume);
+        PlayerPrefs.SetFloat("SoundEffectVolume", s.SoundEffectVolume);
+        PlayerPrefs.SetFloat("MouseSensitivity", s.MouseSensitivity);
+        PlayerPrefs.SetInt("MouseInversion", s.MouseInversion);
+        PlayerPrefs.Save();
     }
 
     public static float GetMasterVolume()
     {
-        try
-        {
-            return PlayerPrefs.GetFloat("MasterVolume", .5f);
-        }catch(Exception e)
-        {
-            ;
-        }
-        return 0f;
+        return PlayerPrefs.GetFloat("MasterVolume", .5f);
     }
 
     public static float GetSoundEffectVolume()
@@ -137,8 +124,6 @@ public class EnemyInfo
                 numOfConversations--;
             }
         } while (numOfConversations > 0);
-
-        ;
     }
 
     public List<Trait> Traits { get => traits; set => traits = value; }
@@ -176,8 +161,8 @@ public class CombatModifiers
     double runAwayChance;
     int gossipReward;
     int itemReward;
-    float miniGameSpeed;
-    float miniGameSize;
+    float miniGameSpeed; //This is the vertical rate of movement
+    float miniGameSize; //This is the vertical range of where text can come in from
     int numberOfConversations;
     double friendshipPoints;
     double healthLoss;
@@ -206,6 +191,11 @@ public class CombatModifiers
     public int NumberOfConversations { get => numberOfConversations; set => numberOfConversations = value; }
     public double FriendshipPoints { get => friendshipPoints; set => friendshipPoints = value; }
     public double HealthLoss { get => healthLoss; set => healthLoss = value; }
+
+    static CombatModifiers CombineModifiers(CombatModifiers x, CombatModifiers y)
+    {
+        return new CombatModifiers(x.ConversationTextSize * y.ConversationTextSize, x.ConversationTextSpeed * y.ConversationTextSpeed, x.RunAwayChance * y.RunAwayChance, x.GossipReward + y.GossipReward, x.ItemReward + y.ItemReward, x.MiniGameSpeed * y.MiniGameSpeed, x.MiniGameSize * y.MiniGameSize, x.NumberOfConversations + y.NumberOfConversations, x.FriendshipPoints * y.FriendshipPoints, x.HealthLoss * y.HealthLoss);
+    }
 }
 
 public class Conversation
