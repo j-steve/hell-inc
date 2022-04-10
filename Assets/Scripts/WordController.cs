@@ -9,7 +9,7 @@ public class WordController : MonoBehaviour
     public float heightOffset = 1;
     public float spinSpeed = 0;
     public float size = 1 ;
-    public float veriticalMovement = 0;
+    public float speed = 1;
 
     public WordController Initialize()
     {
@@ -17,7 +17,7 @@ public class WordController : MonoBehaviour
         heightOffset += (Random.value * 2 - 1) * 40;
         transform.position = transform.position +  new Vector3(0, heightOffset, 0);
         transform.localScale *= Random.value + 1;
-        Debug.LogFormat("Offset is {0}, position is {1}", heightOffset, transform.position);
+        speed = Random.value;
         return this;
     }
 

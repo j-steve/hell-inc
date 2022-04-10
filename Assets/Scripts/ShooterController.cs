@@ -19,7 +19,7 @@ public class ShooterController : MonoBehaviour
     void Update()
     {
         Vector3 newPosition = transform.localPosition; 
-        newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * 20;
+        newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * 50;
         transform.localPosition = newPosition;
 
         if (Input.GetButtonDown("Jump")) {

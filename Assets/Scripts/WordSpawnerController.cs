@@ -99,13 +99,11 @@ public class WordSpawnerController : MonoBehaviour
                     pixel.transform.localPosition =new Vector3(pixelCol + charOffset, -pixelRow, 0);
                     pixel.name = "Pixel " + character;
                     pixel.GetComponent<Renderer>().material.color = parentWord.color;
+                    pixel.GetComponent<Rigidbody>().AddForce(new Vector3(-200 - 2000 * parentWord.speed, 1));
                     if (pixelCol > charWidth) { charWidth = pixelCol; }
                 }
             }
         }
         return charWidth;
-    }
-
-
-
+    } 
 }
