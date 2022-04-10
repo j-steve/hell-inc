@@ -931,6 +931,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverPopup: {fileID: 1189850767}
+  explosion: {fileID: 4166172821060779090, guid: 0266b2a4dcd99eb41845d445748d52b7, type: 3}
 --- !u!1 &1359193055
 GameObject:
   m_ObjectHideFlags: 0

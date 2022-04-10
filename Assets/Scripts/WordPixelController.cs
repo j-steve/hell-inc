@@ -4,7 +4,9 @@ using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
 public class WordPixelController : MonoBehaviour
-{ 
+{
+    [SerializeField] ParticleSystem explosion;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class WordPixelController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 20) {
+            ParticleSystem pixelExplosion = Instantiate(explosion);
+            explosion.transform.position = collision.gameObject.transform.position;
             Destroy(gameObject);
         }
     }

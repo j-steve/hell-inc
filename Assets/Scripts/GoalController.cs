@@ -5,6 +5,7 @@ using UnityEngine;
 public class GoalController : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPopup;
+    [SerializeField] ParticleSystem explosion;
 
     Material material;
 
