@@ -31,7 +31,13 @@ public class WordSpawnerController : MonoBehaviour
     {'w',"00001110000000000100000001100000000001000000111000"},
     {'x',"00010001000000101000000001000000001010000001000100"},
     {'y',"00001000010000010010000000110000000100000000100000"},
-    {'z',"00010011000001010100000110010000000000000000000000"}
+    {'z',"00010011000001010100000110010000000000000000000000"},
+    {'.',"00000001000000000000000000000000000000000000000000"},
+    {'!',"01111101000000000000000000000000000000000000000000"},
+    {'?',"00110000000100000000010011010000111000000000000000"},
+    {',',"00000010010000000110000000000000000000000000000000"},
+    {';',"00001010010000000110000000000000000000000000000000"},
+    {'-',"00001000000000100000000000000000000000000000000000"}
     };
 
     const int MAX_CHAR_WIDTH_PIXELS = 5;
@@ -47,7 +53,7 @@ public class WordSpawnerController : MonoBehaviour
     // Start is called before the first frame update
     void OnEnable()
     {
-        wordList = new Queue<string>("the quick brown fox jumps over the lazy dog This is some random words dude omg can you believe how many words are here there are like a thousand words".ToLowerInvariant().Split(" "));
+        wordList = new Queue<string>("the quick brown fox jumps over the lazy dog! This is some random words, dude. omg can you believe how many-words are here? there are like a thousand words; I think.".ToLowerInvariant().Split(" "));
         //wordBuffer = new Queue<char>(("This is some random words dude".ToLowerInvariant().Split(" ")).ToCharArray())) ;
     }
 
