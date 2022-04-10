@@ -7,24 +7,25 @@ public class WordPixelController : MonoBehaviour
 {
     [SerializeField] ParticleSystem explosion;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<Rigidbody>().AddForce(new Vector3(-1000, 1));
-    }
+    bool isDestroyed = false;
+    new Collider collider;
+    MeshRenderer meshRenderer;
 
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    void Awake()
     {
-        
+        collider = GetComponent<Collider>();
+        meshRenderer = GetComponent<MeshRenderer>();
+        GetComponent<Rigidbody>().AddForce(new Vector3(-1000, 1));
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.relativeVelocity.magnitude > 20) {
-            ParticleSystem pixelExplosion = Instantiate(explosion);
-            explosion.transform.position = collision.gameObject.transform.position;
-            Destroy(gameObject);
+        if (!isDestroyed && (collision.relativeVelocity.magnitude > 20 || collision.gameObject.tag == "Goal")) {
+            explosion.Play();
+            meshRenderer.enabled = false;
+            collider.enabled = false;
+            isDestroyed = true;
         }
     }
 

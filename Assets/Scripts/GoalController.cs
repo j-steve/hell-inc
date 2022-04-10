@@ -5,7 +5,6 @@ using UnityEngine;
 public class GoalController : MonoBehaviour
 {
     [SerializeField] GameObject gameOverPopup;
-    [SerializeField] ParticleSystem explosion;
 
     Material material;
 
@@ -28,6 +27,5 @@ public class GoalController : MonoBehaviour
                 material.color = newColor;
             }
         }
-        Destroy(collision.gameObject);
     }
 }

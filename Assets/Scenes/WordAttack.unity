@@ -835,7 +835,7 @@ GameObject:
   - component: {fileID: 1312010382}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -931,7 +931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverPopup: {fileID: 1189850767}
-  explosion: {fileID: 4166172821060779090, guid: 0266b2a4dcd99eb41845d445748d52b7, type: 3}
 --- !u!1 &1359193055
 GameObject:
   m_ObjectHideFlags: 0
