@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private const float LIFETIME_SECONDS = 10;
+    private const float LIFETIME_SECONDS = 5;
 
     private float expirationTime;
     private Material material;
@@ -21,7 +21,7 @@ public class BulletController : MonoBehaviour
     void Update()
     {
         if (Time.time > expirationTime) {
-            opacity -= Time.deltaTime / 2;
+            opacity -= Time.deltaTime / 10;
             if (opacity <= 0.8) {
                 Destroy(gameObject);
             } else {
@@ -32,6 +32,9 @@ public class BulletController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        if (collision.gameObject.tag == "Player") {
+            return; // Ignore collisions with the gun itself.
+        }
         expirationTime = Mathf.Min(expirationTime, Time.time + 1.5f);
     }
 

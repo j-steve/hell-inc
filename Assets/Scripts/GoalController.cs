@@ -17,6 +17,7 @@ public class GoalController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 20) {
+            //float impactDamage = (collision.relativeVelocity.magnitude  / 100);
             float newBrightness = material.color.r + 0.01f;
             if (newBrightness >= 1) { 
                 gameOverPopup.SetActive(true);
