@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletController : MonoBehaviour
 {
-    private const float LIFETIME_SECONDS = 5;
+    private const float LIFETIME_SECONDS = 10;
 
     private float expirationTime;
     private Material material;
