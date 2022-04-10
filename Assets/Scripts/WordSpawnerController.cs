@@ -63,7 +63,6 @@ public class WordSpawnerController : MonoBehaviour
             return; // TODO
         }
         if ( lastCharSpawnTime + (1 * wordRate) < Time.time) {
-            Debug.LogFormat("lastCharSpawnTime: {0}, time is now {1}", lastCharSpawnTime, Time.time);
             SpawnWord(wordList.Dequeue());
             lastCharSpawnTime = Time.time;
         }
@@ -72,7 +71,7 @@ public class WordSpawnerController : MonoBehaviour
 
     void SpawnWord(string word)
     {
-        WordController wordObj = WordController.Create(wordPrefab, transform);
+        WordController wordObj = Instantiate(wordPrefab, transform).Initialize();
         wordObj.name = "Word: ";
         int charOffset = 0;
         foreach (char nextChar in word) {
@@ -85,8 +84,7 @@ public class WordSpawnerController : MonoBehaviour
     }
 
      int SpawnLetter(char character, int charOffset, WordController parentWord)
-    {
-        Debug.LogFormat("Spawning letter \"{0}\"", character);
+    { 
         if (!CHAR_PIXELS.ContainsKey(character)) {
             Debug.LogWarning("Failed to retrieve character " + character);
             return 0;
@@ -97,8 +95,8 @@ public class WordSpawnerController : MonoBehaviour
             for (int pixelRow = 0; pixelRow < MAX_CHAR_HEIGHT_PIXELS; pixelRow++) {
                 int pixelIndex = pixelCol * MAX_CHAR_HEIGHT_PIXELS + pixelRow;
                 if (charPixels[pixelIndex] == '1') {
-                    Vector3 spawnPosition = new Vector3(pixelCol + charOffset + transform.position.x, -pixelRow + transform.position.y, transform.position.z);
-                    WordPixelController pixel = Instantiate(pixelPrefab, spawnPosition,  Quaternion.identity, parentWord.transform);
+                    WordPixelController pixel = Instantiate(pixelPrefab, parentWord.transform);
+                    pixel.transform.localPosition =new Vector3(pixelCol + charOffset, -pixelRow, 0);
                     pixel.name = "Pixel " + character;
                     pixel.GetComponent<Renderer>().material.color = parentWord.color;
                     if (pixelCol > charWidth) { charWidth = pixelCol; }

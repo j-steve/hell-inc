@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class WordPixelController : MonoBehaviour
-{
+{ 
     // Start is called before the first frame update
     void Start()
     {
@@ -16,9 +17,12 @@ public class WordPixelController : MonoBehaviour
         
     }
 
-    void OnMouseDown()
+    void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Click Detected!", gameObject);
+        if (collision.relativeVelocity.magnitude > 20) {
+            Debug.LogFormat("Mag: {0}", collision.relativeVelocity.magnitude);
+            Destroy(gameObject);
+        }
     }
 
 }
