@@ -128,6 +128,21 @@ public class EnemyInfo
 
     public List<Trait> Traits { get => traits; set => traits = value; }
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
+
+    public string GetCombatLine()
+    {
+        return "What do you want pipsqueak?";
+    }
+
+    public Trait GetCombatTrait()
+    {
+        foreach(Trait t in Traits)
+        {
+            if (t.Type == TraitType.Conversation)
+                return t;
+        }
+        return null;
+    }
 }
 
 public class Trait
