@@ -14,6 +14,7 @@ public class ShooterController : MonoBehaviour
     {
         Vector3 newPosition = transform.localPosition;
         newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * shooterMoveSpeed;
+        Debug.LogFormat("vert is {0}", Input.GetAxis("Vertical"));
         transform.localPosition = newPosition;
         if (Input.GetButtonDown("Jump")) {
             BulletController bullet = Instantiate(bulletPrefab, bulletEjectionPoint.transform.position, Quaternion.identity, bulletContainer.transform);
