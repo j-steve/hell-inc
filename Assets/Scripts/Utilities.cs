@@ -10,6 +10,68 @@ public class Utilities
         string date = DateTime.Now.ToShortDateString();
         return Convert.ToInt32(date.Replace("/", ""));
     }
+
+    public static void SetSettings(Settings s)
+    {
+        try
+        {
+            PlayerPrefs.SetFloat("MasterVolume", s.MasterVolume);
+            PlayerPrefs.SetFloat("SoundEffectVolume", s.SoundEffectVolume);
+            PlayerPrefs.SetFloat("MouseSensitivity", s.MouseSensitivity);
+            PlayerPrefs.SetInt("MouseInversion", s.MouseInversion);
+            PlayerPrefs.Save();
+        }catch(Exception e)
+        {
+            ;
+        }
+    }
+
+    public static float GetMasterVolume()
+    {
+        try
+        {
+            return PlayerPrefs.GetFloat("MasterVolume", .5f);
+        }catch(Exception e)
+        {
+            ;
+        }
+        return 0f;
+    }
+
+    public static float GetSoundEffectVolume()
+    {
+        return PlayerPrefs.GetFloat("SoundEffectVolume", .5f);
+    }
+
+    public static float GetMouseSensitivity()
+    {
+        return PlayerPrefs.GetFloat("MouseSensitivity", .5f);
+    }
+    public static int GetMouseInversion()
+    {
+        return PlayerPrefs.GetInt("MouseInversion", 0);
+    }
+}
+
+public class Settings
+{
+    float masterVolume;
+    float soundEffectVolume;
+    float mouseSensitivity;
+    int mouseInversion;
+
+    public Settings(float masterVolume, float soundEffectVolume, float mouseSensitivity, int mouseInversion)
+    {
+        this.masterVolume = masterVolume;
+        this.soundEffectVolume = soundEffectVolume;
+        this.mouseSensitivity = mouseSensitivity;
+        this.mouseInversion = mouseInversion;
+    }
+
+    public float MasterVolume { get => masterVolume; set => masterVolume = value; }
+    public float SoundEffectVolume { get => soundEffectVolume; set => soundEffectVolume = value; }
+    public float MouseSensitivity { get => mouseSensitivity; set => mouseSensitivity = value; }
+    public int MouseInversion { get => mouseInversion; set => mouseInversion = value; }
 }
 
 public class ItemInfo
