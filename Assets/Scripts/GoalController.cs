@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GoalController : MonoBehaviour
 {
-    [SerializeField] GameObject gameOverPopup;
+    const float pixelHealthDamage = 0.005f;
 
     Material material;
 
@@ -17,15 +17,11 @@ public class GoalController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 20) {
+            WordAttackUi.Instance.IncrementHealth(-pixelHealthDamage);
             //float impactDamage = (collision.relativeVelocity.magnitude  / 100);
-            float newBrightness = material.color.r + 0.01f;
-            if (newBrightness >= 1) { 
-                gameOverPopup.SetActive(true);
-                Time.timeScale = 0;
-            } else {
-                Color newColor = new Color(newBrightness, newBrightness, 1);
-                material.color = newColor;
-            }
+            float newBrightness = material.color.r + pixelHealthDamage;
+            Color newColor = new Color(newBrightness, newBrightness, 1);
+            material.color = newColor;
         }
     }
 }
