@@ -20,7 +20,6 @@ public class WordPixelController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 20) {
-            Debug.LogFormat("Mag: {0}", collision.relativeVelocity.magnitude);
             Destroy(gameObject);
         }
     }

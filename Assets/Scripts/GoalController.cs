@@ -18,8 +18,7 @@ public class GoalController : MonoBehaviour
     {
         if (collision.relativeVelocity.magnitude > 20) {
             float newBrightness = material.color.r + 0.01f;
-            if (newBrightness >= 1) {
-                Destroy(gameObject);
+            if (newBrightness >= 1) { 
                 gameOverPopup.SetActive(true);
                 Time.timeScale = 0;
             } else {
