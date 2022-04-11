@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f3cf39d7a90824c87855bd5cb713ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sin: 0
+  sin: 1
   name: Lou
 --- !u!1 &370209445
 GameObject:
@@ -3061,7 +3061,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 336057955}
   textSpeed: 5
-  player: {fileID: 0}
   enemyMove: 0
   enemyName: {fileID: 1926521476}
   enemyLineImage: {fileID: 540899668}
