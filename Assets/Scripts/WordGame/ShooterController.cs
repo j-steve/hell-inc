@@ -12,8 +12,8 @@ public class ShooterController : MonoBehaviour
     public void Initialize()
     {
         // Reset the scene.
-        foreach(BulletController bullet in bulletContainer.GetComponents<BulletController>()) {
-            Destroy(bullet);
+        foreach(BulletController bullet in bulletContainer.GetComponentsInChildren<BulletController>()) {
+            Destroy(bullet.gameObject);
         } 
     }
 

@@ -80,23 +80,20 @@ public class WordSpawnerController : MonoBehaviour
 
 
     CombatModifiers combatModifiers;
-    Queue<string> wordList = new Queue<string>();
-    List<WordController> spawnedWords = new List<WordController>();
+    Queue<string> wordList = new Queue<string>(); 
     float lastCharSpawnTime = 0;
     bool hasSpawnedAllWords = false;
 
     public void Initialize(string conversationText, CombatModifiers combatModifiers)
     {
         // Reset the scene by clearing any existing words.
-        foreach (WordController word in spawnedWords) {
-            Destroy(word);
-            Debug.LogFormat("Destroying {0}", word.name);
+        foreach (WordController word in GetComponentsInChildren<WordController>()) {
+            Destroy(word.gameObject);
         }
-        spawnedWords.Clear();
-        // Set the new word list.
+        hasSpawnedAllWords = false;
+        // Set the new data.
         this.combatModifiers = combatModifiers;
         wordList = new Queue<string>(conversationText.Split(" "));
-        hasSpawnedAllWords = false;
     }
 
     void FixedUpdate()
@@ -126,7 +123,6 @@ public class WordSpawnerController : MonoBehaviour
                 charOffset += SpawnLetter(nextChar, charOffset, wordObj) + 2;
             }
         }
-        spawnedWords.Add(wordObj);
     }
 
      int SpawnLetter(char character, int charOffset, WordController parentWord)
