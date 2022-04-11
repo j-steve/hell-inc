@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     bool lockPlayer = false;
     List<ItemInfo> itemInventory;
     List<GossipInfo> gossipInventory;
+    public CombatModifiers combatModifiers = new CombatModifiers(1,1,1,1,1,1,1,1,1,1);
     int Stamina = 100;
     int Attentiveness; //Conversation speed/size
     int Professionalism; //Mini game character speed/bullet size
@@ -48,7 +49,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        combatModifiers = new CombatModifiers(1, 1, 1, 1, 1, 1, 1, 3, 1, 1);
     }
 
     // Update is called once per frame
@@ -156,5 +157,10 @@ public class Player : MonoBehaviour
     public enum PlayerMovement
     {
         Forward = 0, Right = 1, Back = 2, Left = 3, None = 4
+    }
+
+    public CombatModifiers GetCombatModifiersForEnemy(Enemy enemy)
+    {
+        return CombatModifiers.CombineModifiers(combatModifiers, enemy.enemyInfo.GetCombatTrait().Modifiers);
     }
 }

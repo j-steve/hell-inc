@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Xml;
 using UnityEngine;
 
@@ -14,13 +15,17 @@ public class DatabaseManager
     List<ItemInfo> items;
     List<GossipInfo> gossips;
     List<Conversation> conversations;
+    Dictionary<Sin, EnemyData> enemyData;
+    List<BattleLine> battleLines;
 
     private DatabaseManager()
     {
         LoadItems();
         LoadGossips();
         LoadTraits();
-        loadConversations();
+        LoadConversations();
+        LoadEnemyData();
+        LoadBattleLines();
     }
 
     public static DatabaseManager Instance
@@ -34,8 +39,62 @@ public class DatabaseManager
     public List<Trait> WantedTraits { get => wantedTraits; set => wantedTraits = value; }
     public Trait BossTrait { get => bossTrait; set => bossTrait = value; }
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
+    public Dictionary<Sin, EnemyData> EnemyData { get => enemyData; set => enemyData = value; }
+    public List<BattleLine> BattleLines { get => battleLines; set => battleLines = value; }
 
-    private void loadConversations()
+    private void LoadBattleLines()
+    {
+        List<BattleLine> temp = new List<BattleLine>();
+        using (XmlReader read = XmlReader.Create(@"Assets/Database/BattleLines.xml"))
+        {
+            read.ReadToFollowing("battleline");
+            do
+            {
+                read.ReadToFollowing("sin");
+                Enum.TryParse(read.ReadElementContentAsString(), out Sin sin);
+                read.ReadToFollowing("text");
+                string text = read.ReadElementContentAsString();
+                BattleLine battleLine = new BattleLine(sin, text);
+
+                temp.Add(battleLine);
+
+            } while (read.ReadToFollowing("battleline"));
+        }
+
+        BattleLines = temp;
+    }
+    public List<string> GetBattleLines(Sin sin)
+    {
+        return BattleLines.Where(s => s.Sin == sin).Select(s => s.Text).ToList<string>();
+    }
+
+    private void LoadEnemyData()
+    {
+        Dictionary<Sin, EnemyData> temp = new Dictionary<Sin, EnemyData>();
+        using (XmlReader read = XmlReader.Create(@"Assets/Database/Enemies.xml"))
+        {
+            read.ReadToFollowing("enemy");
+            do
+            {
+                read.ReadToFollowing("name");
+                string name = read.ReadElementContentAsString();
+                read.ReadToFollowing("sin");
+                Enum.TryParse(read.ReadElementContentAsString(), out Sin sin); 
+                read.ReadToFollowing("sprite");
+                string sprite = read.ReadElementContentAsString();
+                read.ReadToFollowing("iscoworker");
+                bool isCoworker = read.ReadElementContentAsBoolean();
+                EnemyData enemyData = new EnemyData(name, sin, sprite, isCoworker);
+
+                temp.Add(sin, enemyData);
+
+            } while (read.ReadToFollowing("enemy"));
+        }
+
+        EnemyData = temp;
+    }
+
+    private void LoadConversations()
     {
         List<Conversation> temp = new List<Conversation>();
         using (XmlReader read = XmlReader.Create(@"Assets/Database/Conversations.xml"))

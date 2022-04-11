@@ -10,6 +10,55 @@ public class Utilities
         string date = DateTime.Now.ToShortDateString();
         return Convert.ToInt32(date.Replace("/", ""));
     }
+
+    public static void SetSettings(Settings s)
+    {
+        PlayerPrefs.SetFloat("MasterVolume", s.MasterVolume);
+        PlayerPrefs.SetFloat("SoundEffectVolume", s.SoundEffectVolume);
+        PlayerPrefs.SetFloat("MouseSensitivity", s.MouseSensitivity);
+        PlayerPrefs.SetInt("MouseInversion", s.MouseInversion);
+        PlayerPrefs.Save();
+    }
+
+    public static float GetMasterVolume()
+    {
+        return PlayerPrefs.GetFloat("MasterVolume", .5f);
+    }
+
+    public static float GetSoundEffectVolume()
+    {
+        return PlayerPrefs.GetFloat("SoundEffectVolume", .5f);
+    }
+
+    public static float GetMouseSensitivity()
+    {
+        return PlayerPrefs.GetFloat("MouseSensitivity", .5f);
+    }
+    public static int GetMouseInversion()
+    {
+        return PlayerPrefs.GetInt("MouseInversion", 0);
+    }
+}
+
+public class Settings
+{
+    float masterVolume;
+    float soundEffectVolume;
+    float mouseSensitivity;
+    int mouseInversion;
+
+    public Settings(float masterVolume, float soundEffectVolume, float mouseSensitivity, int mouseInversion)
+    {
+        this.masterVolume = masterVolume;
+        this.soundEffectVolume = soundEffectVolume;
+        this.mouseSensitivity = mouseSensitivity;
+        this.mouseInversion = mouseInversion;
+    }
+
+    public float MasterVolume { get => masterVolume; set => masterVolume = value; }
+    public float SoundEffectVolume { get => soundEffectVolume; set => soundEffectVolume = value; }
+    public float MouseSensitivity { get => mouseSensitivity; set => mouseSensitivity = value; }
+    public int MouseInversion { get => mouseInversion; set => mouseInversion = value; }
 }
 
 public class ItemInfo
@@ -75,12 +124,25 @@ public class EnemyInfo
                 numOfConversations--;
             }
         } while (numOfConversations > 0);
-
-        ;
     }
 
     public List<Trait> Traits { get => traits; set => traits = value; }
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
+
+    public string GetCombatLine()
+    {
+        return "What do you want pipsqueak?";
+    }
+
+    public Trait GetCombatTrait()
+    {
+        foreach(Trait t in Traits)
+        {
+            if (t.Type == TraitType.Conversation)
+                return t;
+        }
+        return null;
+    }
 }
 
 public class Trait
@@ -114,8 +176,8 @@ public class CombatModifiers
     double runAwayChance;
     int gossipReward;
     int itemReward;
-    float miniGameSpeed;
-    float miniGameSize;
+    float miniGameSpeed; //This is the vertical rate of movement
+    float miniGameSize; //This is the vertical range of where text can come in from
     int numberOfConversations;
     double friendshipPoints;
     double healthLoss;
@@ -144,6 +206,11 @@ public class CombatModifiers
     public int NumberOfConversations { get => numberOfConversations; set => numberOfConversations = value; }
     public double FriendshipPoints { get => friendshipPoints; set => friendshipPoints = value; }
     public double HealthLoss { get => healthLoss; set => healthLoss = value; }
+
+    public static CombatModifiers CombineModifiers(CombatModifiers x, CombatModifiers y)
+    {
+        return new CombatModifiers(x.ConversationTextSize * y.ConversationTextSize, x.ConversationTextSpeed * y.ConversationTextSpeed, x.RunAwayChance * y.RunAwayChance, x.GossipReward + y.GossipReward, x.ItemReward + y.ItemReward, x.MiniGameSpeed * y.MiniGameSpeed, x.MiniGameSize * y.MiniGameSize, x.NumberOfConversations + y.NumberOfConversations, x.FriendshipPoints * y.FriendshipPoints, x.HealthLoss * y.HealthLoss);
+    }
 }
 
 public class Conversation
@@ -165,6 +232,47 @@ public class Conversation
     public Emoji BestResponse { get => bestResponse; set => bestResponse = value; }
     public Emoji GoodResponse { get => goodResponse; set => goodResponse = value; }
     public Emoji WorstResponse { get => worstResponse; set => worstResponse = value; }
+}
+
+public class EnemyData
+{
+    string name;
+    Sin sin;
+    string sprite;
+    bool isCoworker;
+
+    public EnemyData(string name, Sin sin, string sprite, bool isCoworker)
+    {
+        this.name = name;
+        this.sin = sin;
+        this.sprite = sprite;
+        this.isCoworker = isCoworker;
+    }
+
+    public string Name { get => name; set => name = value; }
+    public Sin Sin { get => sin; set => sin = value; }
+    public string Sprite { get => sprite; set => sprite = value; }
+    public bool IsCoworker { get => isCoworker; set => isCoworker = value; }
+}
+
+public class BattleLine
+{
+    Sin sin;
+    string text;
+
+    public BattleLine(Sin sin, string text)
+    {
+        this.sin = sin;
+        this.text = text;
+    }
+
+    public Sin Sin { get => sin; set => sin = value; }
+    public string Text { get => text; set => text = value; }
+}
+
+public enum Sin
+{
+    Sloth = 0, Pride = 1, Gluttony = 2, Lust = 3, Wrath = 4, Envy = 5, Greed = 6
 }
 
 public enum Emoji
