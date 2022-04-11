@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     bool lockPlayer = false;
     List<ItemInfo> itemInventory;
     List<GossipInfo> gossipInventory;
-    public CombatModifiers combatModifiers;
+    public CombatModifiers combatModifiers = new CombatModifiers(1,1,1,1,1,1,1,1,1,1);
     int Stamina = 100;
     int Attentiveness; //Conversation speed/size
     int Professionalism; //Mini game character speed/bullet size
@@ -159,7 +159,7 @@ public class Player : MonoBehaviour
         Forward = 0, Right = 1, Back = 2, Left = 3, None = 4
     }
 
-    public CombatModifiers CombatModifiersForEnemy(Enemy enemy)
+    public CombatModifiers GetCombatModifiersForEnemy(Enemy enemy)
     {
         return CombatModifiers.CombineModifiers(combatModifiers, enemy.enemyInfo.GetCombatTrait().Modifiers);
     }

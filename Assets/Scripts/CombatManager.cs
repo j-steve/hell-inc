@@ -8,11 +8,14 @@ public class CombatManager : MonoBehaviour
 {
     public Enemy enemy;
     public int textSpeed = 5;
-    public Player player;
+    Player player = new Player();
     public bool enemyMove;
     public TextMeshProUGUI enemyName;
     public Image enemyLineImage;
     public TextMeshProUGUI enemyLine;
+    public GameObject combatMenu;
+    public Button converseButton;
+    public WordGameController wordGameController;
     bool displayText;
     string battleLine;
     int battleLinePosition;
@@ -26,6 +29,19 @@ public class CombatManager : MonoBehaviour
         battleLine = enemy.enemyInfo.GetCombatLine();
         battleLinePosition = 0;
         textSpeedTrack = textSpeed;
+        converseButton.onClick.AddListener(delegate() {
+            combatMenu.SetActive(false);
+            Conversation conversation = enemy.GetRandomConversation();
+            wordGameController.Initialize(conversation.Text, player.GetCombatModifiersForEnemy(enemy));
+        });
+        wordGameController.OnGameWon += (delegate () { 
+            combatMenu.SetActive(true);
+            // TODO: add word game win behavior
+        });
+        wordGameController.OnGameLost += (delegate () { 
+            combatMenu.SetActive(true);
+            // TODO: add word game lose behavior
+        });
     }
 
     // Update is called once per frame

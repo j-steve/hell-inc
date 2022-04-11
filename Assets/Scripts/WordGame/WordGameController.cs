@@ -35,7 +35,9 @@ public class WordGameController : MonoBehaviour
             ui.UpdateHealthBar(playerHealth);
             if (playerHealth <= 0) {
                 Time.timeScale = 0;
-                ui.ShowGameOver();
+                //ui.ShowGameOver();
+                gameObject.SetActive(false);
+                OnGameLost();
             }
         };
         gameRestartButton.onClick.AddListener(delegate () {
@@ -60,8 +62,8 @@ public class WordGameController : MonoBehaviour
     private void Update()
     {
         if (gameVictoryTime != 0 && Time.time >= gameVictoryTime) {
-            OnGameWon();
             gameObject.SetActive(false);
+            OnGameWon();
         }
     }
 }

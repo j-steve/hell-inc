@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyInfo = new EnemyInfo();
-        enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).Single();
+        enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
     }
 
     public Conversation GetRandomConversation()
