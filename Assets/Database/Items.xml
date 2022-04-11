@@ -1,12 +1,126 @@
 <items>
 <item>
 <name>Cake</name>
-<description>A slice of stale carrot cake, the dessert you would expect to find in Hell.</description>
-<sprite>Cake.png</sprite>
+<category>Food</category>
+</item>
+<item>
+<name>Boxed Wine</name>
+<category>Alcohol</category>
+</item>
+<item>
+<name>Ticket to the Zoo</name>
+<category>Animals</category>
 </item>
 <item>
 <name>Calculator</name>
-<description>A TI-666 graphing calculator powered by the souls of former math teachers.</description>
-<sprite>Calculator.png</sprite>
+<category>Math</category>
+</item>
+<item>
+<name>Van Gogh Painting</name>
+<category>Art</category>
+</item>
+<item>
+<name>First Edition Stephen King Book</name>
+<category>Books</category>
+</item>
+<item>
+<name>Windshield Wipers</name>
+<category>Cars</category>
+</item>
+<item>
+<name>People Magazine</name>
+<category>Celebrities</category>
+</item>
+<item>
+<name>Puffy Jacket</name>
+<category>Clothing</category>
+</item>
+<item>
+<name>Spider-Man #1</name>
+<category>Comics</category>
+</item>
+<item>
+<name>Crock Pot</name>
+<category>Cooking</category>
+</item>
+<item>
+<name>Hoverboard</name>
+<category>Electronics</category>
+</item>
+<item>
+<name>Director's Cut of Citizen Kane</name>
+<category>Film</category>
+</item>
+<item>
+<name>GeForce RTX 3080</name>
+<category>Gaming</category>
+</item>
+<item>
+<name>20 Pound Dumbbell</name>
+<category>Health</category>
+</item>
+<item>
+<name>18th Century Revolver</name>
+<category>History</category>
+</item>
+<item>
+<name>Emerald Ring</name>
+<category>Jewelry</category>
+</item>
+<item>
+<name>Harry Potter LEGO Set</name>
+<category>LEGO</category>
+</item>
+<item>
+<name>Deck of Playing Cards</name>
+<category>Magic</category>
+</item>
+<item>
+<name>Tallgeese III Gundam Model</name>
+<category>Models</category>
+</item>
+<item>
+<name>Billy Joel's Greatest Hits</name>
+<category>Music</category>
+</item>
+<item>
+<name>Sounds of Nature CD</name>
+<category>Nature</category>
+</item>
+<item>
+<name>Telescopic Lens</name>
+<category>Photography</category>
+</item>
+<item>
+<name>New York Time's Crossword</name>
+<category>Puzzles</category>
+</item>
+<item>
+<name>SAT Study Guide</name>
+<category>School</category>
+</item>
+<item>
+<name>Bunsen Burner</name>
+<category>Science</category>
+</item>
+<item>
+<name>Football Jersey</name>
+<category>Sports</category>
+</item>
+<item>
+<name>Neck Pillow</name>
+<category>Travel</category>
+</item>
+<item>
+<name>Vinyl Record</name>
+<category>Vintage</category>
+</item>
+<item>
+<name>Snorkle Gear</name>
+<category>Water</category>
+</item>
+<item>
+<name>Notepad and Pencil</name>
+<category>Writing</category>
 </item>
 </items>

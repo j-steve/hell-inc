@@ -64,19 +64,16 @@ public class Settings
 public class ItemInfo
 {
     string name;
-    string desciption;
-    string sprite;
+    string category;
 
-    public ItemInfo(string name, string desciption, string sprite)
+    public ItemInfo(string name, string category)
     {
         this.name = name;
-        this.desciption = desciption;
-        this.sprite = sprite;
+        this.category = category;
     }
 
     public string Name { get => name; set => name = value; }
-    public string Desciption { get => desciption; set => desciption = value; }
-    public string Sprite { get => sprite; set => sprite = value; }
+    public string Category { get => category; set => category = value; }
 }
 
 public class FetchInfo
@@ -171,23 +168,20 @@ public class Trait
     string name;
     TraitType type;
     CombatModifiers modifiers;
-    ItemInfo wantedItem;
-    GossipInfo wantedGossip;
+    string category;
 
-    public Trait(string name, TraitType type, CombatModifiers modifiers, ItemInfo wantedItem, GossipInfo wantedGossip)
+    public Trait(string name, TraitType type, CombatModifiers modifiers, string category)
     {
         this.name = name;
         this.type = type;
         this.modifiers = modifiers;
-        this.wantedItem = wantedItem;
-        this.wantedGossip = wantedGossip;
+        this.category = category;
     }
 
     public string Name { get => name; set => name = value; }
     public TraitType Type { get => type; set => type = value; }
     public CombatModifiers Modifiers { get => modifiers; set => modifiers = value; }
-    public ItemInfo WantedItem { get => wantedItem; set => wantedItem = value; }
-    public GossipInfo WantedGossip { get => wantedGossip; set => wantedGossip = value; }
+    public string Category { get => category; set => category = value; }
 }
 
 public class CombatModifiers
