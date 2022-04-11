@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", "How do you feel about that?"};
+    static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F600 }, { Emoji.Neutral, 0x1F602}, { Emoji.Crying, 0x1F603}, { Emoji.Shocked, 0x1F604  }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
     public int textSpeed = 5;
@@ -17,6 +19,7 @@ public class CombatManager : MonoBehaviour
     public Image enemyLineImage;
     public TextMeshProUGUI enemyLine;
     public GameObject combatMenu;
+    public Button menuButtonPrefab;
     public Button converseButton;
     public GameObject encounterStartMenu;
     public GameObject conversationResponseMenu;
@@ -32,6 +35,7 @@ public class CombatManager : MonoBehaviour
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
         SetBattleLine(enemy.enemyInfo.GetCombatLine());
+        CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
             combatMenu.SetActive(false);
             Conversation conversation = enemy.GetRandomConversation();
@@ -58,6 +62,14 @@ public class CombatManager : MonoBehaviour
         displayText = false;
         battleLinePosition = 0;
         textSpeedTrack = textSpeed;
+    }
+
+    void CreateEmojiMenu()
+    {
+        foreach (Emoji emoji in Enum.GetValues(typeof(Emoji))) {
+            Button emojiButton = Instantiate(menuButtonPrefab, conversationResponseMenu.transform);
+            emojiButton.GetComponentInChildren<TextMeshProUGUI>().text = char.ConvertFromUtf32(emojiUnicodeMap[emoji]);
+        }
     }
 
     // Update is called once per frame
