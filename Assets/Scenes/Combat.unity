@@ -581,6 +581,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sin: 1
   name: Lou
+  relationshipPoints: 0
 --- !u!1 &370209445
 GameObject:
   m_ObjectHideFlags: 0
@@ -2394,7 +2395,7 @@ GameObject:
   - component: {fileID: 1259757182}
   - component: {fileID: 1259757181}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: CombatMainMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
