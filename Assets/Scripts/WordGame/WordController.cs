@@ -14,14 +14,14 @@ public class WordController : MonoBehaviour
     public float verticalAgility = 0;
     public int currentDirection = 1;
 
-    public WordController Initialize()
+    public WordController Initialize(CombatModifiers combatModifiers)
     {
         color = Random.ColorHSV();
-        heightOffset += (Random.value * 2 - 1) * 40;
+        heightOffset += (Random.value * 2 - 1) * 40 * combatModifiers.MiniGameSize;
         transform.position = transform.position +  new Vector3(0, heightOffset, 0);
-        transform.localScale *= Random.value + 1;
-        speed = Random.value;
-        verticalMovement = Random.value;
+        transform.localScale *= (Random.value + 1) * combatModifiers.ConversationTextSize;
+        speed = Random.value * combatModifiers.ConversationTextSpeed;
+        verticalMovement = Random.value * combatModifiers.MiniGameSpeed;
         currentDirection = Random.value >= 0.5f ? 1 : -1;
         verticalAgility = Random.value / 1000;
         return this;

@@ -1,9 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GoalController : MonoBehaviour
 {
+    public event Action OnHit;
+
     const float pixelHealthDamage = 0.005f;
 
     Material material;
@@ -17,7 +20,7 @@ public class GoalController : MonoBehaviour
     void OnCollisionEnter(Collision collision)
     {
         if (collision.relativeVelocity.magnitude > 20) {
-            WordAttackUi.Instance.IncrementHealth(-pixelHealthDamage);
+            OnHit();
             //float impactDamage = (collision.relativeVelocity.magnitude  / 100);
             float newBrightness = material.color.r + pixelHealthDamage;
             Color newColor = new Color(newBrightness, newBrightness, 1);

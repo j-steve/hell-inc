@@ -3,32 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WordAttackUi : MonoBehaviour
-{
-    static public WordAttackUi Instance;
+{ 
 
     [SerializeField] RectTransform healthBarFill;
     [SerializeField] GameObject gameOverPopup;
 
-    float maxHealthWidth;
-    float currentHealth = 1;
+    float maxHealthWidth; 
 
     // Start is called before the first frame update
     void Start()
-    {
-        Instance = this;
+    { 
         maxHealthWidth = healthBarFill.rect.width;
+        Initialize();
+    }
+    public void Initialize()
+    {
+        gameOverPopup.SetActive(false);
     }
 
-    public void IncrementHealth(float healthDeltaPercent)
+    public void UpdateHealthBar(float currentHealth)
     {
-        currentHealth += healthDeltaPercent;
-        if (currentHealth <= 0) {
-            gameOverPopup.SetActive(true);
-            Time.timeScale = 0;
-        } else {
-            healthBarFill.sizeDelta = new Vector2(currentHealth * maxHealthWidth, healthBarFill.sizeDelta.y);
-        }
+        healthBarFill.sizeDelta = new Vector2(currentHealth * maxHealthWidth, healthBarFill.sizeDelta.y);
+    }
 
+    public void ShowGameOver()
+    {
+        gameOverPopup.SetActive(true);
     }
 
 

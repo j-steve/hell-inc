@@ -1271,7 +1271,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pixelPrefab: {fileID: 8717370778742807803, guid: 68cd8b78693d4914ca4b8e71c07bc255, type: 3}
   wordPrefab: {fileID: 638062364014035470, guid: b93dac81331b2114fb01e5447a1d6f8b, type: 3}
-  wordRate: 2
 --- !u!1 &1429454558
 GameObject:
   m_ObjectHideFlags: 0
@@ -1324,6 +1323,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2de0ac86be273b24180f13bcbf6ec3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  wordSpawner: {fileID: 1398170803}
+  shooter: {fileID: 1740154777}
+  goal: {fileID: 1312010382}
+  ui: {fileID: 422779597}
+  gameRestartButton: {fileID: 2064845749}
 --- !u!1 &1483813612
 GameObject:
   m_ObjectHideFlags: 0

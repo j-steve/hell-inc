@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class WordSpawnerController : MonoBehaviour
 {
@@ -70,32 +71,44 @@ public class WordSpawnerController : MonoBehaviour
 
     const int MAX_CHAR_WIDTH_PIXELS = 5;
     const int MAX_CHAR_HEIGHT_PIXELS = 10;
+    const float WORD_SPAWN_RATE_SECONDS = 2;
+
+    public event Action OnWordSpawningComplete;
 
     [SerializeField] WordPixelController pixelPrefab;
     [SerializeField] WordController wordPrefab;
-    [SerializeField] float wordRate = 99999999999999999;
-    //[SerializeField] Queue<char> wordBuffer;
+
+
+    CombatModifiers combatModifiers;
     Queue<string> wordList = new Queue<string>();
+    List<WordController> spawnedWords = new List<WordController>();
     float lastCharSpawnTime = 0;
+    bool hasSpawnedAllWords = false;
 
-    // Start is called before the first frame update
-    void OnEnable()
+    public void Initialize(string conversationText, CombatModifiers combatModifiers)
     {
-        wordList = new Queue<string>("The quick brown fox \"JUMPY\" jumps over the lazy dog \"DOGGO\"! This is some random words, dude. omg can you believe how many-words are here? there are like a thousand words; I think.".Split(" "));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        // Reset the scene by clearing any existing words.
+        foreach (WordController word in spawnedWords) {
+            Destroy(word);
+            Debug.LogFormat("Destroying {0}", word.name);
+        }
+        spawnedWords.Clear();
+        // Set the new word list.
+        this.combatModifiers = combatModifiers;
+        wordList = new Queue<string>(conversationText.Split(" "));
+        hasSpawnedAllWords = false;
     }
 
     void FixedUpdate()
     {
-        if (wordList.Count == 0) {
-            return; // TODO
+        if (hasSpawnedAllWords) {
+            return;
         }
-        if ( lastCharSpawnTime + (1 * wordRate) < Time.time) {
+        if (wordList.Count == 0) {
+            OnWordSpawningComplete();
+            hasSpawnedAllWords = true;
+        }
+        if ( lastCharSpawnTime + (1 * WORD_SPAWN_RATE_SECONDS) < Time.time) {
             SpawnWord(wordList.Dequeue());
             lastCharSpawnTime = Time.time;
         }
@@ -104,7 +117,7 @@ public class WordSpawnerController : MonoBehaviour
 
     void SpawnWord(string word)
     {
-        WordController wordObj = Instantiate(wordPrefab, transform).Initialize();
+        WordController wordObj = Instantiate(wordPrefab, transform).Initialize(combatModifiers);
         wordObj.name = "Word: ";
         int charOffset = 0;
         foreach (char nextChar in word) {
@@ -113,7 +126,7 @@ public class WordSpawnerController : MonoBehaviour
                 charOffset += SpawnLetter(nextChar, charOffset, wordObj) + 2;
             }
         }
-        
+        spawnedWords.Add(wordObj);
     }
 
      int SpawnLetter(char character, int charOffset, WordController parentWord)

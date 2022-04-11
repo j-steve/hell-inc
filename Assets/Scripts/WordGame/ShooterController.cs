@@ -9,6 +9,14 @@ public class ShooterController : MonoBehaviour
     [SerializeField] BulletController bulletPrefab;
     [SerializeField] float shooterMoveSpeed = 50;
 
+    public void Initialize()
+    {
+        // Reset the scene.
+        foreach(BulletController bullet in bulletContainer.GetComponents<BulletController>()) {
+            Destroy(bullet);
+        } 
+    }
+
     // Update is called once per frame
     void Update()
     {
