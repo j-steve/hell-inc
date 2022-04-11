@@ -24,8 +24,14 @@ public class CombatManager : MonoBehaviour
     public GameObject encounterStartMenu;
     public GameObject conversationResponseMenu;
     public WordGameController wordGameController;
+<<<<<<< Updated upstream
 
     Conversation currentConversation;
+=======
+    public GameObject ItemInventory;
+    public Button ItemSlotPrefab;
+    public Transform ItemInventoryContainer;
+>>>>>>> Stashed changes
     bool displayText;
     string battleLine;
     int battleLinePosition;
@@ -55,6 +61,7 @@ public class CombatManager : MonoBehaviour
         });
     }
 
+<<<<<<< Updated upstream
     void SetBattleLine(string battleLine)
     {
         this.battleLine = battleLine;
@@ -87,6 +94,30 @@ public class CombatManager : MonoBehaviour
         } else {
             SetBattleLine("I don't think you were even listening!");
         }
+=======
+    public void GiveItem()
+    {
+        //List<ItemInfo> items = player.ItemInventory;
+        List<ItemInfo> items = DatabaseManager.Instance.Items;
+        ItemInventory.SetActive(true);
+
+        foreach (ItemInfo i in items)
+        {
+            Button b = Instantiate(ItemSlotPrefab);
+            TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
+            textmeshPro.text = i.Name;
+            textmeshPro.outlineWidth = 0.2f;
+            textmeshPro.outlineColor = new Color32(255, 128, 0, 255);
+
+            b.transform.SetParent(ItemInventoryContainer, false);
+
+        }
+    }
+
+    public void TellGossip()
+    {
+
+>>>>>>> Stashed changes
     }
 
     // Update is called once per frame
