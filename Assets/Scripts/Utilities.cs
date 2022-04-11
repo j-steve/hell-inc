@@ -79,6 +79,27 @@ public class ItemInfo
     public string Sprite { get => sprite; set => sprite = value; }
 }
 
+public class FetchInfo
+{
+    string subject;
+    string objective;
+    string poi;
+    string item;
+
+    public FetchInfo(string subject, string objective, string poi, string item)
+    {
+        this.subject = subject;
+        this.objective = objective;
+        this.poi = poi;
+        this.item = item;
+    }
+
+    public string Subject { get => subject; set => subject = value; }
+    public string Objective { get => objective; set => objective = value; }
+    public string Poi { get => poi; set => poi = value; }
+    public string Item { get => item; set => item = value; }
+}
+
 public class GossipInfo
 {
     string name;

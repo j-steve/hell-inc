@@ -16,15 +16,23 @@ public class MainMenu : MonoBehaviour
     public void PlayDailyGame()
     {
         //SceneManager.LoadScene("");
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
+    }
+
+    public void Settings()
+    {
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
     }
 
     public void PlayRandomGame()
     {
         //SceneManager.LoadScene("");
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
     }
 
     public void Exit()
     {
         Application.Quit();
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
     }
 }

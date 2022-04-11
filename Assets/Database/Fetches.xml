@@ -1,0 +1,50 @@
+<fetches>
+"<fetch>
+<subject>Need my report</subject>
+<objective>Pick up the paper that just came out of the printer and deliever it to {name}.</objective>
+<poi>Printer</poi>
+<item>Printed paper</item>
+</fetch>"
+"<fetch>
+<subject>Falling asleep over here</subject>
+<objective>Make a coffee at the coffee machine and bring it to {name}.</objective>
+<poi>Coffee Machine</poi>
+<item>Coffee</item>
+</fetch>"
+"<fetch>
+<subject>My papers aren't staying together</subject>
+<objective>Go to the supply closet and bring {name} a stapler.</objective>
+<poi>Supply Closet</poi>
+<item>Stapler</item>
+</fetch>"
+"<fetch>
+<subject>I'm hungry</subject>
+<objective>Grab the sandwich from the refrigerator and bring it to {name}.</objective>
+<poi>Refrigerator</poi>
+<item>Sandwich</item>
+</fetch>"
+"<fetch>
+<subject>Faxes are still a thing?!</subject>
+<objective>Pick up the paper that just came out of the printer and deliever it to {name}.</objective>
+<poi>Printer</poi>
+<item>Fax</item>
+</fetch>"
+"<fetch>
+<subject>I need something calming</subject>
+<objective>Make a coffee at the coffee machine and bring it to {name}.</objective>
+<poi>Coffee Machine</poi>
+<item>Tea</item>
+</fetch>"
+"<fetch>
+<subject>Need to sign a contract but not in blood</subject>
+<objective>Go to the supply closet and bring {name} a stapler.</objective>
+<poi>Supply Closet</poi>
+<item>Pen</item>
+</fetch>"
+"<fetch>
+<subject>Where is that lunch my mom made me</subject>
+<objective>Grab the sandwich from the refrigerator and bring it to {name}.</objective>
+<poi>Refrigerator</poi>
+<item>Chicken Salad</item>
+</fetch>"
+</fetches>

@@ -17,6 +17,7 @@ public class DatabaseManager
     List<Conversation> conversations;
     Dictionary<Sin, EnemyData> enemyData;
     List<BattleLine> battleLines;
+    List<FetchInfo> fetches;
 
     private DatabaseManager()
     {
@@ -26,6 +27,8 @@ public class DatabaseManager
         LoadConversations();
         LoadEnemyData();
         LoadBattleLines();
+        LoadFetches();
+        ;
     }
 
     public static DatabaseManager Instance
@@ -41,7 +44,33 @@ public class DatabaseManager
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
     public Dictionary<Sin, EnemyData> EnemyData { get => enemyData; set => enemyData = value; }
     public List<BattleLine> BattleLines { get => battleLines; set => battleLines = value; }
+    public List<FetchInfo> Fetches { get => fetches; set => fetches = value; }
 
+    private void LoadFetches()
+    {
+        List<FetchInfo> temp = new List<FetchInfo>();
+        using (XmlReader read = XmlReader.Create(@"Assets/Database/Fetches.xml"))
+        {
+            read.ReadToFollowing("fetch");
+            do
+            {
+                read.ReadToFollowing("subject");
+                string subject = read.ReadElementContentAsString();
+                read.ReadToFollowing("objective");
+                string objective = read.ReadElementContentAsString();
+                read.ReadToFollowing("poi");
+                string poi = read.ReadElementContentAsString();
+                read.ReadToFollowing("item");
+                string item = read.ReadElementContentAsString();
+                FetchInfo fetchInfo = new FetchInfo(subject, objective, poi, item);
+
+                temp.Add(fetchInfo);
+
+            } while (read.ReadToFollowing("fetch"));
+        }
+
+        Fetches = temp;
+    }
     private void LoadBattleLines()
     {
         List<BattleLine> temp = new List<BattleLine>();

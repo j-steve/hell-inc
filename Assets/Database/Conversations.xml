@@ -11,7 +11,12 @@
 <goodresponse>Shocked</goodresponse>
 <worstresponse>Happy</worstresponse>
 </conversation>
-<conversation><text>The boss told me that they already found your replacement.</text><bestresponse>Anger</bestresponse><goodresponse>Crying</goodresponse><worstresponse>Love</worstresponse></conversation>
+<conversation>
+<text>The boss told me that they already found your replacement.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
 <conversation>
 <text>My daughter just got locked up in jail trafficking drugs</text>
 <bestresponse>Shocked</bestresponse>

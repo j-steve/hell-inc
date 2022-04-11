@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour
     public Sin sin;
     public new string name;
     public EnemyData enemyData;
+    public int relationshipPoints;
 
     // Start is called before the first frame update
     void Start()
