@@ -647,6 +647,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6973458560001382724, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6973458560001382729, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: m_RootOrder
       value: 27
@@ -690,6 +694,10 @@ PrefabInstance:
     - target: {fileID: 6973458560001382729, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973458560001382730, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
+      propertyPath: checkDist
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6973458560001382730, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: isTraversable
@@ -2080,6 +2088,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tile
       objectReference: {fileID: 0}
+    - target: {fileID: 6973458560001382724, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 6973458560001382729, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: m_RootOrder
       value: 26
@@ -2123,6 +2135,10 @@ PrefabInstance:
     - target: {fileID: 6973458560001382729, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973458560001382730, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
+      propertyPath: checkDist
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6973458560001382730, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
       propertyPath: isTraversable

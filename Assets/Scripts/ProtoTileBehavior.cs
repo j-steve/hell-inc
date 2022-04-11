@@ -51,22 +51,22 @@ public class ProtoTileBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public IEnumerator SpawnTilePieces()
     {
 
-            //isSpaceAvailable();
-            SpawnPhase1();
-            yield return new WaitForEndOfFrame();
-            SpawnPhase2();
-            //Debug
-            if (isTraversable)
+        //isSpaceAvailable();
+        SpawnPhase1();
+        yield return new WaitForEndOfFrame();
+        SpawnPhase2();
+        //Debug
+        if (isTraversable)
         {
             Instantiate(debugObj, transform.position, Quaternion.identity);
         }
-        
+
     }
 
     public void SpawnPhase1()
@@ -74,10 +74,10 @@ public class ProtoTileBehavior : MonoBehaviour
         Vector3 p = transform.rotation.eulerAngles;
 
         if (!IsThereStairSpace())
-            
-                Instantiate(tileSet.floor_1, dropPoint, transform.rotation, this.gameObject.transform);
-                Instantiate(tileSet.ceiling_1, dropPoint, transform.rotation, this.gameObject.transform);
-                floorSpawned = true;
+
+            Instantiate(tileSet.floor_1, dropPoint, transform.rotation, this.gameObject.transform);
+        Instantiate(tileSet.ceiling_1, dropPoint, transform.rotation, this.gameObject.transform);
+        floorSpawned = true;
         //Walls
         if (!isNoWallType)
         {
@@ -86,7 +86,7 @@ public class ProtoTileBehavior : MonoBehaviour
             SpawnWall(p, transform.forward * -.25f, 180);
             SpawnWall(p, transform.right * -.25f, 270);
         }
- 
+
         //Always Spawn
         foreach (GameObject deco in decoAlwaysSpawn)
         {
@@ -135,9 +135,9 @@ public class ProtoTileBehavior : MonoBehaviour
             }
         }
 
-        
 
-        
+
+
 
 
     }
@@ -152,7 +152,7 @@ public class ProtoTileBehavior : MonoBehaviour
                 targetd.transform.gameObject.GetComponent<ProtoTileBehavior>().GenPillar();
             }
         }
-        
+
     }
 
     public void CallSpawnTile()
@@ -163,7 +163,7 @@ public class ProtoTileBehavior : MonoBehaviour
     public void isSpaceAvailable()
     {
         //bool result = true;
-        if(Physics.OverlapBox(transform.position, new Vector3(.1f,.1f,.1f), Quaternion.identity, 1 << 8).Length > 2)
+        if (Physics.OverlapBox(transform.position, new Vector3(.1f, .1f, .1f), Quaternion.identity, 1 << 8).Length > 2)
         {
             //print("BoxCast Hit!");
             //result = false;
@@ -242,46 +242,52 @@ public class ProtoTileBehavior : MonoBehaviour
         }
         return result;
 
-        
+
     }
 
-    public void SpawnWall(Vector3 p,Vector3 direction, int rot)
+    public void SpawnWall(Vector3 p, Vector3 direction, int rot)
     {
-        if (Physics.Raycast(transform.position, direction, out RaycastHit info, checkDist, 1 << 8) == false)
+        if (Physics.Raycast(transform.position, direction, out RaycastHit info, checkDist) == false)
         {
-            Instantiate(tileSet.wall_f, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
-            if (isCeilingEdgeType)
+            //Check if tile is outside edge tile
+            if (Physics.Raycast(transform.position, direction, out info, checkDist * 5) == false)
             {
-                isCeilingEdgeTile = true;
+                Instantiate(tileSet.boundWall, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+                
             }
+            else
+                {
+                    Instantiate(tileSet.wall_f, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+                }
+            
         }
         else
         {
             //Walls between branches
-            if (info.transform.GetComponent<ProtoTileBehavior>().sourceBranch != sourceBranch && !isTraversable && !isMainHall)
-            {
-                if (info.transform.GetComponent<ProtoTileBehavior>().isMainHall)
-                {
-                    Instantiate(tileSet.boundWall, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
-                }
-                else
-                {
-                    Instantiate(tileSet.wall_f, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
-                }
-                
-            }
-            if (info.transform.GetComponent<ProtoTileBehavior>().sourceBranch != sourceBranch && isTraversable && !isMainHall)
-            {
-                if (info.transform.GetComponent<ProtoTileBehavior>().isMainHall)
-                {
-                    Instantiate(tileSet.entrance_1, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
-                }
-                else
-                {
-                    Instantiate(tileSet.entrance_1, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
-                }
+            //if (info.transform.GetComponent<ProtoTileBehavior>().sourceBranch != sourceBranch && !isTraversable && !isMainHall)
+            //{
+            //    if (info.transform.GetComponent<ProtoTileBehavior>().isMainHall)
+            //    {
+            //        Instantiate(tileSet.boundWall, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+            //    }
+            //    else
+            //    {
+            //        Instantiate(tileSet.wall_f, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+            //    }
 
-            }
+            //}
+            //if (info.transform.GetComponent<ProtoTileBehavior>().sourceBranch != sourceBranch && isTraversable && !isMainHall)
+            //{
+            //    if (info.transform.GetComponent<ProtoTileBehavior>().isMainHall)
+            //    {
+            //        Instantiate(tileSet.entrance_1, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+            //    }
+            //    else
+            //    {
+            //        Instantiate(tileSet.entrance_1, dropPoint, Quaternion.Euler(p.x, p.y + rot, p.z), this.gameObject.transform);
+            //    }
+
+            //}
         }
     }
 }
