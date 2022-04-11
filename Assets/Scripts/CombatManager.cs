@@ -24,6 +24,8 @@ public class CombatManager : MonoBehaviour
     public GameObject encounterStartMenu;
     public GameObject conversationResponseMenu;
     public WordGameController wordGameController;
+
+    Conversation currentConversation;
     bool displayText;
     string battleLine;
     int battleLinePosition;
@@ -38,8 +40,8 @@ public class CombatManager : MonoBehaviour
         CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
             combatMenu.SetActive(false);
-            Conversation conversation = enemy.GetRandomConversation();
-            wordGameController.Initialize(conversation.Text, player.GetCombatModifiersForEnemy(enemy));
+            currentConversation = enemy.GetRandomConversation();
+            wordGameController.Initialize(currentConversation.Text, player.GetCombatModifiersForEnemy(enemy));
         });
         wordGameController.OnGameWon += (delegate () { 
             SetBattleLine(convoResponsePrompts.GetRandom());
@@ -69,6 +71,21 @@ public class CombatManager : MonoBehaviour
         foreach (Emoji emoji in Enum.GetValues(typeof(Emoji))) {
             Button emojiButton = Instantiate(menuButtonPrefab, conversationResponseMenu.transform);
             emojiButton.GetComponentInChildren<TextMeshProUGUI>().text = char.ConvertFromUtf32(emojiUnicodeMap[emoji]);
+            emojiButton.onClick.AddListener(delegate () { EmojiButtonClicked(emoji); });
+        }
+    }
+
+    void EmojiButtonClicked(Emoji emoji)
+    {
+        conversationResponseMenu.SetActive(false);
+        if (emoji == currentConversation.BestResponse) {
+            SetBattleLine("Exactly!!");
+        } else if (emoji == currentConversation.GoodResponse) {
+            SetBattleLine("Yeah, pretty much.");
+        } else if (emoji == currentConversation.WorstResponse) {
+            SetBattleLine("WHAT? How could you say that??");
+        } else {
+            SetBattleLine("I don't think you were even listening!");
         }
     }
 
