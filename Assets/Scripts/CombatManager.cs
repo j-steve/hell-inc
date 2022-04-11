@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
-    static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", "How do you feel about that?"};
+    static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
     static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F600 }, { Emoji.Neutral, 0x1F602}, { Emoji.Crying, 0x1F603}, { Emoji.Shocked, 0x1F604  }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
