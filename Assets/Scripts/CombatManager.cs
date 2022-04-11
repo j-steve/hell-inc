@@ -77,7 +77,6 @@ public class CombatManager : MonoBehaviour
         }
         else if(displayText)
         {
-                Debug.LogFormat("Displaying {0} adding to {1}, ts {2}, tst{3}", battleLine.Substring(0, battleLinePosition), enemyLine.text, textSpeed, textSpeedTrack);
             if(textSpeed == textSpeedTrack)
             {
                 enemyLine.text = battleLine.Substring(0, battleLinePosition);
