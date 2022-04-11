@@ -43,15 +43,13 @@ public class WordGameController : MonoBehaviour
         gameRestartButton.onClick.AddListener(delegate () {
             Initialize(DEMO_CONVERSATION, DEFAULT_COMBAT_MODIFIERS);
         });
-
-        Initialize(DEMO_CONVERSATION, DEFAULT_COMBAT_MODIFIERS);
     }
 
     public void Initialize(string conversationMessage, CombatModifiers combatModifiers)
     {
         this.combatModifiers = combatModifiers;
         gameObject.SetActive(true);
-        wordSpawner.Initialize(DEMO_CONVERSATION, combatModifiers);
+        wordSpawner.Initialize(conversationMessage, combatModifiers);
         shooter.Initialize();
         ui.Initialize();
         gameVictoryTime = 0;
