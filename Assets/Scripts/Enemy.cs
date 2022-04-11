@@ -13,9 +13,9 @@ public class Enemy : MonoBehaviour
         enemyInfo = new EnemyInfo();
     }
 
-    // Update is called once per frame
-    void Update()
+    public Conversation GetRandomConversation()
     {
-        
+        int randomIndex = Random.Range(0, enemyInfo.Conversations.Count);
+        return enemyInfo.Conversations[randomIndex];
     }
 }

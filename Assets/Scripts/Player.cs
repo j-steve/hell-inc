@@ -158,4 +158,9 @@ public class Player : MonoBehaviour
     {
         Forward = 0, Right = 1, Back = 2, Left = 3, None = 4
     }
+
+    public CombatModifiers CombatModifiersForEnemy(Enemy enemy)
+    {
+        return CombatModifiers.CombineModifiers(combatModifiers, enemy.enemyInfo.GetCombatTrait().Modifiers);
+    }
 }

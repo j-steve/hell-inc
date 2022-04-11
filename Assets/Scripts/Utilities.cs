@@ -207,7 +207,7 @@ public class CombatModifiers
     public double FriendshipPoints { get => friendshipPoints; set => friendshipPoints = value; }
     public double HealthLoss { get => healthLoss; set => healthLoss = value; }
 
-    static CombatModifiers CombineModifiers(CombatModifiers x, CombatModifiers y)
+    public static CombatModifiers CombineModifiers(CombatModifiers x, CombatModifiers y)
     {
         return new CombatModifiers(x.ConversationTextSize * y.ConversationTextSize, x.ConversationTextSpeed * y.ConversationTextSpeed, x.RunAwayChance * y.RunAwayChance, x.GossipReward + y.GossipReward, x.ItemReward + y.ItemReward, x.MiniGameSpeed * y.MiniGameSpeed, x.MiniGameSize * y.MiniGameSize, x.NumberOfConversations + y.NumberOfConversations, x.FriendshipPoints * y.FriendshipPoints, x.HealthLoss * y.HealthLoss);
     }
