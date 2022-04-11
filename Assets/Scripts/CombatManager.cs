@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
+    static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", "How do you feel about that?"};
+
     public Enemy enemy;
     public int textSpeed = 5;
     Player player = new Player();
@@ -15,6 +18,8 @@ public class CombatManager : MonoBehaviour
     public TextMeshProUGUI enemyLine;
     public GameObject combatMenu;
     public Button converseButton;
+    public GameObject encounterStartMenu;
+    public GameObject conversationResponseMenu;
     public WordGameController wordGameController;
     bool displayText;
     string battleLine;
@@ -24,19 +29,19 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemyMove = true;
-        displayText = false;
-        battleLine = enemy.enemyInfo.GetCombatLine();
-        battleLinePosition = 0;
-        textSpeedTrack = textSpeed;
+        encounterStartMenu.SetActive(true);
+        conversationResponseMenu.SetActive(false);
+        SetBattleLine(enemy.enemyInfo.GetCombatLine());
         converseButton.onClick.AddListener(delegate() {
             combatMenu.SetActive(false);
             Conversation conversation = enemy.GetRandomConversation();
             wordGameController.Initialize(conversation.Text, player.GetCombatModifiersForEnemy(enemy));
         });
         wordGameController.OnGameWon += (delegate () { 
+            SetBattleLine(convoResponsePrompts.GetRandom());
+            encounterStartMenu.SetActive(false);
+            conversationResponseMenu.SetActive(true);
             combatMenu.SetActive(true);
-            // TODO: add word game win behavior
         });
         wordGameController.OnGameLost += (delegate () { 
             combatMenu.SetActive(true);
@@ -44,10 +49,21 @@ public class CombatManager : MonoBehaviour
         });
     }
 
+    void SetBattleLine(string battleLine)
+    {
+        this.battleLine = battleLine;
+        battleLinePosition = 0;
+        enemyLine.text = "";
+        enemyMove = true;
+        displayText = false;
+        battleLinePosition = 0;
+        textSpeedTrack = textSpeed;
+    }
+
     // Update is called once per frame
     void Update()
     {
-        if(enemyMove)
+        if (enemyMove)
         {
             enemy.transform.position = new Vector3(enemy.transform.position.x - .5f, enemy.transform.position.y, enemy.transform.position.z);
             if (enemy.transform.position.x <= 70)
@@ -61,6 +77,7 @@ public class CombatManager : MonoBehaviour
         }
         else if(displayText)
         {
+                Debug.LogFormat("Displaying {0} adding to {1}, ts {2}, tst{3}", battleLine.Substring(0, battleLinePosition), enemyLine.text, textSpeed, textSpeedTrack);
             if(textSpeed == textSpeedTrack)
             {
                 enemyLine.text = battleLine.Substring(0, battleLinePosition);
@@ -73,10 +90,6 @@ public class CombatManager : MonoBehaviour
             }
             if (battleLinePosition == battleLine.Length + 1)
                 displayText = false;
-        }    
-        else
-        {
-
         }
     }
 }

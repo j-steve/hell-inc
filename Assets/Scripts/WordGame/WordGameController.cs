@@ -62,6 +62,15 @@ public class WordGameController : MonoBehaviour
         if (gameVictoryTime != 0 && Time.time >= gameVictoryTime) {
             gameObject.SetActive(false);
             OnGameWon();
+        } 
+        // Debug commands to insta-win or lose for testing purposes.
+        if (Input.GetKey("w") && Input.GetKey("i")) {
+            gameObject.SetActive(false);
+            OnGameWon();
+        }
+        if (Input.GetKey("l") && Input.GetKey("o")) {
+            gameObject.SetActive(false);
+            OnGameLost();
         }
     }
 }
