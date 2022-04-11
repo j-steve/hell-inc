@@ -15,6 +15,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayDailyGame()
     {
+        UnityEngine.Random.InitState(Utilities.GetDailySeed());
         //SceneManager.LoadScene("");
         gameObject.GetComponentsInParent<AudioSource>()[1].Play();
     }

@@ -287,7 +287,7 @@ public class BattleLine
 
 public enum Sin
 {
-    Sloth = 0, Pride = 1, Gluttony = 2, Lust = 3, Wrath = 4, Envy = 5, Greed = 6
+    Pride = 0, Gluttony = 1, Lust = 2, Wrath = 3, Envy = 4, Greed = 5
 }
 
 public enum Emoji
