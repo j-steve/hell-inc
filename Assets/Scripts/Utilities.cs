@@ -234,6 +234,47 @@ public class Conversation
     public Emoji WorstResponse { get => worstResponse; set => worstResponse = value; }
 }
 
+public class EnemyData
+{
+    string name;
+    Sin sin;
+    string sprite;
+    bool isCoworker;
+
+    public EnemyData(string name, Sin sin, string sprite, bool isCoworker)
+    {
+        this.name = name;
+        this.sin = sin;
+        this.sprite = sprite;
+        this.isCoworker = isCoworker;
+    }
+
+    public string Name { get => name; set => name = value; }
+    public Sin Sin { get => sin; set => sin = value; }
+    public string Sprite { get => sprite; set => sprite = value; }
+    public bool IsCoworker { get => isCoworker; set => isCoworker = value; }
+}
+
+public class BattleLine
+{
+    Sin sin;
+    string text;
+
+    public BattleLine(Sin sin, string text)
+    {
+        this.sin = sin;
+        this.text = text;
+    }
+
+    public Sin Sin { get => sin; set => sin = value; }
+    public string Text { get => text; set => text = value; }
+}
+
+public enum Sin
+{
+    Sloth = 0, Pride = 1, Gluttony = 2, Lust = 3, Wrath = 4, Envy = 5, Greed = 6
+}
+
 public enum Emoji
 {
     Happy = 0, Love = 1, Neutral = 2, Crying = 3, Shocked = 4, Anger = 5

@@ -7,7 +7,7 @@ public class EnemyShake : MonoBehaviour
     public CombatManager combatManager;
     Vector3 initialPosition;
     float shakeMagnitude = 0.7f;
-    private Transform transform;
+    private new Transform transform;
 
     void Awake()
     {
