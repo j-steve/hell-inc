@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
 
                 foreach (string name in Enum.GetNames(typeof(Sin)))
                 {
-                    Enemy e = new Enemy();
+                    Enemy e = Instantiate(new Enemy());
                     Enum.TryParse(name, out Sin sin);
                     e.sin = sin;
                     coworkers.Add(sin, e);

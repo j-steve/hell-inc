@@ -725,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f3cf39d7a90824c87855bd5cb713ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sin: 1
+  sin: 2
   name: Lou
   relationshipPoints: 0
 --- !u!1 &370209445
@@ -3361,7 +3361,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8413288115442226815, guid: b9743908d38153841a5cf20d8a00b048, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -50
+      value: -30
       objectReference: {fileID: 0}
     - target: {fileID: 8413288115442226815, guid: b9743908d38153841a5cf20d8a00b048, type: 3}
       propertyPath: m_AnchoredPosition.y

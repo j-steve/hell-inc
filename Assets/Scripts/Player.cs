@@ -32,9 +32,9 @@ public class Player : MonoBehaviour
     {
         ItemInventory.Add(item);
     }
-    public void RemoveItem(ItemInfo item)
+    public void RemoveItem(string name)
     {
-        ItemInventory.RemoveAt(ItemInventory.FindIndex(i => i.Name == item.Name));
+        ItemInventory.RemoveAt(ItemInventory.FindIndex(i => i.Name == name));
     }
 
     public void AddGossip(GossipInfo gossip)
@@ -118,11 +118,11 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Forward)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + (moveSpeed * Time.deltaTime));
-                if(transform.position.z >= EndPosition)
+                transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if(transform.position.x >= EndPosition)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(transform.position.x, transform.position.y, EndPosition);
+                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
                     //LockPlayer = true;
                 }
             }
@@ -137,11 +137,11 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Back)
             {
-                transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z - (moveSpeed * Time.deltaTime));
-                if (transform.position.z <= EndPosition)
+                transform.position = new Vector3(transform.position.x - (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if (transform.position.x <= EndPosition)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(transform.position.x, transform.position.y, EndPosition);
+                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
                     //LockPlayer = true;
                 }
             }
