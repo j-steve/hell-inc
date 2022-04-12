@@ -725,7 +725,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32f3cf39d7a90824c87855bd5cb713ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sin: 1
   sin: 2
   name: Lou
   relationshipPoints: 0
