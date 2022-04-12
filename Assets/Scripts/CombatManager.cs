@@ -55,8 +55,7 @@ public class CombatManager : MonoBehaviour
             combatMenu.SetActive(true);
         });
         wordGameController.OnGameLost += (delegate () { 
-            combatMenu.SetActive(true);
-            // TODO: add word game lose behavior
+            Application.Quit(); // TODO: add word game lose behavior
         });
 
         List<ItemInfo> items = DatabaseManager.Instance.Items;

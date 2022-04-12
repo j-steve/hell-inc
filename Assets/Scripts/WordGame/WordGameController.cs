@@ -33,15 +33,10 @@ public class WordGameController : MonoBehaviour
         goal.OnHit += delegate () {
             playerHealth -= 0.01f * (float)combatModifiers.HealthLoss;
             ui.UpdateHealthBar(playerHealth);
-            if (playerHealth <= 0) {
-                Time.timeScale = 0;
-                //ui.ShowGameOver();
-                gameObject.SetActive(false);
-                OnGameLost();
-            }
+            if (playerHealth <= 0) {            }
         };
         gameRestartButton.onClick.AddListener(delegate () {
-            Initialize(DEMO_CONVERSATION, DEFAULT_COMBAT_MODIFIERS);
+            OnGameLost();
         });
     }
 
@@ -69,8 +64,9 @@ public class WordGameController : MonoBehaviour
             OnGameWon();
         }
         if (Input.GetKey("l") && Input.GetKey("o")) {
-            gameObject.SetActive(false);
-            OnGameLost();
+            Time.timeScale = 0;
+            ui.ShowGameOver();
         }
     }
+
 }
