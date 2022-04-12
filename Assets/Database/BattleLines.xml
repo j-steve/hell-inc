@@ -23,4 +23,16 @@
 <sin>Lust</sin>
 <text>Hello handsome, want to have a happy hour after work? I'm not talking about drinks.</text>
 </battleline>
+<battleline>
+<sin>Greed</sin>
+<text>Once you're gone there's all that extra budget that can go right into my pockets.</text>
+</battleline>
+<battleline>
+<sin>Wrath</sin>
+<text>Hello handsome, want to have a happy hour after work? I'm not talking about drinks.</text>
+</battleline>
+<battleline>
+<sin>Envy</sin>
+<text>Can I have your chair when you're gone? It really has the best lumbar support.</text>
+</battleline>
 </battleslines>

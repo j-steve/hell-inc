@@ -45,7 +45,7 @@ public class ProtoTileBehavior : MonoBehaviour
         tileSet = tileSetObj.GetComponent<TileSet>();
         dropPoint = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
         //transform.GetChild(0).gameObject.SetActive(false);
-        CallSpawnTile();
+        //CallSpawnTile();
     }
 
     // Update is called once per frame
@@ -56,16 +56,20 @@ public class ProtoTileBehavior : MonoBehaviour
 
     public IEnumerator SpawnTilePieces()
     {
-
+        //GetComponent<BoxCollider>().enabled = false;
         //isSpaceAvailable();
+
+        tileSet = tileSetObj.GetComponent<TileSet>();
+        dropPoint = new Vector3(transform.position.x, transform.position.y - .5f, transform.position.z);
+
         SpawnPhase1();
         yield return new WaitForEndOfFrame();
         SpawnPhase2();
         //Debug
-        if (isTraversable)
-        {
-            Instantiate(debugObj, transform.position, Quaternion.identity);
-        }
+        //if (isTraversable)
+        //{
+        //    Instantiate(debugObj, transform.position, Quaternion.identity);
+        //}
 
     }
 

@@ -11,12 +11,20 @@ public class Enemy : MonoBehaviour
     public new string name;
     public EnemyData enemyData;
     public int relationshipPoints;
+    public List<BattleLine> BattleLines;
 
     // Start is called before the first frame update
     void Start()
     {
         enemyInfo = new EnemyInfo();
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
+
+        BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();
+    }
+
+    public string GetCombatLine()
+    {
+        return BattleLines.GetRandom().Text;
     }
 
     public Conversation GetRandomConversation()

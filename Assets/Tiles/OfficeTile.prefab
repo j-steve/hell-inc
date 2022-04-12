@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 6973458560001382730}
   - component: {fileID: 6973458560001382731}
   m_Layer: 7
-  m_Name: Tile
+  m_Name: OfficeTile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ MonoBehaviour:
   isMainHall: 0
   dropPoint: {x: 0, y: 0, z: 0}
   tileType: 0
-  tileSetObj: {fileID: 6734063063977065248, guid: bcfc3b3ebb4289b48a572db6fa7905a3, type: 3}
+  tileSetObj: {fileID: 6734063063977065248, guid: 31465122ae94e32499e5912c4ad47807, type: 3}
   tileSet: {fileID: 0}
   floorSpawned: 0
   ceilingSpawned: 0
