@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,18 @@ public class Utilities
     {
         string date = DateTime.Now.ToShortDateString();
         return Convert.ToInt32(date.Replace("/", ""));
+    }
+
+    public static ItemInfo GetRandomItem()
+    {
+        List<ItemInfo> items = new List<ItemInfo>();
+
+        foreach(Enemy e in GameManager.Coworkers.Values)
+        {
+            items.Add(DatabaseManager.Instance.Items.Find(i => i.Name == e.enemyInfo.GetWantedtTrait().Name));
+        }
+
+        return items.GetRandom();
     }
 
     public static void SetSettings(Settings s)
@@ -153,6 +166,16 @@ public class EnemyInfo
         foreach(Trait t in Traits)
         {
             if (t.Type == TraitType.Conversation)
+                return t;
+        }
+        return null;
+    }
+
+    public Trait GetWantedtTrait()
+    {
+        foreach (Trait t in Traits)
+        {
+            if (t.Type == TraitType.Wanted)
                 return t;
         }
         return null;

@@ -59,7 +59,7 @@ public class CombatManager : MonoBehaviour
 
         List<ItemInfo> items = DatabaseManager.Instance.Items;
 
-        foreach (ItemInfo i in items)
+        foreach (ItemInfo i in items)//GameManager.Player.ItemInventory)
         {
             Button b = Instantiate(ItemSlotPrefab);
             TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
@@ -133,7 +133,17 @@ public class CombatManager : MonoBehaviour
     {
         Debug.Log(lastSelectedItem);
         ItemInventory.SetActive(false);
-        //remove item from inventory
+        //GameManager.Player.RemoveItem(lastSelectedItem);
+
+        if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
+        {
+            //relationship points go up
+            SetBattleLine("Wow, I love it!");
+        }
+        else
+        {
+            SetBattleLine("Wow, I hate it!");
+        }
         lastSelectedItem = "";
     }
 

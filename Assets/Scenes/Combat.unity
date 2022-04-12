@@ -726,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sin: 1
+  sin: 2
   name: Lou
   relationshipPoints: 0
 --- !u!1 &370209445
