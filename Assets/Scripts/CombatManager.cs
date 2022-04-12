@@ -37,6 +37,8 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wordGameController.gameObject.SetActive(false);
+        combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
         SetBattleLine(enemy.GetCombatLine());
