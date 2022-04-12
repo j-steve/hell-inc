@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4836792245890736261}
   - component: {fileID: 2932900983667165354}
   m_Layer: 0
-  m_Name: OfficeTS1
+  m_Name: OfficeTS2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,13 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c31dd16338c6d429928cc7fdd4c083, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  floor_1: {fileID: 8148793759438567074, guid: 68cac869ca642e047ab7047a51afe7b4, type: 3}
-  wall_f: {fileID: 395564142698124186, guid: 017d1c24082906641ba99d9c9e0c6631, type: 3}
-  wall_r: {fileID: 395564142698124186, guid: 017d1c24082906641ba99d9c9e0c6631, type: 3}
-  wall_b: {fileID: 395564142698124186, guid: 017d1c24082906641ba99d9c9e0c6631, type: 3}
-  wall_l: {fileID: 395564142698124186, guid: 017d1c24082906641ba99d9c9e0c6631, type: 3}
-  boundWall: {fileID: 395564142698124186, guid: eb03d0c44c496034ebfa5f1fdeb0e480, type: 3}
-  ceiling_1: {fileID: 3121467332782523680, guid: 4d531355a0417004ea80e32d20a4b966, type: 3}
+  floor_1: {fileID: 8148793759438567074, guid: d8463ad9917494e48bf25873911cd78a, type: 3}
+  wall_f: {fileID: 395564142698124186, guid: c34c2d513fe8268438c0814a81d46eca, type: 3}
+  wall_r: {fileID: 395564142698124186, guid: c34c2d513fe8268438c0814a81d46eca, type: 3}
+  wall_b: {fileID: 395564142698124186, guid: c34c2d513fe8268438c0814a81d46eca, type: 3}
+  wall_l: {fileID: 395564142698124186, guid: c34c2d513fe8268438c0814a81d46eca, type: 3}
+  boundWall: {fileID: 7184004723323267418, guid: 7fb0e706feff68e439ec3eef40c3f5a4, type: 3}
+  ceiling_1: {fileID: 3121467332782523680, guid: 1be837b0af5f51e42a7f6049fcce071e, type: 3}
   railing_1: {fileID: 0}
   stairs_1: {fileID: 0}
   stairs_descend_1: {fileID: 0}
