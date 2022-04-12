@@ -18,22 +18,30 @@ public class SettingsMenu : MonoBehaviour
         MouseInverted = Utilities.GetMouseInversion();
         GetComponentsInChildren<UnityEngine.UI.Slider>()[0].value = MasterVolume;
         GetComponentsInChildren<UnityEngine.UI.Slider>()[1].value = SoundEffectVolume;
-        GetComponentsInChildren<UnityEngine.UI.Slider>()[2].value = MouseSensitivy;
+        //GetComponentsInChildren<UnityEngine.UI.Slider>()[2].value = MouseSensitivy;
     }
     public void Save()
     {
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
+        MasterVolume = gameObject.GetComponentsInParent<AudioSource>()[0].volume;
+        SoundEffectVolume = gameObject.GetComponentsInParent<AudioSource>()[1].volume;
         Utilities.SetSettings(new Settings(MasterVolume, SoundEffectVolume, MouseSensitivy, MouseInverted));
+    }
+
+    public void Exit()
+    {
+        gameObject.GetComponentsInParent<AudioSource>()[1].Play();
+        GetComponentsInChildren<UnityEngine.UI.Slider>()[0].value = MasterVolume;
+        GetComponentsInChildren<UnityEngine.UI.Slider>()[1].value = SoundEffectVolume;
     }
     public void MainVolumeControl(System.Single vol)
     {
         gameObject.GetComponentsInParent<AudioSource>()[0].volume = vol;
-        MasterVolume = vol;
     }
 
     public void SoundEffectControl(System.Single vol)
     {
         gameObject.GetComponentsInParent<AudioSource>()[1].volume = vol;
-        SoundEffectVolume = vol;
     }
     public void MouseSensitivityControl(System.Single vol)
     {

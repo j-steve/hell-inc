@@ -17,6 +17,7 @@ public class DatabaseManager
     List<Conversation> conversations;
     Dictionary<Sin, EnemyData> enemyData;
     List<BattleLine> battleLines;
+    List<FetchInfo> fetches;
 
     private DatabaseManager()
     {
@@ -26,6 +27,8 @@ public class DatabaseManager
         LoadConversations();
         LoadEnemyData();
         LoadBattleLines();
+        LoadFetches();
+        ;
     }
 
     public static DatabaseManager Instance
@@ -41,7 +44,33 @@ public class DatabaseManager
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
     public Dictionary<Sin, EnemyData> EnemyData { get => enemyData; set => enemyData = value; }
     public List<BattleLine> BattleLines { get => battleLines; set => battleLines = value; }
+    public List<FetchInfo> Fetches { get => fetches; set => fetches = value; }
 
+    private void LoadFetches()
+    {
+        List<FetchInfo> temp = new List<FetchInfo>();
+        using (XmlReader read = XmlReader.Create(@"Assets/Database/Fetches.xml"))
+        {
+            read.ReadToFollowing("fetch");
+            do
+            {
+                read.ReadToFollowing("subject");
+                string subject = read.ReadElementContentAsString();
+                read.ReadToFollowing("objective");
+                string objective = read.ReadElementContentAsString();
+                read.ReadToFollowing("poi");
+                string poi = read.ReadElementContentAsString();
+                read.ReadToFollowing("item");
+                string item = read.ReadElementContentAsString();
+                FetchInfo fetchInfo = new FetchInfo(subject, objective, poi, item);
+
+                temp.Add(fetchInfo);
+
+            } while (read.ReadToFollowing("fetch"));
+        }
+
+        Fetches = temp;
+    }
     private void LoadBattleLines()
     {
         List<BattleLine> temp = new List<BattleLine>();
@@ -129,11 +158,10 @@ public class DatabaseManager
             {
                 read.ReadToFollowing("name");
                 string name = read.ReadElementContentAsString();
-                read.ReadToFollowing("description");
-                string description = read.ReadElementContentAsString();
-                read.ReadToFollowing("sprite");
-                string sprite = read.ReadElementContentAsString();
-                ItemInfo item = new ItemInfo(name, description, sprite);
+                read.ReadToFollowing("category");
+                string category = read.ReadElementContentAsString();
+                
+                ItemInfo item = new ItemInfo(name, category);
 
                 temp.Add(item);
 
@@ -199,20 +227,13 @@ public class DatabaseManager
                 double friendshipPoints = read.ReadElementContentAsDouble();
                 read.ReadToFollowing("healthLoss");
                 double healthLoss = read.ReadElementContentAsDouble();
-                read.ReadToFollowing("item");
-                ItemInfo wantedItem = null;
-                string text = read.ReadElementContentAsString();
-                if(text != "")
-                    wantedItem = Items.Find(i => i.Name == text);
+                read.ReadToFollowing("category");
+                string category = read.ReadElementContentAsString();
 
-                read.ReadToFollowing("gossip");
-                GossipInfo wantedGossip = null;
-                text = read.ReadElementContentAsString();
-                if (text != "")
-                    wantedGossip = Gossips.Find(g => g.Name == text);
+
 
                 CombatModifiers modifiers = new CombatModifiers(conversationTextSize, conversationTextSpeed, runAwayChance, gossipReward, itemReward, miniGameSpeed, miniGameSize, numberOfConversations, friendshipPoints, healthLoss);
-                Trait trait = new Trait(name, type, modifiers, wantedItem, wantedGossip);
+                Trait trait = new Trait(name, type, modifiers, category);
                 
                 switch(type)
                 {

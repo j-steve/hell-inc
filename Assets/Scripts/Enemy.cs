@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.Scripts;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     public Sin sin;
     public new string name;
     public EnemyData enemyData;
+    public int relationshipPoints;
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +21,6 @@ public class Enemy : MonoBehaviour
 
     public Conversation GetRandomConversation()
     {
-        int randomIndex = Random.Range(0, enemyInfo.Conversations.Count);
-        return enemyInfo.Conversations[randomIndex];
+        return enemyInfo.Conversations.GetRandom();
     }
 }
