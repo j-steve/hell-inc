@@ -45,6 +45,7 @@ public class CombatManager : MonoBehaviour
         CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
             combatMenu.SetActive(false);
+            ItemInventory.SetActive(false);
             currentConversation = enemy.GetRandomConversation();
             wordGameController.Initialize(currentConversation.Text, player.GetCombatModifiersForEnemy(enemy));
         });

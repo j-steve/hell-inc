@@ -136,7 +136,7 @@ public class EnemyInfo
         Traits = new List<Trait>();
         Conversations = new List<Conversation>();
 
-        UnityEngine.Random.InitState(Utilities.GetDailySeed());
+        //UnityEngine.Random.InitState(Utilities.GetDailySeed());
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
         int randomWanted = UnityEngine.Random.Range(0, DatabaseManager.Instance.WantedTraits.Count);
         Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
