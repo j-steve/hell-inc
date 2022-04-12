@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     bool lockPlayer = false;
     List<ItemInfo> itemInventory;
     List<GossipInfo> gossipInventory;
-    public CombatModifiers combatModifiers = new CombatModifiers(1,1,1,1,1,1,1,1,1,1);
+    public CombatModifiers combatModifiers = new CombatModifiers(1,1,1,1,1,1,1,3,1,1);
     int Stamina = 100;
     int Attentiveness; //Conversation speed/size
     int Professionalism; //Mini game character speed/bullet size

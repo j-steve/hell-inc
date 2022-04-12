@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Utilities
@@ -146,11 +147,6 @@ public class EnemyInfo
 
     public List<Trait> Traits { get => traits; set => traits = value; }
     public List<Conversation> Conversations { get => conversations; set => conversations = value; }
-
-    public string GetCombatLine()
-    {
-        return "What do you want pipsqueak?";
-    }
 
     public Trait GetCombatTrait()
     {

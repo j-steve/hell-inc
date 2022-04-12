@@ -39,7 +39,7 @@ public class CombatManager : MonoBehaviour
     {
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
-        SetBattleLine(enemy.enemyInfo.GetCombatLine());
+        SetBattleLine(enemy.GetCombatLine());
         CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
             combatMenu.SetActive(false);
