@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
-    static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F600 }, { Emoji.Neutral, 0x1F602}, { Emoji.Crying, 0x1F603}, { Emoji.Shocked, 0x1F604  }, { Emoji.Anger, 0x1F605 } };
+    static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F601 }, { Emoji.Neutral, 0x1F609 }, { Emoji.Crying, 0x1F603 }, { Emoji.Shocked, 0x1F606 }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
     public int textSpeed = 5;
@@ -37,6 +37,8 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        wordGameController.gameObject.SetActive(false);
+        combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
         SetBattleLine(enemy.GetCombatLine());
@@ -112,13 +114,18 @@ public class CombatManager : MonoBehaviour
         }
         // Disable all emoji buttons, and highlight the correct emoji response.
         foreach(Button emojiButton in conversationResponseMenu.GetComponentsInChildren<Button>()) {
-            Emoji thisEmoji = (Emoji)Enum.Parse(typeof(Emoji), emojiButton.name);
             emojiButton.interactable = false;
-            if (thisEmoji == currentConversation.BestResponse) {
-                emojiButton.colors = new ColorBlock {
-                    disabledColor = Color.green,
-                    colorMultiplier = 1
-                };
+            Emoji thisEmoji = (Emoji)Enum.Parse(typeof(Emoji), emojiButton.name);
+            Color? newColor = null;
+            if (thisEmoji == currentConversation.GoodResponse) {
+                newColor = new Color32(159, 188, 155, 255); // Pale Green
+            } else if (thisEmoji == currentConversation.BestResponse) {
+                newColor = new Color32(5, 173, 7, 255); // Bright Green 
+            } else if (thisEmoji == currentConversation.WorstResponse) {
+                newColor = new Color32(255, 117, 117, 255); // Red
+            }
+            if (newColor.HasValue) {
+                emojiButton.colors = new ColorBlock {normalColor = newColor.Value, disabledColor = newColor.Value, colorMultiplier = 1};
             }
         }
     }
