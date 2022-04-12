@@ -311,7 +311,7 @@ public enum Sin
 
 public enum Emoji
 {
-    Happy = 0, Love = 1, Neutral = 2, Crying = 3, Shocked = 4, Anger = 5
+    UNDEFINED = 0, Happy = 1, Love = 2, Neutral = 3, Crying = 4, Shocked = 5, Anger = 6
 }
 
 public enum TraitType
