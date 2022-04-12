@@ -28,7 +28,6 @@ public class CombatManager : MonoBehaviour
     public GameObject ItemInventory;
     public Button ItemSlotPrefab;
     public Transform ItemInventoryContainer;
-    string lastSelectedItem;
     bool displayText;
     string battleLine;
     int battleLinePosition;
@@ -56,19 +55,6 @@ public class CombatManager : MonoBehaviour
             combatMenu.SetActive(true);
             // TODO: add word game lose behavior
         });
-
-        List<ItemInfo> items = DatabaseManager.Instance.Items;
-
-        foreach (ItemInfo i in items)
-        {
-            Button b = Instantiate(ItemSlotPrefab);
-            TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
-            textmeshPro.text = i.Name;
-            b.onClick.AddListener(delegate { ButtonOnClick(b); });
-
-
-            b.transform.SetParent(ItemInventoryContainer, false);
-        }
     }
 
     void SetBattleLine(string battleLine)
@@ -111,30 +97,23 @@ public class CombatManager : MonoBehaviour
             SetBattleLine("I don't think you were even listening!");
         }
     }
-    
-    public void ButtonOnClick(Button b)
-    {
-        TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
-        lastSelectedItem = textmeshPro.text;
-    }
-
-    public void SelectItem()
-    {
-        Debug.Log(lastSelectedItem);
-        ItemInventory.SetActive(false);
-        //remove item from inventory
-        lastSelectedItem = "";
-    }
-
-    public void BackFromInventory()
-    {
-        ItemInventory.SetActive(false);
-        lastSelectedItem = "";
-    }
-
     public void GiveItem()
     {
+        //List<ItemInfo> items = player.ItemInventory;
+        List<ItemInfo> items = DatabaseManager.Instance.Items;
         ItemInventory.SetActive(true);
+
+        foreach (ItemInfo i in items)
+        {
+            Button b = Instantiate(ItemSlotPrefab);
+            TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
+            textmeshPro.text = i.Name;
+            textmeshPro.outlineWidth = 0.2f;
+            textmeshPro.outlineColor = new Color32(255, 128, 0, 255);
+
+            b.transform.SetParent(ItemInventoryContainer, false);
+
+        }
     }
 
     public void TellGossip()
