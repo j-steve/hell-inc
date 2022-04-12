@@ -86,29 +86,40 @@ public class CombatManager : MonoBehaviour
     {
         foreach (Emoji emoji in Enum.GetValues(typeof(Emoji))) {
             Button emojiButton = Instantiate(menuButtonPrefab, conversationResponseMenu.transform);
+            emojiButton.name = Enum.GetName(typeof(Emoji), emoji);
             emojiButton.GetComponentInChildren<TextMeshProUGUI>().text = char.ConvertFromUtf32(emojiUnicodeMap[emoji]);
             emojiButton.onClick.AddListener(delegate () { EmojiButtonClicked(emoji); });
         }
     }
 
-    void EmojiButtonClicked(Emoji emoji)
+    void EmojiButtonClicked(Emoji clickedEmoji)
     {
-        conversationResponseMenu.SetActive(false);
-        if (emoji == currentConversation.BestResponse)
+        if (clickedEmoji == currentConversation.BestResponse)
         {
             SetBattleLine("Exactly!!");
         }
-        else if (emoji == currentConversation.GoodResponse)
+        else if (clickedEmoji == currentConversation.GoodResponse)
         {
             SetBattleLine("Yeah, pretty much.");
         }
-        else if (emoji == currentConversation.WorstResponse)
+        else if (clickedEmoji == currentConversation.WorstResponse)
         {
             SetBattleLine("WHAT? How could you say that??");
         }
         else
         {
             SetBattleLine("I don't think you were even listening!");
+        }
+        // Disable all emoji buttons, and highlight the correct emoji response.
+        foreach(Button emojiButton in conversationResponseMenu.GetComponentsInChildren<Button>()) {
+            Emoji thisEmoji = (Emoji)Enum.Parse(typeof(Emoji), emojiButton.name);
+            emojiButton.interactable = false;
+            if (thisEmoji == currentConversation.BestResponse) {
+                emojiButton.colors = new ColorBlock {
+                    disabledColor = Color.green,
+                    colorMultiplier = 1
+                };
+            }
         }
     }
     
