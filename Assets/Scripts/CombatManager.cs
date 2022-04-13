@@ -87,6 +87,7 @@ public class CombatManager : MonoBehaviour
     void CreateEmojiMenu()
     {
         foreach (Emoji emoji in Enum.GetValues(typeof(Emoji))) {
+            if (emoji == Emoji.UNDEFINED) { continue; }
             Button emojiButton = Instantiate(menuButtonPrefab, conversationResponseMenu.transform);
             emojiButton.name = Enum.GetName(typeof(Emoji), emoji);
             emojiButton.GetComponentInChildren<TextMeshProUGUI>().text = char.ConvertFromUtf32(emojiUnicodeMap[emoji]);
