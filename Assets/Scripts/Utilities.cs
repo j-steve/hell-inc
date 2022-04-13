@@ -203,6 +203,30 @@ public class Trait
     public string Category { get => category; set => category = value; }
 }
 
+public class PlayerModifiers
+{
+    float gluttony;
+    float lust;
+    float envy;
+    float greed;
+    float wrath;
+
+    public PlayerModifiers(float gluttony, float lust, float envy, float greed, float wrath)
+    {
+        this.gluttony = gluttony;
+        this.lust = lust;
+        this.envy = envy;
+        this.greed = greed;
+        this.wrath = wrath;
+    }
+
+    public float Gluttony { get => gluttony; set => gluttony = value; }
+    public float Lust { get => lust; set => lust = value; }
+    public float Envy { get => envy; set => envy = value; }
+    public float Greed { get => greed; set => greed = value; }
+    public float Wrath { get => wrath; set => wrath = value; }
+}
+
 public class CombatModifiers
 {
     float conversationTextSize;
