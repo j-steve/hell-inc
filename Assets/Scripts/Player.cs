@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
     public int moveDistance = 10;
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
+    public OfficeManager officeManager;
     Vector3 endPosition;
     float rotation = 0.0f;
     float lastY;
@@ -61,16 +62,37 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    /*RaycastHit hit;
+                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance);
+                    if (collided && hit.collider.tag == "Tile")
+                    {
+                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance, LayerMask.GetMask("Default"));
+                        //Debug.Log(hit.collider.tag);
+                        if (collided && hit.collider.tag == "Enemy")
+                        {
+                            hit.collider.GetComponentInParent<Enemy>();
+                            //LockPlayer = true;
+                            officeManager.InitiateCombat(hit.collider.name);
+                        }
+                        else
+                        {
+                            distanceMoved = 0f;
+                            Movement = PlayerMovement.Forward;
+                            EndPosition = transform.position + (transform.forward * moveDistance);
+                        }
+                    }*/
+
                     RaycastHit hit;
                     bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance);
                     if (collided && hit.collider.tag != "Tile")
                     {
-                        Debug.Log(hit.collider.tag);
-                        if (hit.collider.tag == "Enemy")
+                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance, LayerMask.GetMask("Default"));
+                        //Debug.Log(hit.collider.tag);
+                        if (collided && hit.collider.tag == "Enemy")
                         {
                             hit.collider.GetComponentInParent<Enemy>();
-                            LockPlayer = true;
-                            //Iniatiate combat
+                            //LockPlayer = true;
+                            //officeManager.InitiateCombat(hit.collider.name);
                         }
                     }
                     else
@@ -78,7 +100,6 @@ public class Player : MonoBehaviour
                         distanceMoved = 0f;
                         Movement = PlayerMovement.Forward;
                         EndPosition = transform.position + (transform.forward * moveDistance);
-                        //Stamina--;
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -89,15 +110,34 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    /*RaycastHit hit;
+                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance);
+                    if (collided && hit.collider.tag == "Tile")
+                    {
+                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
+                        //Debug.Log(hit.collider.tag);
+                        if (collided && hit.collider.tag == "Enemy")
+                        {
+                            //LockPlayer = true;
+                            officeManager.InitiateCombat(hit.collider.name);
+                        }
+                        else
+                        {
+                            distanceMoved = 0f;
+                            Movement = PlayerMovement.Back;
+                            EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
+                        }
+                    }*/
                     RaycastHit hit;
                     bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance);
                     if (collided && hit.collider.tag != "Tile")
                     {
-                        Debug.Log(hit.collider.tag);
-                        if (hit.collider.tag == "Enemy")
+                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
+                        //Debug.Log(hit.collider.tag);
+                        if (collided && hit.collider.tag == "Enemy")
                         {
-                            LockPlayer = true;
-                            //Iniatiate combat
+                            //LockPlayer = true;
+                            //officeManager.InitiateCombat(hit.collider.name);
                         }
                     }
                     else
@@ -105,7 +145,6 @@ public class Player : MonoBehaviour
                         distanceMoved = 0f;
                         Movement = PlayerMovement.Back;
                         EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
-                        //Stamina--;
                     }
                 }
             }
@@ -162,7 +201,8 @@ public class Player : MonoBehaviour
         if(Random.Range(0, 1000) < randomCombatChance)
         {
             Debug.Log("Fight!");
-            LockPlayer = true;
+            //officeManager.InitiateCombat("Lou");
+            //LockPlayer = true;
             randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
         }
