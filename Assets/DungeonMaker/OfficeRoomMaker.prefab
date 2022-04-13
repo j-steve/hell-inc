@@ -45,12 +45,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea882f2f9295809499b76a74206a7a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfTiles: 20
+  numOfTiles: 4
   numOfUniqueRooms: 0
   tile: {fileID: 6973458560001382724, guid: 2fa5ab90c42684d4ca65492ff4db3e08, type: 3}
   tileList: []
   stepDist: 4
-  meanderDegree: 50
+  meanderDegree: 95
   isStarterHall: 0
   splitRoomList: []
   splitRoomTypes: []
