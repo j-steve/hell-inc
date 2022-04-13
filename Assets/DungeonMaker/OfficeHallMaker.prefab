@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea882f2f9295809499b76a74206a7a3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numOfTiles: 100
+  numOfTiles: 50
   numOfUniqueRooms: 20
   tile: {fileID: 6973458560001382724, guid: df75dde58a40f1141aec61d7d2e581eb, type: 3}
   tileList: []
