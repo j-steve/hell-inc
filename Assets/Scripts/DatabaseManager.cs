@@ -46,6 +46,21 @@ public class DatabaseManager
     public List<BattleLine> BattleLines { get => battleLines; set => battleLines = value; }
     public List<FetchInfo> Fetches { get => fetches; set => fetches = value; }
 
+    public List<Conversation> GetConversationsForDay(int day)
+    {
+        int split = Conversations.Count / 5;
+        int start = split * (day - 1);
+        int end = day == 5 ? Conversations.Count : split * day;
+        List<Conversation> dayConversations = new List<Conversation>();
+
+        for (int i = start; i < end; i++)
+        {
+            dayConversations.Add(Conversations[i]);
+        }
+
+        return dayConversations;
+    }
+
     private void LoadFetches()
     {
         List<FetchInfo> temp = new List<FetchInfo>();
@@ -147,6 +162,9 @@ public class DatabaseManager
         }
 
         Conversations = temp;
+        Conversations.Sort(delegate (Conversation x, Conversation y) {
+            return x.Text.Length.CompareTo(y.Text.Length);
+        });
     }
     private void LoadItems()
     {

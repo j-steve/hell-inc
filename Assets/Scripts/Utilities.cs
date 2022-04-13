@@ -155,21 +155,27 @@ public class EnemyInfo
         //UnityEngine.Random.InitState(Utilities.GetDailySeed());
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
         int randomWanted = UnityEngine.Random.Range(0, DatabaseManager.Instance.WantedTraits.Count);
-        Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
-        Trait t = DatabaseManager.Instance.WantedTraits[randomWanted];
-        Utilities.itemsWanted.Add(DatabaseManager.Instance.Items.Find(i => i.Category == t.Category));
-        Traits.Add(t);
+        Trait t1 = DatabaseManager.Instance.ConversationTraits[randomConversation];
+        Traits.Add(t1);
+        Trait t2 = DatabaseManager.Instance.WantedTraits[randomWanted];
+        Utilities.itemsWanted.Add(DatabaseManager.Instance.Items.Find(i => i.Category == t2.Category));
+        Traits.Add(t2);
+    }
+
+    public void LoadConversations(int day)
+    {
+        Conversations.Clear();
         List<int> randomNumbers = new List<int>();
 
-        int numOfConversations = 3;
+        int numOfConversations = 3 + GetCombatTrait().Modifiers.NumberOfConversations;
 
         do
         {
-            int random = UnityEngine.Random.Range(0, DatabaseManager.Instance.Conversations.Count);
+            int random = UnityEngine.Random.Range(0, DatabaseManager.Instance.GetConversationsForDay(day).Count);
 
-            if(!randomNumbers.Contains(random))
+            if (!randomNumbers.Contains(random))
             {
-                Conversations.Add(DatabaseManager.Instance.Conversations[random]);
+                Conversations.Add(DatabaseManager.Instance.GetConversationsForDay(day)[random]);
                 randomNumbers.Add(random);
                 numOfConversations--;
             }

@@ -37,7 +37,7 @@ public Canvas loadingCanvas;
         if (isStarterHall)
         {
             StartPlacing();
-            mainCamera.transform.position = this.transform.position;
+            mainCamera.transform.position = this.transform.position + new Vector3(1,0,0);//Increase by 1 to align to the tiles
         }
     }
 

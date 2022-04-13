@@ -17,6 +17,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         enemyInfo = new EnemyInfo();
+        enemyInfo.LoadConversations(1);//This is the day
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
 
         BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();
