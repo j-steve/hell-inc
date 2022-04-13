@@ -12,7 +12,7 @@ public class CombatManager : MonoBehaviour
     const float EMOJI_OUTCOME_DISPLAY_SECONDS = 1.5f;
     static List<string> convoResponsePrompts = new List<string>() { "What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
     static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??", "Hey, hey wake up!! I'm talking here!" };
-    static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...", "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else.", "I wanted to talk about something else, though."};
+    static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...", "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else.", "I wanted to talk about something else, though." };
     static Dictionary<EmojiRating, List<string>> emojiRatingLines = new Dictionary<EmojiRating, List<string>>() {
         { EmojiRating.BEST, new List<string>() { "Exactly!!", "I feel the same way!", "Totally, I knew you'd get it!", "Agreed!" } },
         { EmojiRating.GOOD, new List<string>() { "Yeah, pretty much.", "Basically.", "Hm, I can see how you'd feel that way.", "I suppose so.", "Yeah, that's fair.", "Hm, I guess so" } },
@@ -30,6 +30,7 @@ public class CombatManager : MonoBehaviour
     public Enemy enemy;
     public int textSpeed = 5;
     Player player;
+    public bool needsReset = false;
     public bool enemyMove;
     public TextMeshProUGUI enemyName;
     public Image enemyLineImage;
@@ -55,25 +56,34 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        SetUp();
+        CreateEmojiMenu();
+    }
+
+    public void SetUp()
+    {
         wordGameController.gameObject.SetActive(false);
         combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
         conversationFailMenu.SetActive(false);
         SetBattleLine(enemy.GetCombatLine());
-        CreateEmojiMenu();
-        converseButton.onClick.AddListener(delegate() {
+
+        converseButton.onClick.RemoveAllListeners();
+        converseButton.onClick.AddListener(delegate () {
             combatMenu.SetActive(false);
             ItemInventory.SetActive(false);
             currentConversation = enemy.GetRandomConversation();
             wordGameController.Initialize(currentConversation.Text, enemy.enemyInfo.GetCombatTrait().Modifiers);
         });
-        wordGameController.OnGameWon += (delegate () { 
+        wordGameController.ResetOnGameWon();
+        wordGameController.OnGameWon += (delegate () {
             SetBattleLine(convoResponsePrompts.GetRandom());
             encounterStartMenu.SetActive(false);
             conversationResponseMenu.SetActive(true);
             combatMenu.SetActive(true);
         });
+        wordGameController.ResetOnGameLost();
         wordGameController.OnGameLost += (delegate () {
             SetBattleLine(convoFailLines.GetRandom());
             encounterStartMenu.SetActive(false);
@@ -81,8 +91,13 @@ public class CombatManager : MonoBehaviour
             combatMenu.SetActive(true);
         });
 
-        List<ItemInfo> items = DatabaseManager.Instance.Items;
+       List<ItemInfo> items = DatabaseManager.Instance.Items;
 
+        foreach (Transform child in ItemInventoryContainer.transform)
+        {
+            //if(child.name)
+            GameObject.Destroy(child.gameObject);
+        }
         foreach (ItemInfo i in items)//player.ItemInventory)
         {
             Button b = Instantiate(ItemSlotPrefab);
@@ -94,6 +109,13 @@ public class CombatManager : MonoBehaviour
             b.transform.SetParent(ItemInventoryContainer, false);
         }
     }
+
+    public void SetEnemy(Enemy e)
+    {
+        enemy = e;
+        
+    }
+
 
     void SetBattleLine(string battleLine)
     {
@@ -178,6 +200,12 @@ public class CombatManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(needsReset)
+        {
+            SetUp();
+            needsReset = false;
+        }
+
         if (enemyMove)
         {
             enemy.transform.position = new Vector3(enemy.transform.position.x - .5f, enemy.transform.position.y, enemy.transform.position.z);

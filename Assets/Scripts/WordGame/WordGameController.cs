@@ -15,6 +15,9 @@ public class WordGameController : MonoBehaviour
     public event Action OnGameWon;
     public event Action OnGameLost;
 
+    public void ResetOnGameWon() => OnGameWon = delegate { };
+    public void ResetOnGameLost() => OnGameLost = delegate { };
+
     [SerializeField] WordSpawnerController wordSpawner;
     [SerializeField] ShooterController shooter;
     [SerializeField] GoalController goal;
