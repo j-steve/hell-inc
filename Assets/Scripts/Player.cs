@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     PlayerModifiers modifiers;
     float attentionSpanMax;
     float attentionSpanCurrent;
-    int randomCombatChance = 0;
-    int randomCombatChangeIncrement;
+    int randomCombatChance = -10;
+    int randomCombatChangeIncrement = 0;
 
     public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
     public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
@@ -163,7 +163,7 @@ public class Player : MonoBehaviour
         {
             Debug.Log("Fight!");
             LockPlayer = true;
-            randomCombatChance = 0;
+            randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
         }
         else
