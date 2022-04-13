@@ -126,6 +126,27 @@ public class GossipInfo
     public string Desciption { get => desciption; set => desciption = value; }
 }
 
+public class PlayerInfo
+{
+    PlayerModifiers modifiers;
+    float attentionSpanMax;
+    float attentionSpanCurrent;
+    List<ItemInfo> inventory;
+
+    public PlayerInfo(PlayerModifiers modifiers, float attentionSpanMax, float attentionSpanCurrent, List<ItemInfo> inventory)
+    {
+        this.modifiers = modifiers;
+        this.attentionSpanMax = attentionSpanMax;
+        this.attentionSpanCurrent = attentionSpanCurrent;
+        this.inventory = inventory;
+    }
+
+    public PlayerModifiers Modifiers { get => modifiers; set => modifiers = value; }
+    public float AttentionSpanMax { get => attentionSpanMax; set => attentionSpanMax = value; }
+    public float AttentionSpanCurrent { get => attentionSpanCurrent; set => attentionSpanCurrent = value; }
+    public List<ItemInfo> Inventory { get => inventory; set => inventory = value; }
+}
+
 public class EnemyInfo
 {
     List<Trait> traits;
