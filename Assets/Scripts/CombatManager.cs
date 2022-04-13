@@ -8,7 +8,23 @@ using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
-    static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
+    /** How long to display the outcome of the emoji selection, in seconds, before returning to the main screen. */
+    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 1.5f;
+    static List<string> convoResponsePrompts = new List<string>() { "What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
+    static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??", "Hey, hey wake up!! I'm talking here!" };
+    static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...", "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else.", "I wanted to talk about something else, though."};
+    static Dictionary<EmojiRating, List<string>> emojiRatingLines = new Dictionary<EmojiRating, List<string>>() {
+        { EmojiRating.BEST, new List<string>() { "Exactly!!", "I feel the same way!", "Totally, I knew you'd get it!", "Agreed!" } },
+        { EmojiRating.GOOD, new List<string>() { "Yeah, pretty much.", "Basically.", "Hm, I can see how you'd feel that way.", "I suppose so.", "Yeah, that's fair.", "Hm, I guess so" } },
+        { EmojiRating.BAD, new List<string>() { "I don't think you were even listening.", "That doesn't make sense to me.", "What? Why would you say that?", "Were you listening to me at all?", "Hm, I don't think we're on the same page there.", "I can't say I agree with that." } },
+        { EmojiRating.WORST, new List<string>() {  "WHAT? How could you say that??", "Are you kidding me??", "What are you, crazy?", "What? That doesn't make any sense!", "You weren't listening at all!" } }
+    };
+    static Dictionary<EmojiRating, Color> emojiRatingColors = new Dictionary<EmojiRating, Color>() {
+        {EmojiRating.BEST, new Color32(159, 188, 155, 255)}, // Bright Green
+        {EmojiRating.GOOD, new Color32(5, 173, 7, 255)}, // Pale Green
+        {EmojiRating.BAD, new Color32(229, 229, 229, 121)}, // Gray
+        {EmojiRating.WORST, new Color32(255, 117, 117, 255)} // Red
+    };
     static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F601 }, { Emoji.Neutral, 0x1F609 }, { Emoji.Crying, 0x1F603 }, { Emoji.Shocked, 0x1F606 }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
@@ -23,6 +39,7 @@ public class CombatManager : MonoBehaviour
     public Button converseButton;
     public GameObject encounterStartMenu;
     public GameObject conversationResponseMenu;
+    public GameObject conversationFailMenu;
     public WordGameController wordGameController;
     Conversation currentConversation;
     public GameObject ItemInventory;
@@ -33,6 +50,7 @@ public class CombatManager : MonoBehaviour
     string battleLine;
     int battleLinePosition;
     int textSpeedTrack;
+    float? returnToMainMenuTime = null;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +59,7 @@ public class CombatManager : MonoBehaviour
         combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
+        conversationFailMenu.SetActive(false);
         SetBattleLine(enemy.GetCombatLine());
         CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
@@ -55,8 +74,11 @@ public class CombatManager : MonoBehaviour
             conversationResponseMenu.SetActive(true);
             combatMenu.SetActive(true);
         });
-        wordGameController.OnGameLost += (delegate () { 
-            Application.Quit(); // TODO: add word game lose behavior
+        wordGameController.OnGameLost += (delegate () {
+            SetBattleLine(convoFailLines.GetRandom());
+            encounterStartMenu.SetActive(false);
+            conversationFailMenu.SetActive(true);
+            combatMenu.SetActive(true);
         });
 
         List<ItemInfo> items = DatabaseManager.Instance.Items;
@@ -97,38 +119,17 @@ public class CombatManager : MonoBehaviour
 
     void EmojiButtonClicked(Emoji clickedEmoji)
     {
-        if (clickedEmoji == currentConversation.BestResponse)
-        {
-            SetBattleLine("Exactly!!");
-        }
-        else if (clickedEmoji == currentConversation.GoodResponse)
-        {
-            SetBattleLine("Yeah, pretty much.");
-        }
-        else if (clickedEmoji == currentConversation.WorstResponse)
-        {
-            SetBattleLine("WHAT? How could you say that??");
-        }
-        else
-        {
-            SetBattleLine("I don't think you were even listening!");
-        }
+        EmojiRating emojiRating = currentConversation.GetEmojiRating(clickedEmoji);
+        SetBattleLine(emojiRatingLines[emojiRating].GetRandom());
         // Disable all emoji buttons, and highlight the correct emoji response.
         foreach(Button emojiButton in conversationResponseMenu.GetComponentsInChildren<Button>()) {
             emojiButton.interactable = false;
             Emoji thisEmoji = (Emoji)Enum.Parse(typeof(Emoji), emojiButton.name);
-            Color? newColor = null;
-            if (thisEmoji == currentConversation.GoodResponse) {
-                newColor = new Color32(159, 188, 155, 255); // Pale Green
-            } else if (thisEmoji == currentConversation.BestResponse) {
-                newColor = new Color32(5, 173, 7, 255); // Bright Green 
-            } else if (thisEmoji == currentConversation.WorstResponse) {
-                newColor = new Color32(255, 117, 117, 255); // Red
-            }
-            if (newColor.HasValue) {
-                emojiButton.colors = new ColorBlock {normalColor = newColor.Value, disabledColor = newColor.Value, colorMultiplier = 1};
-            }
+            ColorBlock newColorBlock = emojiButton.colors;
+            newColorBlock.disabledColor = emojiRatingColors[currentConversation.GetEmojiRating(thisEmoji)];
+            emojiButton.colors = newColorBlock;
         }
+        returnToMainMenuTime = Time.time + EMOJI_OUTCOME_DISPLAY_SECONDS;
     }
     
     public void ButtonOnClick(Button b)
@@ -200,6 +201,12 @@ public class CombatManager : MonoBehaviour
             }
             if (battleLinePosition == battleLine.Length + 1)
                 displayText = false;
+        } else if (returnToMainMenuTime.HasValue && Time.time >= returnToMainMenuTime) {
+            foreach (Button button in conversationResponseMenu.GetComponentsInChildren<Button>()) { button.interactable=true; }
+            conversationResponseMenu.SetActive(false);
+            encounterStartMenu.SetActive(true);
+            SetBattleLine(convoContinuePrompts.GetRandom());
+            returnToMainMenuTime = null;
         }
     }
 }
