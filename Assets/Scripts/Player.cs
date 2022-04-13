@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LockPlayer = true;
         Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }
 
@@ -68,6 +69,7 @@ public class Player : MonoBehaviour
                         if (hit.collider.tag == "Enemy")
                         {
                             hit.collider.GetComponentInParent<Enemy>();
+                            LockPlayer = true;
                             //Iniatiate combat
                         }
                     }
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
                         Debug.Log(hit.collider.tag);
                         if (hit.collider.tag == "Enemy")
                         {
+                            LockPlayer = true;
                             //Iniatiate combat
                         }
                     }
@@ -159,6 +162,7 @@ public class Player : MonoBehaviour
         if(Random.Range(0, 1000) < randomCombatChance)
         {
             Debug.Log("Fight!");
+            LockPlayer = true;
             randomCombatChance = 0;
             randomCombatChangeIncrement = 0;
         }

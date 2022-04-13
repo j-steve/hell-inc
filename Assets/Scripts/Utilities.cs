@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Utilities
 {
+    public static List<ItemInfo> itemsWanted = new List<ItemInfo>();
+
     public static int GetDailySeed()
     {
         string date = DateTime.Now.ToShortDateString();
@@ -15,14 +17,7 @@ public class Utilities
 
     public static ItemInfo GetRandomItem()
     {
-        List<ItemInfo> items = new List<ItemInfo>();
-
-        foreach(Enemy e in GameManager.Coworkers.Values)
-        {
-            items.Add(DatabaseManager.Instance.Items.Find(i => i.Name == e.enemyInfo.GetWantedtTrait().Name));
-        }
-
-        return items.GetRandom();
+        return itemsWanted.GetRandom();
     }
 
     public static void SetSettings(Settings s)
@@ -161,7 +156,9 @@ public class EnemyInfo
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
         int randomWanted = UnityEngine.Random.Range(0, DatabaseManager.Instance.WantedTraits.Count);
         Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
-        Traits.Add(DatabaseManager.Instance.WantedTraits[randomWanted]);
+        Trait t = DatabaseManager.Instance.WantedTraits[randomWanted];
+        Utilities.itemsWanted.Add(DatabaseManager.Instance.Items.Find(i => i.Category == t.Category));
+        Traits.Add(t);
         List<int> randomNumbers = new List<int>();
 
         int numOfConversations = 3;
