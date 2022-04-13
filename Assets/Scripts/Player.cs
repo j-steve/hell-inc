@@ -7,9 +7,10 @@ public class Player : MonoBehaviour
     public int moveDistance = 10;
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
-    float endPosition;
+    Vector3 endPosition;
     float rotation = 0.0f;
     float lastY;
+    float distanceMoved = 0f;
     Quaternion qTo = Quaternion.identity;
     PlayerMovement movement = PlayerMovement.None;
     bool lockPlayer = false;
@@ -21,7 +22,7 @@ public class Player : MonoBehaviour
     public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
     public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
     public PlayerMovement Movement { get => movement; set => movement = value; }
-    public float EndPosition { get => endPosition; set => endPosition = value; }
+    public Vector3 EndPosition { get => endPosition; set => endPosition = value; }
     public PlayerModifiers Modifiers { get => modifiers; set => modifiers = value; }
     public float AttentionSpanMax { get => attentionSpanMax; set => attentionSpanMax = value; }
     public float AttentionSpanCurrent { get => attentionSpanCurrent; set => attentionSpanCurrent = value; }
@@ -58,8 +59,10 @@ public class Player : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance);
+                    if (collided && hit.collider.tag != "Tile")
                     {
+                        Debug.Log(hit.collider.tag);
                         if (hit.collider.tag == "Enemy")
                         {
                             //Iniatiate combat
@@ -67,8 +70,9 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
+                        distanceMoved = 0f;
                         Movement = PlayerMovement.Forward;
-                        EndPosition = transform.position.z + moveDistance;
+                        EndPosition = transform.position + (transform.forward * moveDistance);
                         //Stamina--;
                     }
                 }
@@ -81,8 +85,10 @@ public class Player : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance);
+                    if (collided && hit.collider.tag != "Tile")
                     {
+                        Debug.Log(hit.collider.tag);
                         if (hit.collider.tag == "Enemy")
                         {
                             //Iniatiate combat
@@ -90,8 +96,9 @@ public class Player : MonoBehaviour
                     }
                     else
                     {
+                        distanceMoved = 0f;
                         Movement = PlayerMovement.Back;
-                        EndPosition = transform.position.z - moveDistance;
+                        EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
                         //Stamina--;
                     }
                 }
@@ -107,11 +114,13 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Forward)
             {
-                transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-                if(transform.position.x >= EndPosition)
+                transform.position = transform.position + transform.forward * moveSpeed * Time.deltaTime;
+                distanceMoved += moveSpeed * Time.deltaTime;
+                //transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if (distanceMoved >= moveDistance)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
+                    transform.position = EndPosition;
                     //LockPlayer = true;
                 }
             }
@@ -126,11 +135,13 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Back)
             {
-                transform.position = new Vector3(transform.position.x - (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-                if (transform.position.x <= EndPosition)
+                transform.position = transform.position + (transform.forward * -1) * moveSpeed * Time.deltaTime;
+                distanceMoved += moveSpeed * Time.deltaTime;
+                //transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if (distanceMoved >= moveDistance)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
+                    transform.position = EndPosition;
                     //LockPlayer = true;
                 }
             }

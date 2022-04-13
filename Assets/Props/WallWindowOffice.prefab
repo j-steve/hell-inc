@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 272859907385421056}
   m_Layer: 0
   m_Name: WallWindowOffice
-  m_TagString: Untagged
+  m_TagString: Window
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
