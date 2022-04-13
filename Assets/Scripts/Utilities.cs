@@ -307,6 +307,18 @@ public class Conversation
         this.worstResponse = worstResponse;
     }
 
+    /** Indicates the suitability of the given emoji in response to this conversation. */
+    public EmojiRating GetEmojiRating(Emoji response)
+    {
+        if (response == bestResponse)
+            return EmojiRating.BEST;
+        if (response == goodResponse)
+            return EmojiRating.GOOD;
+        if (response == worstResponse)
+            return EmojiRating.WORST;
+        return EmojiRating.BAD;
+    }
+
     public string Text { get => text; set => text = value; }
     public Emoji BestResponse { get => bestResponse; set => bestResponse = value; }
     public Emoji GoodResponse { get => goodResponse; set => goodResponse = value; }
@@ -362,4 +374,8 @@ public enum Emoji
 public enum TraitType
 {
     Conversation = 0, Wanted = 1, Boss = 2
+}
+public enum EmojiRating
+{
+    UNDEFINED, WORST, BAD, GOOD, BEST
 }
