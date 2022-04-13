@@ -8,8 +8,11 @@ using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
+    /** How long to display the outcome of the emoji selection, in seconds, before returning to the main screen. */
+    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 1.5f;
     static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
     static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??",  "Hey, hey wake up!! I'm talking here!"};
+    static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...",  "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else."};  
     static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F601 }, { Emoji.Neutral, 0x1F609 }, { Emoji.Crying, 0x1F603 }, { Emoji.Shocked, 0x1F606 }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
@@ -35,6 +38,7 @@ public class CombatManager : MonoBehaviour
     string battleLine;
     int battleLinePosition;
     int textSpeedTrack;
+    float? returnToMainMenuTime = null;
 
     // Start is called before the first frame update
     void Start()
@@ -135,6 +139,7 @@ public class CombatManager : MonoBehaviour
                 emojiButton.colors = new ColorBlock {normalColor = newColor.Value, disabledColor = newColor.Value, colorMultiplier = 1};
             }
         }
+        returnToMainMenuTime = Time.time + EMOJI_OUTCOME_DISPLAY_SECONDS;
     }
     
     public void ButtonOnClick(Button b)
@@ -206,6 +211,13 @@ public class CombatManager : MonoBehaviour
             }
             if (battleLinePosition == battleLine.Length + 1)
                 displayText = false;
+        } else if (returnToMainMenuTime.HasValue && Time.time >= returnToMainMenuTime) {
+            foreach (Button button in conversationResponseMenu.GetComponentsInChildren<Button>()) { Destroy(button.gameObject); }
+            CreateEmojiMenu();
+            conversationResponseMenu.SetActive(false);
+            encounterStartMenu.SetActive(true);
+            SetBattleLine(convoContinuePrompts.GetRandom());
+            returnToMainMenuTime = null;
         }
     }
 }
