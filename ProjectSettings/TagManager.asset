@@ -16,6 +16,7 @@ TagManager:
   - Floor
   - Window
   - Tile
+  - Enemy
   layers:
   - Default
   - TransparentFX

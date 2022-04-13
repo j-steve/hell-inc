@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 630121335639523784}
   - component: {fileID: 4544553761590169197}
   - component: {fileID: 1798494089716415143}
+  - component: {fileID: 1404099446690606972}
   m_Layer: 0
   m_Name: Cubby
   m_TagString: Cubby
@@ -25,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285262419305962354}
-  m_LocalRotation: {x: 0.49999797, y: -0.50000215, z: -0.50000226, w: -0.49999776}
+  m_LocalRotation: {x: 0.49999553, y: -0.5000045, z: -0.5000045, w: -0.49999553}
   m_LocalPosition: {x: -2.029128, y: 0.5, z: -10.258755}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
@@ -83,3 +84,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &1404099446690606972
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285262419305962354}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.010000005, y: 0.010000006, z: 0.010000005}
+  m_Center: {x: 0, y: 0, z: 0}

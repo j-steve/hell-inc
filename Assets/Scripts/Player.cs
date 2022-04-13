@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     PlayerModifiers modifiers;
     float attentionSpanMax;
     float attentionSpanCurrent;
+    int randomCombatChance = 0;
+    int randomCombatChangeIncrement;
 
     public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
     public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
@@ -65,6 +67,7 @@ public class Player : MonoBehaviour
                         Debug.Log(hit.collider.tag);
                         if (hit.collider.tag == "Enemy")
                         {
+                            hit.collider.GetComponentInParent<Enemy>();
                             //Iniatiate combat
                         }
                     }
@@ -121,6 +124,7 @@ public class Player : MonoBehaviour
                 {
                     Movement = PlayerMovement.None;
                     transform.position = EndPosition;
+                    CheckForRandomBattle();
                     //LockPlayer = true;
                 }
             }
@@ -142,13 +146,26 @@ public class Player : MonoBehaviour
                 {
                     Movement = PlayerMovement.None;
                     transform.position = EndPosition;
+                    CheckForRandomBattle();
                     //LockPlayer = true;
                 }
             }
         }
         lastY = transform.rotation.y;
+    }
 
-        
+    private void CheckForRandomBattle()
+    {
+        if(Random.Range(0, 1000) < randomCombatChance)
+        {
+            Debug.Log("Fight!");
+            randomCombatChance = 0;
+            randomCombatChangeIncrement = 0;
+        }
+        else
+        {
+            randomCombatChance += ++randomCombatChangeIncrement;
+        }
     }
 
     public enum PlayerMovement

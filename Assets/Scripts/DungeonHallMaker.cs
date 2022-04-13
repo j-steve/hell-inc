@@ -20,10 +20,11 @@ public int numOfTilesInSection = 0;
 public Camera mainCamera;
 public Canvas loadingCanvas;
 
+
     // Start is called before the first frame update
     void Start()
-    {   
-        
+    {
+       
     }
 
     // Update is called once per frame
