@@ -14,19 +14,17 @@ public class Player : MonoBehaviour
     PlayerMovement movement = PlayerMovement.None;
     bool lockPlayer = false;
     List<ItemInfo> itemInventory;
-    List<GossipInfo> gossipInventory;
-    public CombatModifiers combatModifiers = new CombatModifiers(1,1,1,1,1,1,1,3,1,1);
-    int Stamina = 100;
-    int Attentiveness; //Conversation speed/size
-    int Professionalism; //Mini game character speed/bullet size
-    int ConflictResolution;
-
+    PlayerModifiers modifiers;
+    float attentionSpanMax;
+    float attentionSpanCurrent;
 
     public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
-    public List<GossipInfo> GossipInventory { get => gossipInventory; set => gossipInventory = value; }
     public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
     public PlayerMovement Movement { get => movement; set => movement = value; }
     public float EndPosition { get => endPosition; set => endPosition = value; }
+    public PlayerModifiers Modifiers { get => modifiers; set => modifiers = value; }
+    public float AttentionSpanMax { get => attentionSpanMax; set => attentionSpanMax = value; }
+    public float AttentionSpanCurrent { get => attentionSpanCurrent; set => attentionSpanCurrent = value; }
 
     public void AddItem(ItemInfo item)
     {
@@ -37,19 +35,10 @@ public class Player : MonoBehaviour
         ItemInventory.RemoveAt(ItemInventory.FindIndex(i => i.Name == name));
     }
 
-    public void AddGossip(GossipInfo gossip)
-    {
-        GossipInventory.Add(gossip);
-    }
-    public void RemoveGossip(GossipInfo gossip)
-    {
-        GossipInventory.RemoveAt(GossipInventory.FindIndex(g => g.Name == gossip.Name));
-    }
-
     // Start is called before the first frame update
     void Start()
     {
-        combatModifiers = new CombatModifiers(1, 1, 1, 1, 1, 1, 1, 3, 1, 1);
+        Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }
 
     // Update is called once per frame
@@ -80,7 +69,7 @@ public class Player : MonoBehaviour
                     {
                         Movement = PlayerMovement.Forward;
                         EndPosition = transform.position.z + moveDistance;
-                        Stamina--;
+                        //Stamina--;
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -103,7 +92,7 @@ public class Player : MonoBehaviour
                     {
                         Movement = PlayerMovement.Back;
                         EndPosition = transform.position.z - moveDistance;
-                        Stamina--;
+                        //Stamina--;
                     }
                 }
             }
@@ -148,19 +137,11 @@ public class Player : MonoBehaviour
         }
         lastY = transform.rotation.y;
 
-        if(Stamina <= 0)
-        {
-            //Day is over or game is lost if its the final day
-        }
+        
     }
 
     public enum PlayerMovement
     {
         Forward = 0, Right = 1, Back = 2, Left = 3, None = 4
-    }
-
-    public CombatModifiers GetCombatModifiersForEnemy(Enemy enemy)
-    {
-        return CombatModifiers.CombineModifiers(combatModifiers, enemy.enemyInfo.GetCombatTrait().Modifiers);
     }
 }

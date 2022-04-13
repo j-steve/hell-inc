@@ -47,7 +47,7 @@ public class CombatManager : MonoBehaviour
             combatMenu.SetActive(false);
             ItemInventory.SetActive(false);
             currentConversation = enemy.GetRandomConversation();
-            wordGameController.Initialize(currentConversation.Text, player.GetCombatModifiersForEnemy(enemy));
+            wordGameController.Initialize(currentConversation.Text, enemy.enemyInfo.GetCombatTrait().Modifiers);
         });
         wordGameController.OnGameWon += (delegate () { 
             SetBattleLine(convoResponsePrompts.GetRandom());
