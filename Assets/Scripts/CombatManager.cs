@@ -29,7 +29,7 @@ public class CombatManager : MonoBehaviour
 
     public Enemy enemy;
     public int textSpeed = 5;
-    Player player = new Player();
+    Player player;
     public bool enemyMove;
     public TextMeshProUGUI enemyName;
     public Image enemyLineImage;
@@ -83,7 +83,7 @@ public class CombatManager : MonoBehaviour
 
         List<ItemInfo> items = DatabaseManager.Instance.Items;
 
-        foreach (ItemInfo i in items)//GameManager.Player.ItemInventory)
+        foreach (ItemInfo i in items)//player.ItemInventory)
         {
             Button b = Instantiate(ItemSlotPrefab);
             TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
@@ -140,20 +140,23 @@ public class CombatManager : MonoBehaviour
 
     public void SelectItem()
     {
-        Debug.Log(lastSelectedItem);
-        ItemInventory.SetActive(false);
-        //GameManager.Player.RemoveItem(lastSelectedItem);
+        if (lastSelectedItem != "")
+        {
+            Debug.Log(lastSelectedItem);
+            ItemInventory.SetActive(false);
+            //player.RemoveItem(lastSelectedItem);
 
-        if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
-        {
-            //relationship points go up
-            SetBattleLine("Wow, I love it!");
+            if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
+            {
+                //relationship points go up
+                SetBattleLine("Wow, I love it!");
+            }
+            else
+            {
+                SetBattleLine("Wow, I hate it!");
+            }
+            lastSelectedItem = "";
         }
-        else
-        {
-            SetBattleLine("Wow, I hate it!");
-        }
-        lastSelectedItem = "";
     }
 
     public void BackFromInventory()
