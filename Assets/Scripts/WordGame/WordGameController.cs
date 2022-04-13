@@ -19,7 +19,6 @@ public class WordGameController : MonoBehaviour
     [SerializeField] ShooterController shooter;
     [SerializeField] GoalController goal;
     [SerializeField] WordAttackUi ui;
-    [SerializeField] Button gameRestartButton;
 
     CombatModifiers combatModifiers;
     float playerHealth = 1;
@@ -33,11 +32,10 @@ public class WordGameController : MonoBehaviour
         goal.OnHit += delegate () {
             playerHealth -= 0.01f * (float)combatModifiers.HealthLoss;
             ui.UpdateHealthBar(playerHealth);
-            if (playerHealth <= 0) {            }
+            if (playerHealth <= 0) {
+                LoseGame();
+            }
         };
-        gameRestartButton.onClick.AddListener(delegate () {
-            OnGameLost();
-        });
     }
 
     public void Initialize(string conversationMessage, CombatModifiers combatModifiers)
@@ -46,7 +44,6 @@ public class WordGameController : MonoBehaviour
         gameObject.SetActive(true);
         wordSpawner.Initialize(conversationMessage, combatModifiers);
         shooter.Initialize();
-        ui.Initialize();
         gameVictoryTime = 0;
         playerHealth = 1;
         Time.timeScale = 1;
@@ -64,9 +61,14 @@ public class WordGameController : MonoBehaviour
             OnGameWon();
         }
         if (Input.GetKey("l") && Input.GetKey("o")) {
-            Time.timeScale = 0;
-            ui.ShowGameOver();
+            LoseGame();
         }
+    }
+
+    private void LoseGame()
+    {
+        gameObject.SetActive(false);
+        OnGameLost();
     }
 
 }

@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     static List<string> convoResponsePrompts = new List<string>() {"What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
+    static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??",  "Hey, hey wake up!! I'm talking here!"};
     static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F601 }, { Emoji.Neutral, 0x1F609 }, { Emoji.Crying, 0x1F603 }, { Emoji.Shocked, 0x1F606 }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
@@ -23,6 +24,7 @@ public class CombatManager : MonoBehaviour
     public Button converseButton;
     public GameObject encounterStartMenu;
     public GameObject conversationResponseMenu;
+    public GameObject conversationFailMenu;
     public WordGameController wordGameController;
     Conversation currentConversation;
     public GameObject ItemInventory;
@@ -41,6 +43,7 @@ public class CombatManager : MonoBehaviour
         combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
         conversationResponseMenu.SetActive(false);
+        conversationFailMenu.SetActive(false);
         SetBattleLine(enemy.GetCombatLine());
         CreateEmojiMenu();
         converseButton.onClick.AddListener(delegate() {
@@ -55,8 +58,11 @@ public class CombatManager : MonoBehaviour
             conversationResponseMenu.SetActive(true);
             combatMenu.SetActive(true);
         });
-        wordGameController.OnGameLost += (delegate () { 
-            Application.Quit(); // TODO: add word game lose behavior
+        wordGameController.OnGameLost += (delegate () {
+            SetBattleLine(convoFailLines.GetRandom());
+            encounterStartMenu.SetActive(false);
+            conversationFailMenu.SetActive(true);
+            combatMenu.SetActive(true);
         });
 
         List<ItemInfo> items = DatabaseManager.Instance.Items;
