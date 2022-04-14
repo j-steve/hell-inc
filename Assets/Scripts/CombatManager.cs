@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     /** How long to display the outcome of the emoji selection, in seconds, before returning to the main screen. */
-    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 1.5f;
+    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 4f;
     static List<string> convoResponsePrompts = new List<string>() { "What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
     static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??", "Hey, hey wake up!! I'm talking here!" };
     static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...", "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else.", "I wanted to talk about something else, though."};
@@ -29,9 +29,10 @@ public class CombatManager : MonoBehaviour
 
     public Enemy enemy;
     public int textSpeed = 5;
-    Player player;
+    public Player player;
     public bool enemyMove;
     public TextMeshProUGUI enemyName;
+    public TextMeshProUGUI enemyTrait;
     public Image enemyLineImage;
     public TextMeshProUGUI enemyLine;
     public GameObject combatMenu;
@@ -51,10 +52,13 @@ public class CombatManager : MonoBehaviour
     int battleLinePosition;
     int textSpeedTrack;
     float? returnToMainMenuTime = null;
+    int preCombatRelationsip;
 
     // Start is called before the first frame update
     void Start()
     {
+        player.LockPlayer = true;
+        preCombatRelationsip = enemy.relationshipPoints;
         wordGameController.gameObject.SetActive(false);
         combatMenu.SetActive(true);
         encounterStartMenu.SetActive(true);
@@ -120,7 +124,7 @@ public class CombatManager : MonoBehaviour
     void EmojiButtonClicked(Emoji clickedEmoji)
     {
         EmojiRating emojiRating = currentConversation.GetEmojiRating(clickedEmoji);
-        SetBattleLine(emojiRatingLines[emojiRating].GetRandom());
+        
         // Disable all emoji buttons, and highlight the correct emoji response.
         foreach(Button emojiButton in conversationResponseMenu.GetComponentsInChildren<Button>()) {
             emojiButton.interactable = false;
@@ -129,6 +133,53 @@ public class CombatManager : MonoBehaviour
             newColorBlock.disabledColor = emojiRatingColors[currentConversation.GetEmojiRating(thisEmoji)];
             emojiButton.colors = newColorBlock;
         }
+
+        if(emojiRating == EmojiRating.BEST)
+        {
+            enemy.relationshipPoints += 50;
+        }
+        else if (emojiRating == EmojiRating.GOOD)
+        {
+            enemy.relationshipPoints += 25;
+        }
+        else if (emojiRating == EmojiRating.WORST)
+        {
+            if (enemy.relationshipPoints % 100 >= 25)
+                enemy.relationshipPoints -= 25;
+            else
+                enemy.relationshipPoints = ((enemy.relationshipPoints / 100) * 100);
+        }
+
+        float levelUps = ((enemy.relationshipPoints / 100) - (preCombatRelationsip / 100));
+        
+        switch(enemy.sin)
+        {
+            case Sin.Envy:
+                player.Modifiers.Envy += (levelUps / 10.0f);
+                break;
+            case Sin.Gluttony:
+                player.Modifiers.Gluttony += (levelUps / 10.0f);
+                break;
+            case Sin.Greed:
+                player.Modifiers.Greed += (levelUps / 10.0f);
+                break;
+            case Sin.Lust:
+                player.Modifiers.Lust += (levelUps / 10.0f);
+                break;
+            case Sin.Wrath:
+                player.Modifiers.Wrath += (levelUps / 10.0f);
+                break;
+        }
+
+        string extra = "";
+
+        if(enemy.relationshipPoints >= 25 && !enemyTrait.gameObject.activeSelf)
+        {
+            enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
+            extra = " You now know something about " + enemy.name;
+            enemyTrait.gameObject.SetActive(true);
+        }
+        SetBattleLine(emojiRatingLines[emojiRating].GetRandom() + extra);
         returnToMainMenuTime = Time.time + EMOJI_OUTCOME_DISPLAY_SECONDS;
     }
     
@@ -148,8 +199,40 @@ public class CombatManager : MonoBehaviour
 
             if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
             {
-                //relationship points go up
-                SetBattleLine("Wow, I love it!");
+                string extra = "";
+                int points = enemy.relationshipPoints;
+                enemy.relationshipPoints += 50;
+                if((enemy.relationshipPoints / 100) > (preCombatRelationsip / 100))
+                {
+                    switch (enemy.sin)
+                    {
+                        case Sin.Envy:
+                            player.Modifiers.Envy += .1f;
+                            break;
+                        case Sin.Gluttony:
+                            player.Modifiers.Gluttony += .1f;
+                            break;
+                        case Sin.Greed:
+                            player.Modifiers.Greed += .1f;
+                            break;
+                        case Sin.Lust:
+                            player.Modifiers.Lust += .1f;
+                            break;
+                        case Sin.Wrath:
+                            player.Modifiers.Wrath += .1f;
+                            break;
+                    }
+                    preCombatRelationsip += 50;
+
+                    
+                    if ((enemy.relationshipPoints / 100) == 2)
+                    {
+                        enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
+                        extra = " You now know something about " + enemy.name;
+                        enemyTrait.gameObject.SetActive(true);
+                    }
+                }
+                SetBattleLine("Wow, I love it!" + extra);
             }
             else
             {
@@ -175,6 +258,20 @@ public class CombatManager : MonoBehaviour
 
     }
 
+    public void Run()
+    {
+        int result = UnityEngine.Random.Range(0, 100);
+        if((enemy.enemyInfo.GetCombatTrait().Modifiers.RunAwayChance * 50) > result)
+        {
+            //go to office
+        }
+        else
+        {
+            //player loses health
+            SetBattleLine("You're not getting away that easily");
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -185,6 +282,11 @@ public class CombatManager : MonoBehaviour
             {
                 enemyMove = false;
                 enemyName.text = enemy.name;
+                if(enemy.relationshipPoints >= 200)
+                {
+                    enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
+                    enemyTrait.gameObject.SetActive(true);
+                }
                 enemyName.gameObject.SetActive(true);
                 enemyLineImage.gameObject.SetActive(true);
                 displayText = true;
