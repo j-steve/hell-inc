@@ -9,7 +9,8 @@ public class ShooterController : MonoBehaviour
     const float PLAYER_MOVE_SPEED_MAX = 200;
 
     static List<string> PLAYER_RESPONSE_WORDS = new List<string>() {
-       "yup.", "totally.", "really?", "that's crazy.", "oh.", "wow.", "woah.", "no way.", "huh.", "uh-huh.", "say what?", "yikes."
+       "yup.", "totally.", "really?","oh.", "wow.", "woah.", "no way.", "huh.", "uh-huh.", "yikes." 
+        // TODO: add support for multiple words, e.g.  "that's crazy.",   "say what?" 
     };
 
     [SerializeField] GameObject bulletEjectionPoint;
@@ -32,7 +33,7 @@ public class ShooterController : MonoBehaviour
     {
         Vector3 newPosition = transform.localPosition;
         float playerMoveSpeed = PLAYER_MOVE_SPEED_MIN;
-        playerMoveSpeed += Player.Instance.Modifiers.Greed * (PLAYER_MOVE_SPEED_MAX - PLAYER_MOVE_SPEED_MIN);
+        playerMoveSpeed += (Player.Instance.Modifiers.Greed / PlayerModifiers.MAX_LEVEL) * (PLAYER_MOVE_SPEED_MAX - PLAYER_MOVE_SPEED_MIN);
         newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * playerMoveSpeed;
         transform.localPosition = newPosition;
         if (Input.GetButtonDown("Jump")) {

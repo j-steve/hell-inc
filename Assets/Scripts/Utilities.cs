@@ -229,6 +229,8 @@ public class Trait
 
 public class PlayerModifiers
 {
+    public static float MAX_LEVEL = 10;
+
     float gluttony;
     float lust;
     float envy;
