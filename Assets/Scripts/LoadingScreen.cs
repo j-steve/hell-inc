@@ -36,7 +36,7 @@ public class LoadingScreen : MonoBehaviour
     public void Initiate()
     {
         day1 = new List<string>();
-        day1.Add("You are Abaddon, usually called Aba, and most commonly known to the world as Sloth, one of the deadly sins(although when has anyone ever died from relaxing and taking it easy??).");
+        day1.Add("You are Abaddon, usually called Aba, and most commonly known to the world as Sloth, one of the deadly sins (although when has anyone ever died from relaxing and taking it easy??). ");
         day1.Add("Being true to your namesake, you don't always get a lot of work done and your boss Lou(Pride) gave you one work week to shape up or you're fired. However that's just not your style. ");
         day1.Add("Instead of doing work, maybe getting your coworker sins on your side will help you out of this jam. ");
         day1.Add("^^");
