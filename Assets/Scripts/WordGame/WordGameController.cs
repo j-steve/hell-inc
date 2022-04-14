@@ -6,6 +6,9 @@ using UnityEngine.UI;
 
 public class WordGameController : MonoBehaviour
 {
+    /** The base damage done to the player's attentionspan by a single word pixel hit. */
+    private const float BASE_HIT_DAMAGE = 0.005f;
+    private const float MAX_DAMAGE_REDUCTION = 0.5f;
     private const string DEMO_CONVERSATION = "The quick brown fox \"JUMPY\" jumps over the lazy dog \"DOGGO\"! This is some random words, dude. omg can you believe how many-words are here? there are like a thousand words; I think.";
     private static CombatModifiers DEFAULT_COMBAT_MODIFIERS = new CombatModifiers(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
@@ -19,10 +22,8 @@ public class WordGameController : MonoBehaviour
     [SerializeField] ShooterController shooter;
     [SerializeField] GoalController goal;
     [SerializeField] WordAttackUi ui;
-    [SerializeField] Button gameRestartButton;
 
     CombatModifiers combatModifiers;
-    float playerHealth = 1;
     float gameVictoryTime = 0;
 
     public void Start()
@@ -31,24 +32,24 @@ public class WordGameController : MonoBehaviour
             gameVictoryTime = Time.time + DELAY_AFTER_LAST_WORD_SECONDS;
         };
         goal.OnHit += delegate () {
-            playerHealth -= 0.01f * (float)combatModifiers.HealthLoss;
-            ui.UpdateHealthBar(playerHealth);
-            if (playerHealth <= 0) {            }
+            float hitDamage = BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
+            hitDamage *= MAX_DAMAGE_REDUCTION * (Player.Instance.Modifiers.Greed / PlayerModifiers.MAX_LEVEL);
+            Player.Instance.AttentionSpanCurrent -= BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
+            ui.UpdateHealthBar(Player.Instance.AttentionSpanCurrent / Player.Instance.AttentionSpanMax);
+            if (Player.Instance.AttentionSpanCurrent <= 0) {
+                LoseGame();
+            }
         };
-        gameRestartButton.onClick.AddListener(delegate () {
-            OnGameLost();
-        });
     }
 
     public void Initialize(string conversationMessage, CombatModifiers combatModifiers)
     {
         this.combatModifiers = combatModifiers;
         gameObject.SetActive(true);
+        ui.UpdateHealthBar(Player.Instance.AttentionSpanCurrent / Player.Instance.AttentionSpanMax);
         wordSpawner.Initialize(conversationMessage, combatModifiers);
-        shooter.Initialize();
-        ui.Initialize();
-        gameVictoryTime = 0;
-        playerHealth = 1;
+        shooter.Initialize(combatModifiers);
+        gameVictoryTime = 0;;
         Time.timeScale = 1;
     }
 
@@ -64,9 +65,14 @@ public class WordGameController : MonoBehaviour
             OnGameWon();
         }
         if (Input.GetKey("l") && Input.GetKey("o")) {
-            Time.timeScale = 0;
-            ui.ShowGameOver();
+            LoseGame();
         }
+    }
+
+    private void LoseGame()
+    {
+        gameObject.SetActive(false);
+        OnGameLost();
     }
 
 }

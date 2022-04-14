@@ -3,7 +3,7 @@
 <text>I just bought a new car</text>
 <bestresponse>Happy</bestresponse>
 <goodresponse>Love</goodresponse>
-<worstresponse>Shocked</worstresponse>
+<worstresponse>Anger</worstresponse>
 </conversation>
 <conversation>
 <text>I just bought a new car but crashed it</text>
@@ -18,7 +18,277 @@
 <worstresponse>Love</worstresponse>
 </conversation>
 <conversation>
-<text>My daughter just got locked up in jail trafficking drugs</text>
+<text>I think this is the year I finally start working out!</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Man, I just cannot get myself to the gym lately.</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>I went for a run yesterday. It was the worst experience of my life.</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>How am I supposed to lose weight when they keep stocking donuts in the kitchen?</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Shocked</worstresponse>
+</conversation>
+<conversation>
+<text>Working out is alright I guess. I know I should do it more, but meh.</text>
+<bestresponse>Neutral</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>I saw another demon at the gym bench 350lbs yesterday! Crazy right?!</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Neutral</worstresponse>
+</conversation>
+<conversation>
+<text>Did you see the game last night? Terrible, right?</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Anger</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Did you see the game last night? Amazing, right?</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>Sports are just so boring. I can't get into them at all.</text>
+<bestresponse>Neutral</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Wow! Aba! Have you been working out? You look great!</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>What a surprising win at yesterday's game, am I right?</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>What a surprising loss at yesterday's game, am I right?</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Yesterday's match was outrageous. What was the ref doing?</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>You know, you're such a good listener. I really appreciate that about you.</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Have you ever been to the Second Circle of Hell? Gets pretty wild at night...</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>You ever met an angel before? Complete and total nerds, man.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>I don't get why the boss gets so mad at you. You clearly work hard around here.</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>This might come as a suprise to you, but I secretly love puppies. Don't tell anyone, ok?!</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Love</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Psst... I heard there's a secret fight club in the Seventh Circle. Keep it quiet, alright?</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Neutral</worstresponse>
+</conversation>
+<conversation>
+<text>Honestly, Aba, you really ought to try and work a little harder. It's embarrassing.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+<conversation>
+<text>I really think I'm gonna win the lottery this time around. I can feel it!</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>Man, I'd burn this place to ground if everything else in Hell weren't already made of fire.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>Don't take this the wrong way, but I think you're a pretty decent person, Aba.</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Neutral</worstresponse>
+</conversation>
+<conversation>
+<text>Don't take this the wrong way, but I think you're a pretty awful person, Aba.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+<conversation>
+<text>Hey! Hey! If you're paying attention to me, make a smiley face. Do it now.</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>Hey! Hey! If you're paying attention to me, make a angry face. Do it now.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Do you ever feel like you're not in control of your actions? Like you're just a badly drawn character in a video game?</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>So uh, yeah. How, uh, how about that weather, right?</text>
+<bestresponse>Neutral</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Shocked</worstresponse>
+</conversation>
+<conversation>
+<text>Just broke up with that lower demon of torment I'd been seeing. You know, the one covered in hooks? I'm really tore up about it.</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Anger</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+<conversation>
+<text>I don't know. Sometimes you torment souls, and sometimes the souls torment you, am I right?</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Shocked</worstresponse>
+</conversation>
+<conversation>
+<text>I swear if I have to file one more report I'm gonna wreck up this miserable office!</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Anger</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Boring boring boring. Everything about this place is just so boring, ya know?</text>
+<bestresponse>Neutral</bestresponse>
+<goodresponse>Anger</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>You'll never believe this! Some guy named Dante and an old dude who went by Virgil came by my lair last night!</text>
+<bestresponse>Shocked</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>You look tired today, Aba. Are you tired?</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+<conversation>
+<text>Torture just doesn't seem to make me as happy as it used it. Just feels unfullfilling, you know?</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Do you think you could help me move a couch later on this week? We just need to take it down a couple thousand flights. No big deal.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>Deep down, I kind of wish I was a demon of sloth too. I respect the sin.</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Hey, I heard a rumor someone in the office is totally into you!</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Anger</worstresponse>
+</conversation>
+<conversation>
+<text>Hey, I heard a rumor someone in the office has a big grudge against you!</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Shocked</goodresponse>
+<worstresponse>Love</worstresponse>
+</conversation>
+<conversation>
+<text>One of these days, I swear I'm gonna finish my novel. Don't worry, you'll get a credit in the intro.</text>
+<bestresponse>Happy</bestresponse>
+<goodresponse>Love</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>One of these days, I swear I'm gonna let the boss really know what a jerk he is!</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>I made a blood souffle the other night, but it settled wrong in the oven and tasted nasty...</text>
+<bestresponse>Crying</bestresponse>
+<goodresponse>Neutral</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>I was so depressed until I saw you today. Now I'm even more depressed.</text>
+<bestresponse>Anger</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Happy</worstresponse>
+</conversation>
+<conversation>
+<text>I was so depressed until I saw you today. Now I'm feeling a bit better, buddy!</text>
+<bestresponse>Love</bestresponse>
+<goodresponse>Happy</goodresponse>
+<worstresponse>Crying</worstresponse>
+</conversation>
+<conversation>
+<text>I feel a little blah today to be honest. Not great, not terrible.</text>
+<bestresponse>Neutral</bestresponse>
+<goodresponse>Crying</goodresponse>
+<worstresponse>Shocked</worstresponse>
+</conversation>
+<conversation>
+<text>Do you think it's weird we all speak English? Shouldn't we be talking in Latin or Aramaic or something?</text>
 <bestresponse>Shocked</bestresponse>
 <goodresponse>Neutral</goodresponse>
 <worstresponse>Love</worstresponse>

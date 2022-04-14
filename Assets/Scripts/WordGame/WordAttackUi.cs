@@ -4,32 +4,22 @@ using UnityEngine;
 
 public class WordAttackUi : MonoBehaviour
 { 
-
     [SerializeField] RectTransform healthBarFill;
-    [SerializeField] GameObject gameOverPopup;
 
     float maxHealthWidth; 
 
     // Start is called before the first frame update
     void Start()
-    { 
-        maxHealthWidth = healthBarFill.rect.width;
-        Initialize();
-    }
-    public void Initialize()
     {
-        gameOverPopup.SetActive(false);
+        if (maxHealthWidth == 0) {
+            maxHealthWidth = healthBarFill.rect.width;
+        }
     }
 
     public void UpdateHealthBar(float currentHealth)
     {
+        Start(); 
         healthBarFill.sizeDelta = new Vector2(currentHealth * maxHealthWidth, healthBarFill.sizeDelta.y);
     }
-
-    public void ShowGameOver()
-    {
-        gameOverPopup.SetActive(true);
-    }
-
 
 }

@@ -4,27 +4,26 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    static public Player Instance {get; private set;}
+
     public int moveDistance = 10;
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
-    float endPosition;
+    public OfficeManager officeManager;
     float rotation = 0.0f;
     float lastY;
-    Quaternion qTo = Quaternion.identity;
-    PlayerMovement movement = PlayerMovement.None;
-    bool lockPlayer = false;
-    List<ItemInfo> itemInventory;
-    PlayerModifiers modifiers;
-    float attentionSpanMax;
-    float attentionSpanCurrent;
+    float distanceMoved = 0f;
+    Quaternion qTo = Quaternion.identity;  
+    int randomCombatChance = -10;
+    int randomCombatChangeIncrement = 0;
 
-    public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
-    public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
-    public PlayerMovement Movement { get => movement; set => movement = value; }
-    public float EndPosition { get => endPosition; set => endPosition = value; }
-    public PlayerModifiers Modifiers { get => modifiers; set => modifiers = value; }
-    public float AttentionSpanMax { get => attentionSpanMax; set => attentionSpanMax = value; }
-    public float AttentionSpanCurrent { get => attentionSpanCurrent; set => attentionSpanCurrent = value; }
+    public List<ItemInfo> ItemInventory { get; set; }
+    public bool LockPlayer { get; set; }
+    public PlayerMovement Movement { get; set; }
+    public Vector3 EndPosition { get; set; }
+    public PlayerModifiers Modifiers { get; private set; }
+    public float AttentionSpanMax { get; set; }
+    public float AttentionSpanCurrent { get; set; }
 
     public void AddItem(ItemInfo item)
     {
@@ -38,6 +37,10 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
+        LockPlayer = true;
+        AttentionSpanMax = 1;
+        AttentionSpanCurrent = AttentionSpanMax;
         Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }
 
@@ -58,18 +61,29 @@ public class Player : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+                    
+                    bool collided = Physics.Raycast(transform.position, transform.forward, out hit, moveDistance, LayerMask.GetMask("Default"));
+                    //Debug.Log(hit.collider.tag);
+                    if (collided && hit.collider.tag == "Enemy")
                     {
-                        if (hit.collider.tag == "Enemy")
-                        {
-                            //Iniatiate combat
-                        }
+                        Debug.Log(hit.collider.name);
+                        hit.collider.GetComponentInParent<Enemy>();
+                        //LockPlayer = true;
+                        //officeManager.InitiateCombat(hit.collider.name);
                     }
                     else
                     {
-                        Movement = PlayerMovement.Forward;
-                        EndPosition = transform.position.z + moveDistance;
-                        //Stamina--;
+                        collided = Physics.Raycast(transform.position, transform.forward, out hit, moveDistance);
+                        if (collided && hit.collider.tag != "Tile")
+                        {
+
+                        }
+                        else
+                        {
+                            distanceMoved = 0f;
+                            Movement = PlayerMovement.Forward;
+                            EndPosition = transform.position + (transform.forward * moveDistance);
+                        }
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -81,18 +95,29 @@ public class Player : MonoBehaviour
                 else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, moveDistance))
+
+                    bool collided = Physics.Raycast(transform.position, (transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
+                    //Debug.Log(hit.collider.tag);
+                    if (collided && hit.collider.tag == "Enemy")
                     {
-                        if (hit.collider.tag == "Enemy")
-                        {
-                            //Iniatiate combat
-                        }
+                        Debug.Log(hit.collider.name);
+                        hit.collider.GetComponentInParent<Enemy>();
+                        //LockPlayer = true;
+                        //officeManager.InitiateCombat(hit.collider.name);
                     }
                     else
                     {
-                        Movement = PlayerMovement.Back;
-                        EndPosition = transform.position.z - moveDistance;
-                        //Stamina--;
+                        collided = Physics.Raycast(transform.position, (transform.forward * -1), out hit, moveDistance);
+                        if (collided && hit.collider.tag != "Tile")
+                        {
+
+                        }
+                        else
+                        {
+                            distanceMoved = 0f;
+                            Movement = PlayerMovement.Back;
+                            EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
+                        }
                     }
                 }
             }
@@ -107,11 +132,14 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Forward)
             {
-                transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-                if(transform.position.x >= EndPosition)
+                transform.position = transform.position + transform.forward * moveSpeed * Time.deltaTime;
+                distanceMoved += moveSpeed * Time.deltaTime;
+                //transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if (distanceMoved >= moveDistance)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
+                    transform.position = EndPosition;
+                    CheckForRandomBattle();
                     //LockPlayer = true;
                 }
             }
@@ -126,18 +154,35 @@ public class Player : MonoBehaviour
             }
             else if (Movement == PlayerMovement.Back)
             {
-                transform.position = new Vector3(transform.position.x - (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
-                if (transform.position.x <= EndPosition)
+                transform.position = transform.position + (transform.forward * -1) * moveSpeed * Time.deltaTime;
+                distanceMoved += moveSpeed * Time.deltaTime;
+                //transform.position = new Vector3(transform.position.x + (moveSpeed * Time.deltaTime), transform.position.y, transform.position.z);
+                if (distanceMoved >= moveDistance)
                 {
                     Movement = PlayerMovement.None;
-                    transform.position = new Vector3(EndPosition, transform.position.y, transform.position.z);
+                    transform.position = EndPosition;
+                    CheckForRandomBattle();
                     //LockPlayer = true;
                 }
             }
         }
         lastY = transform.rotation.y;
+    }
 
-        
+    private void CheckForRandomBattle()
+    {
+        if(Random.Range(0, 1000) < randomCombatChance)
+        {
+            Debug.Log("Fight!");
+            //officeManager.InitiateCombat("Lou");
+            //LockPlayer = true;
+            randomCombatChance = -10;
+            randomCombatChangeIncrement = 0;
+        }
+        else
+        {
+            randomCombatChance += ++randomCombatChangeIncrement;
+        }
     }
 
     public enum PlayerMovement

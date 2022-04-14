@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Utilities
 {
+    public static List<ItemInfo> itemsWanted = new List<ItemInfo>();
+
     public static int GetDailySeed()
     {
         string date = DateTime.Now.ToShortDateString();
@@ -15,14 +17,7 @@ public class Utilities
 
     public static ItemInfo GetRandomItem()
     {
-        List<ItemInfo> items = new List<ItemInfo>();
-
-        foreach(Enemy e in GameManager.Coworkers.Values)
-        {
-            items.Add(DatabaseManager.Instance.Items.Find(i => i.Name == e.enemyInfo.GetWantedtTrait().Name));
-        }
-
-        return items.GetRandom();
+        return itemsWanted.GetRandom();
     }
 
     public static void SetSettings(Settings s)
@@ -160,19 +155,27 @@ public class EnemyInfo
         //UnityEngine.Random.InitState(Utilities.GetDailySeed());
         int randomConversation = UnityEngine.Random.Range(0, DatabaseManager.Instance.ConversationTraits.Count);
         int randomWanted = UnityEngine.Random.Range(0, DatabaseManager.Instance.WantedTraits.Count);
-        Traits.Add(DatabaseManager.Instance.ConversationTraits[randomConversation]);
-        Traits.Add(DatabaseManager.Instance.WantedTraits[randomWanted]);
+        Trait t1 = DatabaseManager.Instance.ConversationTraits[randomConversation];
+        Traits.Add(t1);
+        Trait t2 = DatabaseManager.Instance.WantedTraits[randomWanted];
+        Utilities.itemsWanted.Add(DatabaseManager.Instance.Items.Find(i => i.Category == t2.Category));
+        Traits.Add(t2);
+    }
+
+    public void LoadConversations(int day)
+    {
+        Conversations.Clear();
         List<int> randomNumbers = new List<int>();
 
-        int numOfConversations = 3;
+        int numOfConversations = 3 + GetCombatTrait().Modifiers.NumberOfConversations;
 
         do
         {
-            int random = UnityEngine.Random.Range(0, DatabaseManager.Instance.Conversations.Count);
+            int random = UnityEngine.Random.Range(0, DatabaseManager.Instance.GetConversationsForDay(day).Count);
 
-            if(!randomNumbers.Contains(random))
+            if (!randomNumbers.Contains(random))
             {
-                Conversations.Add(DatabaseManager.Instance.Conversations[random]);
+                Conversations.Add(DatabaseManager.Instance.GetConversationsForDay(day)[random]);
                 randomNumbers.Add(random);
                 numOfConversations--;
             }
@@ -226,6 +229,8 @@ public class Trait
 
 public class PlayerModifiers
 {
+    public static float MAX_LEVEL = 10;
+
     float gluttony;
     float lust;
     float envy;
@@ -307,6 +312,18 @@ public class Conversation
         this.worstResponse = worstResponse;
     }
 
+    /** Indicates the suitability of the given emoji in response to this conversation. */
+    public EmojiRating GetEmojiRating(Emoji response)
+    {
+        if (response == bestResponse)
+            return EmojiRating.BEST;
+        if (response == goodResponse)
+            return EmojiRating.GOOD;
+        if (response == worstResponse)
+            return EmojiRating.WORST;
+        return EmojiRating.BAD;
+    }
+
     public string Text { get => text; set => text = value; }
     public Emoji BestResponse { get => bestResponse; set => bestResponse = value; }
     public Emoji GoodResponse { get => goodResponse; set => goodResponse = value; }
@@ -362,4 +379,8 @@ public enum Emoji
 public enum TraitType
 {
     Conversation = 0, Wanted = 1, Boss = 2
+}
+public enum EmojiRating
+{
+    UNDEFINED, WORST, BAD, GOOD, BEST
 }

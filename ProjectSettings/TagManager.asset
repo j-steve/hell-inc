@@ -3,7 +3,22 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Goal
+  - Cubby
+  - Wall
+  - Chair
+  - Desk
+  - Shelving
+  - Cabinet
+  - Marble
+  - Plank
+  - Floor
+  - Window
+  - Tile
+  - Enemy
+  - PlayerPixel
+  - EnemyPixel
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DungeonHallMaker : MonoBehaviour
@@ -16,22 +17,28 @@ public bool isStarterHall = false;
 public List<GameObject> splitRoomList;
 public GameObject[] splitRoomTypes;
 public int numOfTilesInSection = 0;
+public Camera mainCamera;
+public Canvas loadingCanvas;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        if (isStarterHall)
-        {
-            StartPlacing();
-        }
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+    }
+
+    public void StartGame()
+    {
+        if (isStarterHall)
+        {
+            StartPlacing();
+            mainCamera.transform.position = this.transform.position + new Vector3(1,0,0);//Increase by 1 to align to the tiles
+        }
     }
 
     public void DecideNextLocation()
@@ -118,12 +125,14 @@ public int numOfTilesInSection = 0;
         {
             splitRoom.GetComponent<DungeonHallMaker>().StartPlacing();
         }
+
     }
 
     public IEnumerator TimedManifestTiles()
     {
         yield return new WaitForSeconds(2);
         ManifestTiles();
+        loadingCanvas.gameObject.SetActive(false);
     } 
 
 }

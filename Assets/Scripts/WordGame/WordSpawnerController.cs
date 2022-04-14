@@ -85,6 +85,7 @@ public class WordSpawnerController : MonoBehaviour
 
     public event Action OnWordSpawningComplete;
 
+    [SerializeField] bool isEnemy;
     [SerializeField] WordPixelController pixelPrefab;
     [SerializeField] WordController wordPrefab;
 
@@ -108,7 +109,7 @@ public class WordSpawnerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (hasSpawnedAllWords) {
+        if (!isEnemy || hasSpawnedAllWords) {
             return;
         }
         if (wordList.Count == 0) {
@@ -116,15 +117,16 @@ public class WordSpawnerController : MonoBehaviour
             hasSpawnedAllWords = true;
         }
         if ( lastCharSpawnTime + (1 * WORD_SPAWN_RATE_SECONDS) < Time.time) {
-            SpawnWord(wordList.Dequeue());
+            SpawnWord(wordList.Dequeue(), transform.position);
             lastCharSpawnTime = Time.time;
         }
         
     }
 
-    void SpawnWord(string word)
+    public void SpawnWord(string word, Vector3 spawnPosition)
     {
-        WordController wordObj = Instantiate(wordPrefab, transform).Initialize(combatModifiers);
+        WordController wordObj = Instantiate(wordPrefab, transform).Initialize(combatModifiers, !isEnemy);
+        wordObj.transform.position = spawnPosition;
         wordObj.name = "Word: ";
         int charOffset = 0;
         foreach (char nextChar in word) {
@@ -148,10 +150,13 @@ public class WordSpawnerController : MonoBehaviour
                 int pixelIndex = pixelCol * MAX_CHAR_HEIGHT_PIXELS + pixelRow;
                 if (charPixels[pixelIndex] == '1') {
                     WordPixelController pixel = Instantiate(pixelPrefab, parentWord.transform);
-                    pixel.transform.localPosition =new Vector3(pixelCol + charOffset, -pixelRow, 0);
+                    //pixel.transform.position = spawnPosition + new Vector3(pixelCol + charOffset, -pixelRow, 0);
+                    pixel.transform.localPosition = new Vector3(pixelCol + charOffset, -pixelRow, 0);
                     pixel.name = "Pixel " + character;
+                    pixel.isFromPlayer = !isEnemy;
                     pixel.GetComponent<Renderer>().material.color = parentWord.color;
-                    pixel.GetComponent<Rigidbody>().AddForce(new Vector3(-200 - 2000 * parentWord.speed, 1));
+                    pixel.GetComponent<Rigidbody>().AddForce(new Vector3(parentWord.speed, 0, 0));
+                    pixel.tag = isEnemy ? "EnemyPixel" : "PlayerPixel";
                     if (pixelCol > charWidth) { charWidth = pixelCol; }
                 }
             }
