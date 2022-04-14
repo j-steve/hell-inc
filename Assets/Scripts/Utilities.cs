@@ -8,7 +8,7 @@ using UnityEngine;
 public class Utilities
 {
     public static List<ItemInfo> itemsWanted = new List<ItemInfo>();
-
+    public static int day = 0;
     public static int GetDailySeed()
     {
         string date = DateTime.Now.ToShortDateString();
