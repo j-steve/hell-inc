@@ -10,12 +10,15 @@ public class WordAttackUi : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    { 
-        maxHealthWidth = healthBarFill.rect.width;
+    {
+        if (maxHealthWidth == 0) {
+            maxHealthWidth = healthBarFill.rect.width;
+        }
     }
 
     public void UpdateHealthBar(float currentHealth)
     {
+        Start(); 
         healthBarFill.sizeDelta = new Vector2(currentHealth * maxHealthWidth, healthBarFill.sizeDelta.y);
     }
 

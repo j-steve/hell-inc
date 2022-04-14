@@ -10,27 +10,20 @@ public class Player : MonoBehaviour
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
     public OfficeManager officeManager;
-    Vector3 endPosition;
     float rotation = 0.0f;
     float lastY;
     float distanceMoved = 0f;
-    Quaternion qTo = Quaternion.identity;
-    PlayerMovement movement = PlayerMovement.None;
-    bool lockPlayer = false;
-    List<ItemInfo> itemInventory;
-    PlayerModifiers modifiers;
-    float attentionSpanMax;
-    float attentionSpanCurrent;
+    Quaternion qTo = Quaternion.identity;  
     int randomCombatChance = -10;
     int randomCombatChangeIncrement = 0;
 
-    public List<ItemInfo> ItemInventory { get => itemInventory; set => itemInventory = value; }
-    public bool LockPlayer { get => lockPlayer; set => lockPlayer = value; }
-    public PlayerMovement Movement { get => movement; set => movement = value; }
-    public Vector3 EndPosition { get => endPosition; set => endPosition = value; }
-    public PlayerModifiers Modifiers { get => modifiers; set => modifiers = value; }
-    public float AttentionSpanMax { get => attentionSpanMax; set => attentionSpanMax = value; }
-    public float AttentionSpanCurrent { get => attentionSpanCurrent; set => attentionSpanCurrent = value; }
+    public List<ItemInfo> ItemInventory { get; set; }
+    public bool LockPlayer { get; set; }
+    public PlayerMovement Movement { get; set; }
+    public Vector3 EndPosition { get; set; }
+    public PlayerModifiers Modifiers { get; private set; }
+    public float AttentionSpanMax { get; set; }
+    public float AttentionSpanCurrent { get; set; }
 
     public void AddItem(ItemInfo item)
     {
@@ -46,6 +39,8 @@ public class Player : MonoBehaviour
     {
         Instance = this;
         LockPlayer = true;
+        AttentionSpanMax = 1;
+        AttentionSpanCurrent = AttentionSpanMax;
         Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }
 

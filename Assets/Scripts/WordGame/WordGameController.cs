@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class WordGameController : MonoBehaviour
 {
     /** The base damage done to the player's attentionspan by a single word pixel hit. */
-    private const float BASE_HIT_DAMAGE = 0.01f;
+    private const float BASE_HIT_DAMAGE = 0.005f;
+    private const float MAX_DAMAGE_REDUCTION = 0.5f;
     private const string DEMO_CONVERSATION = "The quick brown fox \"JUMPY\" jumps over the lazy dog \"DOGGO\"! This is some random words, dude. omg can you believe how many-words are here? there are like a thousand words; I think.";
     private static CombatModifiers DEFAULT_COMBAT_MODIFIERS = new CombatModifiers(1, 1, 1, 1, 1, 1, 1, 1, 1, 1);
 
@@ -31,6 +32,8 @@ public class WordGameController : MonoBehaviour
             gameVictoryTime = Time.time + DELAY_AFTER_LAST_WORD_SECONDS;
         };
         goal.OnHit += delegate () {
+            float hitDamage = BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
+            hitDamage *= MAX_DAMAGE_REDUCTION * (Player.Instance.Modifiers.Greed / PlayerModifiers.MAX_LEVEL);
             Player.Instance.AttentionSpanCurrent -= BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
             ui.UpdateHealthBar(Player.Instance.AttentionSpanCurrent / Player.Instance.AttentionSpanMax);
             if (Player.Instance.AttentionSpanCurrent <= 0) {
