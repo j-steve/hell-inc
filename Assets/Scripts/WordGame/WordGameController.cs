@@ -43,7 +43,7 @@ public class WordGameController : MonoBehaviour
         this.combatModifiers = combatModifiers;
         gameObject.SetActive(true);
         wordSpawner.Initialize(conversationMessage, combatModifiers);
-        shooter.Initialize();
+        shooter.Initialize(combatModifiers);
         gameVictoryTime = 0;
         playerHealth = 1;
         Time.timeScale = 1;

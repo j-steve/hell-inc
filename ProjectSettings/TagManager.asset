@@ -17,6 +17,8 @@ TagManager:
   - Window
   - Tile
   - Enemy
+  - PlayerPixel
+  - EnemyPixel
   layers:
   - Default
   - TransparentFX

@@ -9,7 +9,7 @@ using UnityEngine.UI;
 public class CombatManager : MonoBehaviour
 {
     /** How long to display the outcome of the emoji selection, in seconds, before returning to the main screen. */
-    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 4f;
+    const float EMOJI_OUTCOME_DISPLAY_SECONDS = 3f;
     static List<string> convoResponsePrompts = new List<string>() { "What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
     static List<string> convoFailLines = new List<string>() { "Did you fall asleep while I was talking??", "Hey, hey wake up!! I'm talking here!" };
     static List<string> convoContinuePrompts = new List<string>() { "Anyways, as I was saying...", "What's next...", "I could go on...", "But, there was something else I wanted to tell you...", "Anyways...", "Let's talk about something else.", "I wanted to talk about something else, though."};

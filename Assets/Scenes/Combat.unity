@@ -123,6 +123,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &620615588 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3373432242642633916, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+  m_PrefabInstance: {fileID: 3373432242613868932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &620615590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 620615588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3eea065ad1221e4a803011b8556c8de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 0
+  pixelPrefab: {fileID: 8717370778742807803, guid: 68cd8b78693d4914ca4b8e71c07bc255, type: 3}
+  wordPrefab: {fileID: 638062364014035470, guid: b93dac81331b2114fb01e5447a1d6f8b, type: 3}
 --- !u!1001 &3373432242613868932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,9 +162,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3373432241388455928, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3373432241965852140, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373432242074233616, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: isEnemy
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3373432242373233499, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: m_Name
@@ -194,13 +222,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3373432242444627727, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373432242917452489, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3373432242917452489, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: wordSpawner
+      value: 
+      objectReference: {fileID: 620615590}
+    - target: {fileID: 3373432242917452489, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: wordSpawnerController
+      value: 
+      objectReference: {fileID: 620615590}
     - target: {fileID: 3373432243151446231, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4078386572855238180, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}

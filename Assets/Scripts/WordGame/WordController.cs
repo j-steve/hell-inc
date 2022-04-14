@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class WordController : MonoBehaviour
 {
+    const int BASE_SPEED = 3000;
+    const int PLAYER_SPEED_BOOST = 2000;
+    const int MAX_RANDOM_SPEED_BOOST = 1000;
+    const int MAX_DIFFICULTY_SPEED_BOOST = 1000;
 
     public Color color;
     public float heightOffset = 1;
@@ -14,16 +18,28 @@ public class WordController : MonoBehaviour
     public float verticalAgility = 0;
     public int currentDirection = 1;
 
-    public WordController Initialize(CombatModifiers combatModifiers)
+    public WordController Initialize(CombatModifiers combatModifiers, bool isPlayerWord)
     {
         color = Random.ColorHSV();
-        heightOffset += (Random.value * 2 - 1) * 40 * combatModifiers.MiniGameSize;
-        transform.position = transform.position +  new Vector3(0, heightOffset, 0);
-        transform.localScale *= (Random.value + 1) * combatModifiers.ConversationTextSize;
-        speed = Random.value * combatModifiers.ConversationTextSpeed;
-        verticalMovement = Random.value * combatModifiers.MiniGameSpeed;
-        currentDirection = Random.value >= 0.5f ? 1 : -1;
-        verticalAgility = Random.value / 1000;
+        color.r = 1 - color.r * 0.5f;
+        color.g = 1 - color.g * 0.5f;
+        color.b = 1 - color.b * 0.5f;
+        speed = BASE_SPEED;
+        if (isPlayerWord) {
+            speed += PLAYER_SPEED_BOOST;
+            size = 0.5f;
+        } else {  
+            heightOffset += (Random.value * 2 - 1) * 40 * combatModifiers.MiniGameSize;
+            transform.position = transform.position + new Vector3(0, heightOffset, 0);
+            size = 1 * (Random.value + 1) * combatModifiers.ConversationTextSize;
+            speed += Random.value * MAX_RANDOM_SPEED_BOOST;
+            speed += combatModifiers.ConversationTextSpeed * MAX_DIFFICULTY_SPEED_BOOST;
+            speed *= -1;  // enemy words travel the opposite direction. 
+            verticalMovement = Random.value * combatModifiers.MiniGameSpeed;
+            currentDirection = Random.value >= 0.5f ? 1 : -1;
+            verticalAgility = Random.value / 1000;
+        }
+        transform.localScale *= size;
         return this;
     }
 
