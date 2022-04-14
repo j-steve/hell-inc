@@ -51,8 +51,8 @@ public class LoadingScreen : MonoBehaviour
         day1.Add("Instead of doing work, maybe getting your coworker sins on your side will help you out of this jam.");
         day1.Add("^^");
         day1.Add("Talk to your coworkers and show them you are listening to them. Conversations will eventually tire you out, but you can always sleep it off and get going again the next day.^");
-        day1.Add("Find items and give them to who wants them. Bonding with a coworker will eventually reveal what they like and in return you will pick up their specialties to help you not get fired.");
-        day1.Add("");
+        day1.Add("Find items and give them to who wants them. Bonding with a coworker will eventually reveal what they like and in return you will pick up their specialties to help you not get fired.^^");
+        day1.Add("Press enter to play.");
 
         day1Sprites = new List<LoadingSpriteAnimation>();
         day1Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 1, false));
@@ -81,6 +81,13 @@ public class LoadingScreen : MonoBehaviour
     {
         if (inScreen)
         {
+            if (Input.GetKey(KeyCode.Return))
+            {
+                inScreen = false;
+                loadOffice = false;
+                StartCoroutine(LoadOffice());
+            }
+
             if (!gotTextForDay)
             {
                 textSpeedTrack = textSpeed;
@@ -113,7 +120,7 @@ public class LoadingScreen : MonoBehaviour
                 timeSpent = 0;
                 lineNumber = 0;
             }
-            if (gotTextForDay)
+            if (gotTextForDay && !loadOffice)
             {
                 foreach (LoadingSpriteAnimation l in sprites.Where(s => s.Placed))
                 {
@@ -165,64 +172,53 @@ public class LoadingScreen : MonoBehaviour
                         l.Placed = true;
                     }
                 }
-                    /*if (timeSpent > (lineNumber * timeDelay))
+                    
+                if (textSpeed == textSpeedTrack)
+                {
+                    if (battleLinePosition + 1 <= text[lineNumber].Length)
                     {
-                        writing = true;
-                    }
-                    else
-                    {
-                        writing = false;
-                    }    
-
-                    if(writing)*/
-                    {
-                        if (textSpeed == textSpeedTrack)
+                        if (text[lineNumber].Substring(battleLinePosition, 1) != "^")
                         {
-                            if (battleLinePosition + 1 <= text[lineNumber].Length)
-                            {
-                                if (text[lineNumber].Substring(battleLinePosition, 1) != "^")
-                                {
-                                    textField.text += text[lineNumber].Substring(battleLinePosition, 1);
-                                }
-                                else
-                                {
-                                    textField.text = (textField.text + text[lineNumber].Substring(battleLinePosition, 1)).Replace("^", "\n");
-                                }
-
-
-                            }
-                            battleLinePosition++;
-                            textSpeedTrack = 0;
+                            textField.text += text[lineNumber].Substring(battleLinePosition, 1);
                         }
                         else
                         {
-                            textSpeedTrack++;
+                            textField.text = (textField.text + text[lineNumber].Substring(battleLinePosition, 1)).Replace("^", "\n");
                         }
 
-                        if (battleLinePosition == text[lineNumber].Length + 1)
-                        {
-                            battleLinePosition = 0;
-                            lineNumber++;
-                        }
+
                     }
+                    battleLinePosition++;
+                    textSpeedTrack = 0;
                 }
-                if (lineNumber >= text.Count)
+                else
                 {
-                    inScreen = false;
-                    loadOffice = true;
+                    textSpeedTrack++;
                 }
 
-                timeSpent += Time.deltaTime;
-            }
-
-            if (loadOffice)
-            {
-                loadOffice = false;
-                StartCoroutine(Wait());
+                if (lineNumber < text.Count && battleLinePosition == text[lineNumber].Length + 1)
+                {
+                    battleLinePosition = 0;
+                    lineNumber++;
+                }
             }
         }
-    public IEnumerator Wait()
+        if (lineNumber >= text.Count)
+        {
+            loadOffice = true;
+        }
+
+        timeSpent += Time.deltaTime;
+
+        /*if (loadOffice)
+        {
+            loadOffice = false;
+            StartCoroutine(LoadOffice());
+        }*/
+    }
+    public IEnumerator LoadOffice()
     {
+        inScreen = false;
         office.gameObject.SetActive(true);
         office.StartGame();
         yield return new WaitForSeconds(2);
