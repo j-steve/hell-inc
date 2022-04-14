@@ -176,7 +176,7 @@ public class CombatManager : MonoBehaviour
         if(enemy.relationshipPoints >= 25 && !enemyTrait.gameObject.activeSelf)
         {
             enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
-            extra = " [You now know something about " + enemy.name + "]";
+            extra = " [You now know something about " + enemy.enemyName + "]";
             enemyTrait.gameObject.SetActive(true);
         }
         SetBattleLine(emojiRatingLines[emojiRating].GetRandom() + extra);
@@ -228,7 +228,7 @@ public class CombatManager : MonoBehaviour
                     if ((enemy.relationshipPoints / 100) == 2)
                     {
                         enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
-                        extra = " You now know something about " + enemy.name;
+                        extra = " You now know something about " + enemy.enemyName;
                         enemyTrait.gameObject.SetActive(true);
                     }
                 }
@@ -281,7 +281,7 @@ public class CombatManager : MonoBehaviour
             if (enemy.transform.position.x <= 70)
             {
                 enemyMove = false;
-                enemyName.text = enemy.name;
+                enemyName.text = enemy.enemyName;
                 if(enemy.relationshipPoints >= 200)
                 {
                     enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;

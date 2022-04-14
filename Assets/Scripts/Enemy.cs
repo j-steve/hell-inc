@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     public EnemyInfo enemyInfo;
     public Sin sin;
-    public new string name;
+    public string enemyName;
     public EnemyData enemyData;
     public int relationshipPoints = 0;
     public List<BattleLine> BattleLines;
