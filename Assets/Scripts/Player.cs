@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
-    static public Player Instance {get; private set;}
+{ 
 
     public int moveDistance = 10;
     public int moveSpeed = 10;
@@ -18,12 +17,12 @@ public class Player : MonoBehaviour
     int randomCombatChangeIncrement = 0;
 
     public List<ItemInfo> ItemInventory { get; set; }
-    public bool LockPlayer { get; set; }
+    public bool LockPlayer { get; set; } = true;
     public PlayerMovement Movement { get; set; }
     public Vector3 EndPosition { get; set; }
-    public PlayerModifiers Modifiers { get; private set; }
-    public float AttentionSpanMax { get; set; }
-    public float AttentionSpanCurrent { get; set; }
+    public PlayerModifiers Modifiers { get; private set; } = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
+    public float AttentionSpanMax { get; set; } = 1;
+    public float AttentionSpanCurrent { get; set; } = 1;
 
     public void AddItem(ItemInfo item)
     {
@@ -32,16 +31,6 @@ public class Player : MonoBehaviour
     public void RemoveItem(string name)
     {
         ItemInventory.RemoveAt(ItemInventory.FindIndex(i => i.Name == name));
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        Instance = this;
-        LockPlayer = true;
-        AttentionSpanMax = 1;
-        AttentionSpanCurrent = AttentionSpanMax;
-        Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }
 
     // Update is called once per frame

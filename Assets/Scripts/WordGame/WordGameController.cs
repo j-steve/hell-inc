@@ -33,10 +33,10 @@ public class WordGameController : MonoBehaviour
         };
         goal.OnHit += delegate () {
             float hitDamage = BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
-            hitDamage *= MAX_DAMAGE_REDUCTION * (Player.Instance.Modifiers.Greed / PlayerModifiers.MAX_LEVEL);
-            Player.Instance.AttentionSpanCurrent -= BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
-            ui.UpdateHealthBar(Player.Instance.AttentionSpanCurrent / Player.Instance.AttentionSpanMax);
-            if (Player.Instance.AttentionSpanCurrent <= 0) {
+            hitDamage *= MAX_DAMAGE_REDUCTION * (GameManager.Player.Modifiers.Greed / PlayerModifiers.MAX_LEVEL);
+            GameManager.Player.AttentionSpanCurrent -= BASE_HIT_DAMAGE * (float)combatModifiers.HealthLoss;
+            ui.UpdateHealthBar(GameManager.Player.AttentionSpanCurrent / GameManager.Player.AttentionSpanMax);
+            if (GameManager.Player.AttentionSpanCurrent <= 0) {
                 LoseGame();
             }
         };
@@ -46,7 +46,7 @@ public class WordGameController : MonoBehaviour
     {
         this.combatModifiers = combatModifiers;
         gameObject.SetActive(true);
-        ui.UpdateHealthBar(Player.Instance.AttentionSpanCurrent / Player.Instance.AttentionSpanMax);
+        ui.UpdateHealthBar(GameManager.Player.AttentionSpanCurrent / GameManager.Player.AttentionSpanMax);
         wordSpawner.Initialize(conversationMessage, combatModifiers);
         shooter.Initialize(combatModifiers);
         gameVictoryTime = 0;;
