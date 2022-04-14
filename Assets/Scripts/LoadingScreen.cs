@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LoadingScreen : MonoBehaviour
 {
-    bool inScreen = false;
+    public bool inScreen = false;
+    bool gotTextForDay = false;
     List<string> day1;
     List<string> day2;
     List<string> day3;
@@ -48,9 +49,15 @@ public class LoadingScreen : MonoBehaviour
     {
         if (inScreen)
         {
-            if (Utilities.day == 1)
+            List<string> text;
+            List<LoadingSpriteAnimation> sprites;
+            if (!gotTextForDay)
             {
-
+                if (Utilities.day == 1)
+                {
+                    text = day1;
+                    sprites = day1Sprites;
+                }
             }
         }
     }

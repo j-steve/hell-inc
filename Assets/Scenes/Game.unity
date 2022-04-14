@@ -244,6 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57acebb8bbb4ae644b10980406f38802, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inScreen: 0
   timeDelay: 3
   lineNumber: 0
   sprite1: {fileID: 4936537968126820286}
@@ -987,23 +988,23 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 554393485054940549, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2233944670362357453, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2319806205361972029, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2850744093385306666, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4123439902374125847, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968386952642, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_Pivot.x
@@ -1095,7 +1096,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968386952654, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968852774296, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_SizeDelta.y
