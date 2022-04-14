@@ -29,9 +29,9 @@ public class WordController : MonoBehaviour
         color.g = 1 - color.g * 0.5f;
         color.b = 1 - color.b * 0.5f; 
         if (isPlayerWord) {
-            size = PLAYER_BASE_SIZE + (Player.Instance.Modifiers.Gluttony / PlayerModifiers.MAX_LEVEL) * PLAYER_MAX_SIZE_BOOST;
+            size = PLAYER_BASE_SIZE + (GameManager.Player.Modifiers.Gluttony / PlayerModifiers.MAX_LEVEL) * PLAYER_MAX_SIZE_BOOST;
             speed = PLAYER_BASE_SPEED;
-            speed += (Player.Instance.Modifiers.Wrath / PlayerModifiers.MAX_LEVEL) * PLAYER_MAX_SPEED_BOOST;
+            speed += (GameManager.Player.Modifiers.Wrath / PlayerModifiers.MAX_LEVEL) * PLAYER_MAX_SPEED_BOOST;
         } else {  
             heightOffset += (Random.value * 2 - 1) * 40 * combatModifiers.MiniGameSize;
             transform.position = transform.position + new Vector3(0, heightOffset, 0);

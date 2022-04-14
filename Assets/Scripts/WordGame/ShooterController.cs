@@ -10,9 +10,9 @@ public class ShooterController : MonoBehaviour
     const float MIN_SHOOT_INTERVAL = 0.25f;
     const float MAX_SHOOT_INTERVAL = MIN_SHOOT_INTERVAL / 10;
 
-    static List<string> PLAYER_RESPONSE_WORDS = new List<string>() {
-       "yup.", "totally.", "really?","oh.", "wow.", "woah.", "no way.", "huh.", "uh-huh.", "yikes." 
-        // TODO: add support for multiple words, e.g.  "that's crazy.",   "say what?" 
+    static readonly List<string> PLAYER_RESPONSE_WORDS = new List<string>() {
+       "yup.", "totally.", "really?", "oh.", "wow.", "woah.", "huh.", "uh-huh.", "yikes." 
+        // TODO: add support for multiple words, e.g.  "that's crazy.",   "say what?"  "no way."
     };
 
     [SerializeField] GameObject bulletEjectionPoint; 
@@ -31,12 +31,12 @@ public class ShooterController : MonoBehaviour
     {
         Vector3 newPosition = transform.localPosition;
         float playerMoveSpeed = PLAYER_MOVE_SPEED_MIN;
-        playerMoveSpeed += (Player.Instance.Modifiers.Greed / PlayerModifiers.MAX_LEVEL) * (PLAYER_MOVE_SPEED_MAX - PLAYER_MOVE_SPEED_MIN);
+        playerMoveSpeed += (GameManager.Player.Modifiers.Greed / PlayerModifiers.MAX_LEVEL) * (PLAYER_MOVE_SPEED_MAX - PLAYER_MOVE_SPEED_MIN);
         newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * playerMoveSpeed;
         transform.localPosition = newPosition;
 
         float effectiveShootInterval = MIN_SHOOT_INTERVAL;
-        effectiveShootInterval += Player.Instance.Modifiers.Envy / PlayerModifiers.MAX_LEVEL * (MAX_SHOOT_INTERVAL - MIN_SHOOT_INTERVAL);
+        effectiveShootInterval += GameManager.Player.Modifiers.Envy / PlayerModifiers.MAX_LEVEL * (MAX_SHOOT_INTERVAL - MIN_SHOOT_INTERVAL);
         if (Input.GetButtonDown("Jump") && Time.time - lastShootTime > effectiveShootInterval) {
             wordSpawner.SpawnWord(PLAYER_RESPONSE_WORDS.GetRandom(), bulletEjectionPoint.transform.position);
             lastShootTime = Time.time;

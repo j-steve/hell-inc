@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    static Dictionary<Sin, Enemy> coworkers;
-    static Player player;
+    static Dictionary<Sin, Enemy> coworkers; 
+
     public static Dictionary<Sin, Enemy> Coworkers 
     {
         get
@@ -31,28 +31,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public static Player Player 
-    {
-        get
-        {
-            if(player== null)
-            {
-                player = new Player();
-            }
-            return player;
-        }
-        set => player = value; 
-    }
+    public static Player Player { get; private set; } = new Player();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public static int WorkDay = 1;
 }
