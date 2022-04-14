@@ -62,17 +62,23 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    /*RaycastHit hit;
-                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance);
-                    if (collided && hit.collider.tag == "Tile")
+                    RaycastHit hit;
+                    
+                    bool collided = Physics.Raycast(transform.position, transform.forward, out hit, moveDistance, LayerMask.GetMask("Default"));
+                    //Debug.Log(hit.collider.tag);
+                    if (collided && hit.collider.tag == "Enemy")
                     {
-                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance, LayerMask.GetMask("Default"));
-                        //Debug.Log(hit.collider.tag);
-                        if (collided && hit.collider.tag == "Enemy")
+                        Debug.Log(hit.collider.name);
+                        hit.collider.GetComponentInParent<Enemy>();
+                        //LockPlayer = true;
+                        //officeManager.InitiateCombat(hit.collider.name);
+                    }
+                    else
+                    {
+                        collided = Physics.Raycast(transform.position, transform.forward, out hit, moveDistance);
+                        if (collided && hit.collider.tag != "Tile")
                         {
-                            hit.collider.GetComponentInParent<Enemy>();
-                            //LockPlayer = true;
-                            officeManager.InitiateCombat(hit.collider.name);
+
                         }
                         else
                         {
@@ -80,26 +86,6 @@ public class Player : MonoBehaviour
                             Movement = PlayerMovement.Forward;
                             EndPosition = transform.position + (transform.forward * moveDistance);
                         }
-                    }*/
-
-                    RaycastHit hit;
-                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance);
-                    if (collided && hit.collider.tag != "Tile")
-                    {
-                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward), out hit, moveDistance, LayerMask.GetMask("Default"));
-                        //Debug.Log(hit.collider.tag);
-                        if (collided && hit.collider.tag == "Enemy")
-                        {
-                            hit.collider.GetComponentInParent<Enemy>();
-                            //LockPlayer = true;
-                            //officeManager.InitiateCombat(hit.collider.name);
-                        }
-                    }
-                    else
-                    {
-                        distanceMoved = 0f;
-                        Movement = PlayerMovement.Forward;
-                        EndPosition = transform.position + (transform.forward * moveDistance);
                     }
                 }
                 else if (Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -110,16 +96,23 @@ public class Player : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    /*RaycastHit hit;
-                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance);
-                    if (collided && hit.collider.tag == "Tile")
+                    RaycastHit hit;
+
+                    bool collided = Physics.Raycast(transform.position, (transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
+                    //Debug.Log(hit.collider.tag);
+                    if (collided && hit.collider.tag == "Enemy")
                     {
-                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
-                        //Debug.Log(hit.collider.tag);
-                        if (collided && hit.collider.tag == "Enemy")
+                        Debug.Log(hit.collider.name);
+                        hit.collider.GetComponentInParent<Enemy>();
+                        //LockPlayer = true;
+                        //officeManager.InitiateCombat(hit.collider.name);
+                    }
+                    else
+                    {
+                        collided = Physics.Raycast(transform.position, (transform.forward * -1), out hit, moveDistance);
+                        if (collided && hit.collider.tag != "Tile")
                         {
-                            //LockPlayer = true;
-                            officeManager.InitiateCombat(hit.collider.name);
+
                         }
                         else
                         {
@@ -127,24 +120,6 @@ public class Player : MonoBehaviour
                             Movement = PlayerMovement.Back;
                             EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
                         }
-                    }*/
-                    RaycastHit hit;
-                    bool collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance);
-                    if (collided && hit.collider.tag != "Tile")
-                    {
-                        collided = Physics.Raycast(transform.position, transform.TransformDirection(transform.forward * -1), out hit, moveDistance, LayerMask.GetMask("Default"));
-                        //Debug.Log(hit.collider.tag);
-                        if (collided && hit.collider.tag == "Enemy")
-                        {
-                            //LockPlayer = true;
-                            //officeManager.InitiateCombat(hit.collider.name);
-                        }
-                    }
-                    else
-                    {
-                        distanceMoved = 0f;
-                        Movement = PlayerMovement.Back;
-                        EndPosition = transform.position + ((transform.forward * -1) * moveDistance);
                     }
                 }
             }

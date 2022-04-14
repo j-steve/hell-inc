@@ -254,9 +254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6259c1f9376fb4549ac4cf0fe4d9205b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDistance: 1
+  moveDistance: 2
   moveSpeed: 5
   rotationSpeed: 90
+  officeManager: {fileID: 0}
 --- !u!1 &1746368111 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 167859953751487727, guid: d263488c05243194288557ab34245de9, type: 3}
@@ -868,6 +869,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3399025856755354377, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399025857576243031, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399025857726585018, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3399025857831261508, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
       propertyPath: m_Name
       value: Office
@@ -915,6 +928,26 @@ PrefabInstance:
     - target: {fileID: 3399025857831261513, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399025857885939275, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3399025858303268943, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_Size.z
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135532266327281779, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135532266327281779, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6135532266327281779, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 8795636414062828367, guid: 4edfa506ab69c4b45bb618501cfad71d, type: 3}
       propertyPath: mainCamera
