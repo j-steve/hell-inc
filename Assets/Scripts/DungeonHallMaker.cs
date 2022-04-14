@@ -135,7 +135,7 @@ public List<GameObject> FinalTileList;
     {
         yield return new WaitForSeconds(2);
         ManifestTiles();
-        loadingCanvas.gameObject.SetActive(false);
+        //loadingCanvas.gameObject.SetActive(false);
     } 
 
     public void AddTileToFinalList(GameObject tile)
