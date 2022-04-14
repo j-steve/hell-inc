@@ -19,12 +19,14 @@ public GameObject[] splitRoomTypes;
 public int numOfTilesInSection = 0;
 public Camera mainCamera;
 public Canvas loadingCanvas;
+public List<GameObject> FinalTileList;
 
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        //Remove this later. PJM
+       //StartGame();
     }
 
     // Update is called once per frame
@@ -105,7 +107,7 @@ public Canvas loadingCanvas;
 
     public void ManifestTiles()
     {
-        BroadcastMessage("CallSpawnTile");
+        BroadcastMessage("CallSpawnTile",this);
     }
 
     public void PlaceSplitRooms()
@@ -134,5 +136,10 @@ public Canvas loadingCanvas;
         ManifestTiles();
         loadingCanvas.gameObject.SetActive(false);
     } 
+
+    public void AddTileToFinalList(GameObject tile)
+    {
+        FinalTileList.Add(tile);
+    }
 
 }

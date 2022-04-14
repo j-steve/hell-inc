@@ -64,7 +64,7 @@ public class ProtoTileBehavior : MonoBehaviour
 
         SpawnPhase1();
         yield return new WaitForEndOfFrame();
-        SpawnPhase2();
+        //SpawnPhase2();
         //Debug
         //if (isTraversable)
         //{
@@ -159,8 +159,9 @@ public class ProtoTileBehavior : MonoBehaviour
 
     }
 
-    public void CallSpawnTile()
+    public void CallSpawnTile(DungeonHallMaker dungeon)
     {
+        dungeon.AddTileToFinalList(this.gameObject);
         StartCoroutine(SpawnTilePieces());
     }
 
