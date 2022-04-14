@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class ShooterController : MonoBehaviour
 {
+    const float PLAYER_MOVE_SPEED_MIN = 50;
+    const float PLAYER_MOVE_SPEED_MAX = 200;
+
     static List<string> PLAYER_RESPONSE_WORDS = new List<string>() {
        "yup.", "totally.", "really?", "that's crazy.", "oh.", "wow.", "woah.", "no way.", "huh.", "uh-huh.", "say what?", "yikes."
     };
@@ -28,7 +31,9 @@ public class ShooterController : MonoBehaviour
     void Update()
     {
         Vector3 newPosition = transform.localPosition;
-        newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * shooterMoveSpeed;
+        float playerMoveSpeed = PLAYER_MOVE_SPEED_MIN;
+        playerMoveSpeed += Player.Instance.Modifiers.Greed * (PLAYER_MOVE_SPEED_MAX - PLAYER_MOVE_SPEED_MIN);
+        newPosition.y += Input.GetAxis("Vertical") * Time.deltaTime * playerMoveSpeed;
         transform.localPosition = newPosition;
         if (Input.GetButtonDown("Jump")) {
             //BulletController bullet = Instantiate(bulletPrefab, bulletEjectionPoint.transform.position, Quaternion.identity, bulletContainer.transform);

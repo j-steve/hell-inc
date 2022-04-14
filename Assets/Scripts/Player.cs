@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    static public Player Instance {get; private set;}
+
     public int moveDistance = 10;
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
@@ -42,6 +44,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Instance = this;
         LockPlayer = true;
         Modifiers = new PlayerModifiers(1f, 1f, 1f, 1f, 1f);
     }

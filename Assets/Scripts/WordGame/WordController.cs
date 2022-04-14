@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class WordController : MonoBehaviour
 {
+    const float PLAYER_BASE_SIZE = 0.5f;
+    const float PLAYER_MAX_SIZE_BOOST = 0.5f;
+
     const int BASE_SPEED = 3000;
-    const int PLAYER_SPEED_BOOST = 2000;
+    const int PLAYER_MAX_SPEED_BOOST = 2000;
     const int MAX_RANDOM_SPEED_BOOST = 1000;
     const int MAX_DIFFICULTY_SPEED_BOOST = 1000;
 
@@ -26,8 +29,8 @@ public class WordController : MonoBehaviour
         color.b = 1 - color.b * 0.5f;
         speed = BASE_SPEED;
         if (isPlayerWord) {
-            speed += PLAYER_SPEED_BOOST;
-            size = 0.5f;
+            size = PLAYER_BASE_SIZE + Player.Instance.Modifiers.Gluttony * PLAYER_MAX_SIZE_BOOST;
+            speed += Player.Instance.Modifiers.Wrath * PLAYER_MAX_SPEED_BOOST;
         } else {  
             heightOffset += (Random.value * 2 - 1) * 40 * combatModifiers.MiniGameSize;
             transform.position = transform.position + new Vector3(0, heightOffset, 0);

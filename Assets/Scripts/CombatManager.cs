@@ -176,7 +176,7 @@ public class CombatManager : MonoBehaviour
         if(enemy.relationshipPoints >= 25 && !enemyTrait.gameObject.activeSelf)
         {
             enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
-            extra = " You now know something about " + enemy.name;
+            extra = " [You now know something about " + enemy.name + "]";
             enemyTrait.gameObject.SetActive(true);
         }
         SetBattleLine(emojiRatingLines[emojiRating].GetRandom() + extra);
