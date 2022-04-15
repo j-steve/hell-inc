@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 8394520016610427309}
   - component: {fileID: 6012025361365239174}
   - component: {fileID: 1262165660}
+  - component: {fileID: -6983555914964320376}
   m_Layer: 0
   m_Name: Sathy
   m_TagString: Enemy
@@ -176,3 +177,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.24, y: 10.24, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-6983555914964320376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8394520016610427299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb379b48dc10d0d49a620a4ee2c75171, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}

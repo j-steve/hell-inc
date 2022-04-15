@@ -48,8 +48,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3, y: 6, z: 2}
-  m_Center: {x: 0, y: 0, z: 1.5446596}
+  m_Size: {x: 4, y: 6, z: 0.12571144}
+  m_Center: {x: 0, y: 0, z: 1.9351311}
 --- !u!1 &2941662430870699205
 GameObject:
   m_ObjectHideFlags: 0
@@ -358,7 +358,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1669761526534485426, guid: 23d004bb7d716df4ead4c62c534843b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 23d004bb7d716df4ead4c62c534843b9, type: 3}
 --- !u!1001 &2913233300897706746
 PrefabInstance:
@@ -415,7 +416,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: officeDesk
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6669144716169617557, guid: 919a5c5af418e8e4ea5a9cbe66a6303b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 919a5c5af418e8e4ea5a9cbe66a6303b, type: 3}
 --- !u!1 &61043141817524014 stripped
 GameObject:
@@ -507,7 +509,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -1669761526534485426, guid: 23d004bb7d716df4ead4c62c534843b9, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 23d004bb7d716df4ead4c62c534843b9, type: 3}
 --- !u!4 &1539246295264061235 stripped
 Transform:

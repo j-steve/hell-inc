@@ -902,6 +902,7 @@ GameObject:
   - component: {fileID: 1862451336}
   - component: {fileID: 1862451335}
   - component: {fileID: 1862451334}
+  - component: {fileID: 1862451337}
   m_Layer: 0
   m_Name: Office
   m_TagString: Untagged
@@ -1048,6 +1049,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1862451337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1862451333}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 8aec90caf2520214c98d95869860113d, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!114 &1950637136 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8881829462927494950, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
@@ -6701,7 +6719,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968852774299, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_fontSize
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968852774299, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_margin.w
@@ -6725,7 +6743,7 @@ PrefabInstance:
       objectReference: {fileID: 11400000, guid: a2443dfb75fd7d14cbfdbf96e4808c92, type: 2}
     - target: {fileID: 4936537968852774299, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_fontSizeBase
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 4936537968852774299, guid: a81afc5ea06dac149a5e4290b6b8c720, type: 3}
       propertyPath: m_sharedMaterial

@@ -143,6 +143,12 @@ public class LoadingScreen : MonoBehaviour
                     text = day5;
                     sprites = day5Sprites;
                 }
+                else if (GameManager.WorkDay == 6)
+                {
+                    Day6Setup();
+                    text = day6;
+                    sprites = day6Sprites;
+                }
                 gotTextForDay = true;
                 timeSpent = 0;
                 lineNumber = 0;
@@ -254,6 +260,7 @@ public class LoadingScreen : MonoBehaviour
 
         foreach (Enemy e in GameManager.Coworkers.Values)
         {
+            e.relationshipPoints = 500;
             if (e.relationshipPoints >= 500)
             {
                 switch(e.sin)
@@ -283,7 +290,7 @@ public class LoadingScreen : MonoBehaviour
                         numberOfLines += 2;
                         break;
                     case Sin.Wrath:
-                        day5.Add("Finally someone I can rage with!! You and me are going to a McDonalds this weekend and yelling at everyone who is taking too long to order!");
+                        day5.Add("Finally someone I can rage with!! You and me are going to a McDonalds this weekend and yelling at everyone who is taking too long to order!^");
                         day5.Add("You feel like you really know how to say the most damaging thing to a person at a given time.^");
                         day5Sprites.Add(new LoadingSpriteAnimation(sathy, numberOfLines, numberOfLines + 1, 2, false));
                         numberOfLines += 2;
@@ -300,14 +307,42 @@ public class LoadingScreen : MonoBehaviour
         day5.Add("The final battle starts now.^");
         day5.Add("Press enter to continue.");
     }
+    public void Day6Setup()
+    {
+        day6 = new List<string>();
+        day6Sprites = new List<LoadingSpriteAnimation>();
 
+        if (GameManager.GameWon)
+        {
+            day6.Add("By the end of it Lou is huffing and wheezing on the ground.^");
+            day6.Add("Lou can't even stand up.^");
+            day6.Add("He looks at you astonished and tells you that he will see you next week.^");
+            day6.Add("You've secured sitting in your office chair for 40 hours a week doing nothing for at least another year.^");
+            day6.Add("Press enter to continue.");
+        }
+        else
+        {
+            day6.Add("You just couldn't make it...^");
+            day6.Add("Security has to drag you out of Lou's office as you can't even stand up.^");
+            day6.Add("They throw your stuff in a box then they throw you right out the door.^");
+            day6.Add("You spend the rest of your life sitting on your couch at home and staying true to your sin.^");
+            day6.Add("Press enter to continue.");
+        }
+    }
     public IEnumerator LoadOffice()
     {
-        inScreen = false;
-        office.gameObject.SetActive(true);
-        office.StartGame();
-        yield return new WaitForSeconds(2);
-        gameObject.SetActive(false);
+        if (GameManager.WorkDay < 6)
+        {
+            inScreen = false;
+            office.gameObject.SetActive(true);
+            office.StartGame();
+            yield return new WaitForSeconds(2);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            textField.text = "";
+        }
     }
 
     private IEnumerator FadeIn(Image i, Sprite s)

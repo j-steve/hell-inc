@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public static event Action<Enemy> OnStartCombat;
     public static event Action OnCompleteCombat;
     public static event Action OnDayEnd;
+    public static bool GameWon = false;
 
     private static OfficeManager _officeManager;
     private static OfficeManager officeManager {
@@ -75,5 +76,10 @@ public class GameManager : MonoBehaviour
         WorkDay += 1;
         officeManager.gameObject.SetActive(true);
         OnDayEnd?.Invoke();
+    }
+
+    public static void StartCredits()
+    {
+        WorkDay = 7;
     }
 }
