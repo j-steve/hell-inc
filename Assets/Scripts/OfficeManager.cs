@@ -12,6 +12,7 @@ public class OfficeManager : MonoBehaviour
     public Enemy Envy;
     public List<Enemy> Coworkers;
     public GameObject dungeonTileList;
+    public int NumberOfItemsPerDay = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -57,5 +58,15 @@ public class OfficeManager : MonoBehaviour
             
             
         }
+    }
+
+    public void DropItems()
+    {
+        List<ItemInfo> items = new List<ItemInfo>();
+        for (int i = 0; i < NumberOfItemsPerDay; i++)
+        {
+            items.Add(Utilities.GetRandomItem());
+        }
+
     }
 }

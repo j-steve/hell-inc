@@ -22,6 +22,7 @@ public class LoadingScreen : MonoBehaviour
     List<string> day4;
     List<string> day5;
     List<string> day6;
+    List<string> day7;
     //public float timeDelay = 3;
     public float timeSpent = 0;
     public int lineNumber = 0;
@@ -47,6 +48,7 @@ public class LoadingScreen : MonoBehaviour
     List<LoadingSpriteAnimation> day4Sprites;
     List<LoadingSpriteAnimation> day5Sprites;
     List<LoadingSpriteAnimation> day6Sprites;
+    List<LoadingSpriteAnimation> day7Sprites;
 
     public void Initiate()
     {
@@ -71,6 +73,13 @@ public class LoadingScreen : MonoBehaviour
         day4.Add("Day 4^^");
         day4.Add("Press enter to continue.");
 
+        day7.Add("Patrick McLean - Artwork, Dungeon Maker, Coding^"); 
+        day7.Add("Stephen Sichina - Mini Game, Coding^");
+        day7.Add("Michael Thomas - Coding, Writing^");
+        day7.Add("Music produced by J Apollo Productions^");
+        day7.Add("Sarah Thomas - Writing, Editing^");
+        day7.Add("^Thanks for playing!");
+
         day1Sprites = new List<LoadingSpriteAnimation>();
         day1Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 1, false));
         day1Sprites.Add(new LoadingSpriteAnimation(lou, 1, 2, 2, false));
@@ -88,6 +97,12 @@ public class LoadingScreen : MonoBehaviour
 
         day4Sprites = new List<LoadingSpriteAnimation>();
         day4Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 4, false));
+
+        day7Sprites.Add(new LoadingSpriteAnimation(aba, 0, 8, 1, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(beezlebob, 0, 8, 2, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(belphie, 0, 8, 3, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(mams, 0, 8, 4, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(lou, 0, 8, 5, false));
     }
 
     public void StartText()
@@ -148,6 +163,11 @@ public class LoadingScreen : MonoBehaviour
                     Day6Setup();
                     text = day6;
                     sprites = day6Sprites;
+                }
+                else if (GameManager.WorkDay == 6)
+                {
+                    text = day7;
+                    sprites = day7Sprites;
                 }
                 gotTextForDay = true;
                 timeSpent = 0;
@@ -319,6 +339,7 @@ public class LoadingScreen : MonoBehaviour
             day6.Add("He looks at you astonished and tells you that he will see you next week.^");
             day6.Add("You've secured sitting in your office chair for 40 hours a week doing nothing for at least another year.^");
             day6.Add("Press enter to continue.");
+            day6Sprites.Add(new LoadingSpriteAnimation(aba, 0, 6, 1, false));
         }
         else
         {
@@ -327,6 +348,7 @@ public class LoadingScreen : MonoBehaviour
             day6.Add("They throw your stuff in a box then they throw you right out the door.^");
             day6.Add("You spend the rest of your life sitting on your couch at home and staying true to your sin.^");
             day6.Add("Press enter to continue.");
+            day6Sprites.Add(new LoadingSpriteAnimation(aba, 0, 6, 1, false));
         }
     }
     public IEnumerator LoadOffice()
