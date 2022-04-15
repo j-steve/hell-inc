@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
         this.sin = sin;
         enemyName = getSinEnemyName(sin);
         enemyInfo = new EnemyInfo();
+        if(sin == Sin.Pride)
+        {
+            enemyInfo.SetAsBoss();
+        }
         enemyInfo.LoadConversations(1);//This is the day
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
         BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();

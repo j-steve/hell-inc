@@ -88,6 +88,14 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("Combat");
         Enemy = null;
         WorkDay += 1;
+        if (WorkDay < 5)
+        {
+            foreach (Enemy e in Coworkers.Values)
+            {
+                e.enemyInfo.LoadConversations(WorkDay);
+            }
+        }
+
         officeManager.gameObject.SetActive(true);
         officeManager.ClearDungeon();
         loadingScreen.gameObject.SetActive(true);

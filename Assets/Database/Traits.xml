@@ -2,16 +2,16 @@
 <trait>
 <name>Big Bad Boss</name>
 <type>Boss</type>
-<conversationTextSize>.1</conversationTextSize>
-<conversationTextSpeed>10</conversationTextSpeed>
+<conversationTextSize>.5</conversationTextSize>
+<conversationTextSpeed>5</conversationTextSpeed>
 <runAwayChance>0</runAwayChance>
 <gossipReward>0</gossipReward>
 <itemReward>0</itemReward>
-<miniGameSpeed>10</miniGameSpeed>
-<miniGameSize>.1</miniGameSize>
+<miniGameSpeed>5</miniGameSpeed>
+<miniGameSize>.5</miniGameSize>
 <numberOfConversations>3</numberOfConversations>
 <friendshipPoints>1</friendshipPoints>
-<healthLoss>5</healthLoss>
+<healthLoss>3</healthLoss>
 <category></category>
 </trait>
 <trait>
