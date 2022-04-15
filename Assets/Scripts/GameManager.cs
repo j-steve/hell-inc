@@ -71,6 +71,10 @@ public class GameManager : MonoBehaviour
 
     public static void StartCombat(Enemy enemy)
     {
+        if(enemy.enemyName == "Lou")
+        {
+            WorkDay = 5;
+        }
         officeManager.gameObject.SetActive(false);
         Enemy = enemy;
         SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
