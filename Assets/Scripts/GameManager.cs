@@ -17,12 +17,9 @@ public class GameManager : MonoBehaviour
             {
                 coworkers = new Dictionary<Sin, Enemy>();
 
-                foreach (string name in Enum.GetNames(typeof(Sin)))
-                {
-                    Enemy e = Instantiate(new Enemy());
-                    Enum.TryParse(name, out Sin sin);
-                    e.sin = sin;
-                    coworkers.Add(sin, e);
+                foreach (Sin sin in Enum.GetValues(typeof(Sin)))
+                { 
+                    coworkers.Add(sin, new Enemy().Initialize(sin));
                 }
                 
             }
@@ -53,8 +50,7 @@ public class GameManager : MonoBehaviour
 
     public static void StartRandomCombat()
     {
-        Sin sin = ((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom();
-        StartCombat(new Enemy().Initialize(sin));
+        StartCombat(Coworkers.GetRandom().Value);
     }
 
     public static void StartCombat(Enemy enemy)
