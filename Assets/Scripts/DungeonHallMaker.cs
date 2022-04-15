@@ -43,7 +43,7 @@ public GameObject RootObject;
         {
             PlaceTile();
             StartPlacing();
-            mainCamera.transform.position = this.transform.position + new Vector3(1,-.75f,0);//Increase by 1 to align to the tiles
+            mainCamera.transform.position = this.transform.position + new Vector3(0,-.75f,0);//Increase by 1 to align to the tiles
         }
     }
 
