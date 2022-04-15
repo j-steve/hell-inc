@@ -15,6 +15,7 @@ public class ProtoTileBehavior : MonoBehaviour
     public bool ceilingSpawned = false;
     public bool stairSpawned = false;
     public bool hasPillar = false;
+    public bool hasItemOrEnemy = false;
     public GameObject errorObj;
     public GameObject[] decoAlwaysSpawn;
     public GameObject debugObj;
@@ -159,9 +160,9 @@ public class ProtoTileBehavior : MonoBehaviour
 
     }
 
-    public void CallSpawnTile(DungeonHallMaker dungeon)
+    public void CallSpawnTile(GameObject dungeonTileList)
     {
-        dungeon.AddTileToFinalList(this.gameObject);
+        transform.parent = dungeonTileList.transform;
         StartCoroutine(SpawnTilePieces());
     }
 
