@@ -103,7 +103,7 @@ public class CombatManager : MonoBehaviour
 
         //List<ItemInfo> items = DatabaseManager.Instance.Items;
 
-        player.AddItem(Utilities.GetRandomItem());
+        //player.AddItem(Utilities.GetRandomItem());
 
         foreach (ItemInfo i in player.ItemInventory)
         {
