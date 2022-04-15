@@ -41,18 +41,33 @@ public class LoadingScreen : MonoBehaviour
     public Sprite sathy;
 
     List<LoadingSpriteAnimation> day1Sprites;
+    List<LoadingSpriteAnimation> day2Sprites;
+    List<LoadingSpriteAnimation> day3Sprites;
+    List<LoadingSpriteAnimation> day4Sprites;
     List<LoadingSpriteAnimation> day5Sprites;
 
     public void Initiate()
     {
         day1 = new List<string>();
-        day1.Add("You are Abaddon, usually called Aba, and most commonly known to the world as Sloth, one of the deadly sins(although when has anyone ever died from relaxing and taking it easy??).^");
-        day1.Add("Being true to your namesake, you don't always get a lot of work done and your boss Lou(Pride) gave you one work week to shape up or you're fired. However that's just not your style.^");
-        day1.Add("Instead of doing work, maybe getting your coworker sins on your side will help you out of this jam.");
+        day1.Add("You are Abaddon, usually called Aba, and most commonly known to the world as Sloth, one of the seven deadly sins (although when has anyone ever died from relaxing and taking it easy??).^");
+        day1.Add("True to your moniker, you don't always get a lot of work done and your boss Lou (aka Pride) gave you one work week to shape up or you're fired. However, that's just not your style.^");
+        day1.Add("Instead of doing work, maybe getting your sinful coworkers on your side will help you out of this jam.");
         day1.Add("^^");
         day1.Add("Talk to your coworkers and show them you are listening to them. Conversations will eventually tire you out, but you can always sleep it off and get going again the next day.^");
-        day1.Add("Find items and give them to who wants them. Bonding with a coworker will eventually reveal what they like and in return you will pick up their specialties to help you not get fired.^^");
+        day1.Add("Find items and give them to the coworkers who want them. Bond with your coworkers to reveal what they like and, in return, their specialties will rub off on you and help you keep your job.^^");
         day1.Add("Press enter to play.");
+
+        day2 = new List<string>();
+        day2.Add("Day 2^^"); 
+        day2.Add("Press enter to play.");
+
+        day3 = new List<string>();
+        day3.Add("Day 3^^");
+        day3.Add("Press enter to play.");
+
+        day4 = new List<string>();
+        day4.Add("Day 4^^");
+        day4.Add("Press enter to play.");
 
         day1Sprites = new List<LoadingSpriteAnimation>();
         day1Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 1, false));
@@ -62,6 +77,15 @@ public class LoadingScreen : MonoBehaviour
         day1Sprites.Add(new LoadingSpriteAnimation(beezlebob, 4, 8, 3, false));
         day1Sprites.Add(new LoadingSpriteAnimation(mams, 4, 8, 4, false));
         day1Sprites.Add(new LoadingSpriteAnimation(sathy, 4, 8, 5, false));
+
+        day2Sprites = new List<LoadingSpriteAnimation>();
+        day2Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 2, false));
+
+        day3Sprites = new List<LoadingSpriteAnimation>();
+        day3Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 3, false));
+
+        day4Sprites = new List<LoadingSpriteAnimation>();
+        day4Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 4, false));
     }
 
     public void StartText()
@@ -99,17 +123,17 @@ public class LoadingScreen : MonoBehaviour
                 else if (Utilities.day == 2)
                 {
                     text = day2;
-                    sprites = new List<LoadingSpriteAnimation>();
+                    sprites = day2Sprites;
                 }
                 else if (Utilities.day == 3)
                 {
                     text = day3;
-                    sprites = new List<LoadingSpriteAnimation>();
+                    sprites = day3Sprites;
                 }
                 else if (Utilities.day == 4)
                 {
                     text = day4;
-                    sprites = new List<LoadingSpriteAnimation>();
+                    sprites = day4Sprites;
                 }
                 else if (Utilities.day == 5)
                 {
