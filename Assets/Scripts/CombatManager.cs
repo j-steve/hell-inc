@@ -190,7 +190,7 @@ public class CombatManager : MonoBehaviour
         string extra = "";
 
         if(levelUps > 0)
-            extra += " You feel a little stronger.";
+            extra += " [You feel a little stronger.]";
 
         if (enemy.relationshipPoints >= 200 && !enemyTrait.gameObject.activeSelf)
         {
