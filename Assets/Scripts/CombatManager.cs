@@ -101,9 +101,11 @@ public class CombatManager : MonoBehaviour
             combatMenu.SetActive(true);
         });
 
-        List<ItemInfo> items = DatabaseManager.Instance.Items;
+        //List<ItemInfo> items = DatabaseManager.Instance.Items;
 
-        foreach (ItemInfo i in items)//player.ItemInventory)
+        player.AddItem(Utilities.GetRandomItem());
+
+        foreach (ItemInfo i in player.ItemInventory)
         {
             Button b = Instantiate(ItemSlotPrefab);
             TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
@@ -214,7 +216,7 @@ public class CombatManager : MonoBehaviour
         {
             Debug.Log(lastSelectedItem);
             ItemInventory.SetActive(false);
-            //player.RemoveItem(lastSelectedItem);
+            player.RemoveItem(lastSelectedItem);
 
             if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
             {

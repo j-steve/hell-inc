@@ -73,6 +73,7 @@ public class LoadingScreen : MonoBehaviour
         day4.Add("Day 4^^");
         day4.Add("Press enter to continue.");
 
+        day7 = new List<string>();
         day7.Add("Patrick McLean - Artwork, Dungeon Maker, Coding^"); 
         day7.Add("Stephen Sichina - Mini Game, Coding^");
         day7.Add("Michael Thomas - Coding, Writing^");
@@ -98,6 +99,7 @@ public class LoadingScreen : MonoBehaviour
         day4Sprites = new List<LoadingSpriteAnimation>();
         day4Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 4, false));
 
+        day7Sprites = new List<LoadingSpriteAnimation>();
         day7Sprites.Add(new LoadingSpriteAnimation(aba, 0, 8, 1, false));
         day7Sprites.Add(new LoadingSpriteAnimation(beezlebob, 0, 8, 2, false));
         day7Sprites.Add(new LoadingSpriteAnimation(belphie, 0, 8, 3, false));
@@ -255,10 +257,11 @@ public class LoadingScreen : MonoBehaviour
                     lineNumber++;
                 }
             }
-        }
-        if (lineNumber >= text.Count)
-        {
-            loadOffice = true;
+
+            if (lineNumber >= text.Count)
+            {
+                loadOffice = true;
+            }
         }
 
         timeSpent += Time.deltaTime;

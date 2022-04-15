@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     int randomCombatChance = -10;
     int randomCombatChangeIncrement = 0;
 
-    public List<ItemInfo> ItemInventory { get; set; }
+    public List<ItemInfo> ItemInventory { get; private set; }
     public bool LockPlayer { get; set; } = true;
     public PlayerMovement Movement { get; set; }
     public Vector3 EndPosition { get; set; }
@@ -27,6 +27,8 @@ public class Player : MonoBehaviour
 
     public void AddItem(ItemInfo item)
     {
+        if (ItemInventory == null)
+            ItemInventory = new List<ItemInfo>();
         ItemInventory.Add(item);
     }
     public void RemoveItem(string name)
