@@ -97,7 +97,10 @@ public class GameManager : MonoBehaviour
         {
             foreach (Enemy e in Coworkers.Values)
             {
-                e.enemyInfo.LoadConversations(WorkDay);
+                if (e.sin == Sin.Pride)
+                    e.enemyInfo.Conversations = DatabaseManager.Instance.GetConversationsForBoss();
+                else
+                    e.enemyInfo.LoadConversations(WorkDay);
             }
         }
         GameManager.Player.randomCombatChance = -10;
