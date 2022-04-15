@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sin: 1
-  name: Belphie
+  enemyName: Belphie
   relationshipPoints: 0
 --- !u!65 &426670742
 BoxCollider:

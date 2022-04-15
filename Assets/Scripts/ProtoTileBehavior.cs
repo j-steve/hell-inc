@@ -15,6 +15,7 @@ public class ProtoTileBehavior : MonoBehaviour
     public bool ceilingSpawned = false;
     public bool stairSpawned = false;
     public bool hasPillar = false;
+    public bool hasItemOrEnemy = false;
     public GameObject errorObj;
     public GameObject[] decoAlwaysSpawn;
     public GameObject debugObj;

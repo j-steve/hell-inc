@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sin: 0
-  name: Lou
+  enemyName: Lou
   relationshipPoints: 0
 --- !u!65 &513777796
 BoxCollider:

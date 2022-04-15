@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sin: 3
-  name: Sathy
+  enemyName: Sathy
   relationshipPoints: 0
 --- !u!65 &1262165660
 BoxCollider:

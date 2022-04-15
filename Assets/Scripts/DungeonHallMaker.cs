@@ -19,7 +19,9 @@ public GameObject[] splitRoomTypes;
 public int numOfTilesInSection = 0;
 public Camera mainCamera;
 public Canvas loadingCanvas;
-public List<GameObject> FinalTileList;
+public GameObject[] FinalTileList;
+public int tileCounter = 0;
+public OfficeManager officeManager;
 
 
     // Start is called before the first frame update
@@ -135,12 +137,15 @@ public List<GameObject> FinalTileList;
     {
         yield return new WaitForSeconds(2);
         ManifestTiles();
+        yield return new WaitForSeconds(2);
+        officeManager.DropCoworkers();
         //loadingCanvas.gameObject.SetActive(false);
     } 
 
     public void AddTileToFinalList(GameObject tile)
     {
-        FinalTileList.Add(tile);
+        FinalTileList[tileCounter] = tile;
+        tileCounter += 1;
     }
 
 }
