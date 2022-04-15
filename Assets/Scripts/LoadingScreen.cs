@@ -331,7 +331,7 @@ public class LoadingScreen : MonoBehaviour
     }
     public IEnumerator LoadOffice()
     {
-        if (GameManager.WorkDay < 6)
+        if (GameManager.WorkDay < 5)
         {
             inScreen = false;
             office.gameObject.SetActive(true);
@@ -339,9 +339,14 @@ public class LoadingScreen : MonoBehaviour
             yield return new WaitForSeconds(2);
             gameObject.SetActive(false);
         }
+        else if(GameManager.WorkDay == 6)
+        {
+            GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.name == "lou").Single());
+        }
         else
         {
             textField.text = "";
+            GameManager.StartCredits();
         }
     }
 
