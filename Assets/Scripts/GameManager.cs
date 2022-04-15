@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public static event Action<Enemy> OnStartCombat;
     public static event Action OnCompleteCombat;
     public static event Action OnDayEnd;
-    public static bool GameWon = false;
+    public static bool GameWon = true;
 
     private static LoadingScreen _loadingScreen;
 

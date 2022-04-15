@@ -101,10 +101,10 @@ public class LoadingScreen : MonoBehaviour
 
         day7Sprites = new List<LoadingSpriteAnimation>();
         day7Sprites.Add(new LoadingSpriteAnimation(aba, 0, 8, 1, false));
-        day7Sprites.Add(new LoadingSpriteAnimation(beezlebob, 0, 8, 2, false));
-        day7Sprites.Add(new LoadingSpriteAnimation(belphie, 0, 8, 3, false));
-        day7Sprites.Add(new LoadingSpriteAnimation(mams, 0, 8, 4, false));
-        day7Sprites.Add(new LoadingSpriteAnimation(lou, 0, 8, 5, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(beezlebob, 1, 8, 2, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(belphie, 2, 8, 3, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(mams, 3, 8, 4, false));
+        day7Sprites.Add(new LoadingSpriteAnimation(lou, 4, 8, 5, false));
     }
 
     public void StartText()
@@ -359,7 +359,7 @@ public class LoadingScreen : MonoBehaviour
             text = day6;
             sprites = day6Sprites;
         }
-        else if (GameManager.WorkDay == 6)
+        else if (GameManager.WorkDay == 7)
         {
             text = day7;
             sprites = day7Sprites;
@@ -384,14 +384,16 @@ public class LoadingScreen : MonoBehaviour
             inScreen = false;
             gotTextForDay = false;
         }
-        else if(GameManager.WorkDay == 6)
+        else if(GameManager.WorkDay == 5)
         {
-            GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.name == "Lou").Single());
+            gameObject.SetActive(false);
+            GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.enemyName == "Lou").Single());
         }
         else
         {
             textField.text = "";
             GameManager.StartCredits();
+            StartNewDay();
         }
     }
 

@@ -88,11 +88,18 @@ public class CombatManager : MonoBehaviour
             wordGameController.Initialize(currentConversation.Text, enemy.enemyInfo.GetCombatTrait().Modifiers);
         });
         CombatFailOkButton.onClick.AddListener(GameManager.EndDay);
-        wordGameController.OnGameWon += (delegate () { 
-            SetBattleLine(convoResponsePrompts.GetRandom());
-            encounterStartMenu.SetActive(false);
-            conversationResponseMenu.SetActive(true);
-            combatMenu.SetActive(true);
+        wordGameController.OnGameWon += (delegate () {
+            if (GameManager.WorkDay == 5)
+            {
+                GameManager.EndDay();
+            }
+            else
+            {
+                SetBattleLine(convoResponsePrompts.GetRandom());
+                encounterStartMenu.SetActive(false);
+                conversationResponseMenu.SetActive(true);
+                combatMenu.SetActive(true);
+            }
         });
         wordGameController.OnGameLost += (delegate () {
             SetBattleLine(convoFailLines.GetRandom());
