@@ -1209,7 +1209,7 @@ MonoBehaviour:
   moveDistance: 4
   moveSpeed: 20
   rotationSpeed: 500
-  officeManager: {fileID: 0}
+  officeManager: {fileID: 1862451334}
 --- !u!114 &1134839572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1414,12 +1414,7 @@ MonoBehaviour:
   Wrath: {fileID: 160161202}
   Envy: {fileID: 1015904215}
   Coworkers: []
-  Items:
-  - {fileID: 146777677}
-  - {fileID: 1423395150}
-  - {fileID: 412602785}
-  - {fileID: 930184428}
-  - {fileID: 397242539}
+  Items: []
   dungeonTileList: {fileID: 2099710222}
   NumberOfItemsPerDay: 5
 --- !u!82 &1862451335

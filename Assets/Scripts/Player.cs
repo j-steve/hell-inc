@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     int randomCombatChance = -10;
     int randomCombatChangeIncrement = 0;
 
-    public List<ItemInfo> ItemInventory { get; private set; }
+    public List<ItemInfo> ItemInventory { get; set; }
     public bool LockPlayer { get; set; } = true;
     public PlayerMovement Movement { get; set; }
     public Vector3 EndPosition { get; set; }
@@ -63,6 +63,12 @@ public class Player : MonoBehaviour
                         //LockPlayer = true;
                         //officeManager.InitiateCombat(hit.collider.name);
                         GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.enemyName == hit.collider.name).Single());
+                    }
+                    if (collided && hit.collider.tag == "Item")
+                    {
+                        Debug.Log(hit.collider.name);
+                        AddItem(Utilities.GetRandomItem());
+                        Destroy(hit.collider.gameObject);
                     }
                     else
                     {
