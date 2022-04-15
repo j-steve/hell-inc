@@ -22,8 +22,8 @@ public class CombatManager : MonoBehaviour
         { EmojiRating.WORST, new List<string>() {  "WHAT? How could you say that??", "Are you kidding me??", "What are you, crazy?", "What? That doesn't make any sense!", "You weren't listening at all!" } }
     };
     static Dictionary<EmojiRating, Color> emojiRatingColors = new Dictionary<EmojiRating, Color>() {
-        {EmojiRating.BEST, new Color32(159, 188, 155, 255)}, // Bright Green
-        {EmojiRating.GOOD, new Color32(5, 173, 7, 255)}, // Pale Green
+        {EmojiRating.BEST, new Color32(5, 173, 7, 255)}, // Bright Green
+        {EmojiRating.GOOD, new Color32(159, 188, 155, 255)}, // Pale Green
         {EmojiRating.BAD, new Color32(229, 229, 229, 121)}, // Gray
         {EmojiRating.WORST, new Color32(255, 117, 117, 255)} // Red
     };
@@ -190,7 +190,7 @@ public class CombatManager : MonoBehaviour
         string extra = "";
 
         if(levelUps > 0)
-            extra += " You feel a little stronger.";
+            extra += " [You feel a little stronger.]";
 
         if (enemy.relationshipPoints >= 200 && !enemyTrait.gameObject.activeSelf)
         {
