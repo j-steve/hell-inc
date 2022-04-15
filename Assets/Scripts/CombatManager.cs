@@ -58,6 +58,8 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        gameObject.GetComponentsInParent<AudioSource>()[0].volume = Utilities.GetMasterVolume();
+        gameObject.GetComponentsInParent<AudioSource>()[0].Play();
         player.LockPlayer = true;
         preCombatRelationsip = enemy.relationshipPoints;
         wordGameController.gameObject.SetActive(false);
