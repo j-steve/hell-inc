@@ -45,6 +45,7 @@ public class CombatManager : MonoBehaviour
     Conversation currentConversation;
     public GameObject ItemInventory;
     public Button ItemSlotPrefab;
+    public Button CombatFailOkButton;
     public Transform ItemInventoryContainer;
     string lastSelectedItem;
     bool displayText;
@@ -74,6 +75,7 @@ public class CombatManager : MonoBehaviour
             currentConversation = enemy.GetRandomConversation();
             wordGameController.Initialize(currentConversation.Text, enemy.enemyInfo.GetCombatTrait().Modifiers);
         });
+        CombatFailOkButton.onClick.AddListener(GameManager.EndDay);
         wordGameController.OnGameWon += (delegate () { 
             SetBattleLine(convoResponsePrompts.GetRandom());
             encounterStartMenu.SetActive(false);
