@@ -160,9 +160,9 @@ public class ProtoTileBehavior : MonoBehaviour
 
     }
 
-    public void CallSpawnTile(DungeonHallMaker dungeon)
+    public void CallSpawnTile(GameObject dungeonTileList)
     {
-        dungeon.AddTileToFinalList(this.gameObject);
+        transform.parent = dungeonTileList.transform;
         StartCoroutine(SpawnTilePieces());
     }
 

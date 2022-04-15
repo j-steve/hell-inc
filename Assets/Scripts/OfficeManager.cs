@@ -11,7 +11,7 @@ public class OfficeManager : MonoBehaviour
     public Enemy Wrath;
     public Enemy Envy;
     public List<Enemy> Coworkers;
-    public DungeonHallMaker dungeon;
+    public GameObject dungeonTileList;
 
     // Start is called before the first frame update
     void Start()
@@ -32,22 +32,21 @@ public class OfficeManager : MonoBehaviour
         
     }
 
-    public IEnumerator DropCoworkers()
+    public void DropCoworkers()
     {
-        print("hello from DropCoworkers");
-        yield return new WaitForSeconds(4);
+        
         foreach (Enemy coworker in Coworkers)
         {
             bool suitableDrop = false;
-
+            print("hello from DropCoworkers");
             while (suitableDrop == false)
             {
-                int randTile = Random.Range(0,dungeon.FinalTileList.Length);
-                if (dungeon.FinalTileList[randTile] != null && !dungeon.FinalTileList[randTile].GetComponent<ProtoTileBehavior>().hasItemOrEnemy)
+                int randTile = Random.Range(0,dungeonTileList.transform.childCount);
+                if (!dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().hasItemOrEnemy)
                 {
-                    Vector3 dropPos = dungeon.FinalTileList[randTile].GetComponent<ProtoTileBehavior>().dropPoint;
+                    Vector3 dropPos = dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().dropPoint;
                     coworker.gameObject.transform.position = dropPos;
-                    dungeon.FinalTileList[randTile].GetComponent<ProtoTileBehavior>().hasItemOrEnemy = true;
+                    dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().hasItemOrEnemy = true;
                     suitableDrop=true;
                 }
                 else
