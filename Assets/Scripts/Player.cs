@@ -1,10 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 { 
-
     public int moveDistance = 10;
     public int moveSpeed = 10;
     public int rotationSpeed = 60;
@@ -160,11 +160,16 @@ public class Player : MonoBehaviour
 
     private void CheckForRandomBattle()
     {
-        if(Random.Range(0, 1000) < randomCombatChance)
+        if (Random.Range(0, 1000) < randomCombatChance || Input.GetKey("c") && Input.GetKey("o"))
         {
             Debug.Log("Fight!");
             //officeManager.InitiateCombat("Lou");
             //LockPlayer = true;
+            //GameManager.StartCombat();
+            SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
+            //SceneManager.LoadScene("Combat");
+            FindObjectOfType<OfficeManager>().gameObject.SetActive(false);
+            FindObjectOfType<OfficeMainMenu>().gameObject.SetActive(false);
             randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
         }
