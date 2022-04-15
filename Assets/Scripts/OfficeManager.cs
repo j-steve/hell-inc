@@ -11,6 +11,7 @@ public class OfficeManager : MonoBehaviour
     public Enemy Wrath;
     public Enemy Envy;
     public List<Enemy> Coworkers;
+    public List<Item> Items;
     public GameObject dungeonTileList;
     public int NumberOfItemsPerDay = 5;
 
@@ -62,11 +63,34 @@ public class OfficeManager : MonoBehaviour
 
     public void DropItems()
     {
-        List<ItemInfo> items = new List<ItemInfo>();
-        for (int i = 0; i < NumberOfItemsPerDay; i++)
-        {
-            items.Add(Utilities.GetRandomItem());
-        }
+        //List<ItemInfo> items = new List<ItemInfo>();
+        //for (int i = 0; i < NumberOfItemsPerDay; i++)
+        //{
+        //    items.Add(Utilities.GetRandomItem());
+        //}
 
+        foreach (Item item in Items)
+        {
+            bool suitableDrop = false;
+            print("hello from DropItems");
+            while (suitableDrop == false)
+            {
+                int randTile = Random.Range(0,dungeonTileList.transform.childCount);
+                if (!dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().hasItemOrEnemy)
+                {
+                    Vector3 dropPos = dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().dropPoint;
+                    item.gameObject.transform.position = dropPos;
+                    dungeonTileList.transform.GetChild(randTile).GetComponent<ProtoTileBehavior>().hasItemOrEnemy = true;
+                    suitableDrop=true;
+                }
+                else
+                {
+                    //do nothing
+                }
+            }
+            
+            
+        }
+    
     }
 }
