@@ -163,13 +163,8 @@ public class Player : MonoBehaviour
         if (Random.Range(0, 1000) < randomCombatChance || Input.GetKey("c") && Input.GetKey("o"))
         {
             Debug.Log("Fight!");
-            //officeManager.InitiateCombat("Lou");
             //LockPlayer = true;
-            //GameManager.StartCombat();
-            SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
-            //SceneManager.LoadScene("Combat");
-            FindObjectOfType<OfficeManager>().gameObject.SetActive(false);
-            FindObjectOfType<OfficeMainMenu>().gameObject.SetActive(false);
+            GameManager.StartCombat();
             randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
         }
