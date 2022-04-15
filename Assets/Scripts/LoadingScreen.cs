@@ -365,6 +365,7 @@ public class LoadingScreen : MonoBehaviour
             sprites = day7Sprites;
         }
         gotTextForDay = true;
+        loadOffice = false;
         timeSpent = 0;
         lineNumber = 0;
     }
