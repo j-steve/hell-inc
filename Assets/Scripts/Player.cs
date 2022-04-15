@@ -168,7 +168,7 @@ public class Player : MonoBehaviour
             //LockPlayer = true;
             randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
-            GameManager.StartCombat();
+            GameManager.StartRandomCombat();
         }
         else
         {

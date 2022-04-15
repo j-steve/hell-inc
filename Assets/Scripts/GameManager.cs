@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Assets.Scripts;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     public static int WorkDay { get; private set; } = 1;
 
-    public static event Action OnStartCombat;
+    public static event Action<Enemy> OnStartCombat;
     public static event Action OnCompleteCombat;
     public static event Action OnDayEnd;
 
@@ -48,11 +49,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public static void StartCombat()
+    public static void StartRandomCombat()
+    {
+        Sin sin = ((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom();
+        Enemy enemy = new Enemy() { sin = sin };
+        enemy.Initialize();
+        StartCombat(enemy);
+    }
+
+    public static void StartCombat(Enemy enemy)
     {
         officeManager.gameObject.SetActive(false);
         SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
-        OnStartCombat?.Invoke();
+        OnStartCombat?.Invoke(enemy);
     }
 
     public static void ReturnToOffice()
