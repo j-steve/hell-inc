@@ -33,5 +33,24 @@ public class GameManager : MonoBehaviour
 
     public static Player Player { get; private set; } = new Player();
 
-    public static int WorkDay = 1;
+    public static int WorkDay { get; private set; } = 1;
+
+    public static Action OnStartCombat;
+    public static Action OnCompleteCombat;
+    public static Action OnDayEnd;
+
+    public static void StartCombat()
+    {
+
+    }
+
+    public static void CompleteCombat()
+    {
+        OnCompleteCombat();
+    }
+    public static void EndDay()
+    {
+        OnDayEnd();
+        WorkDay += 1;
+    }
 }
