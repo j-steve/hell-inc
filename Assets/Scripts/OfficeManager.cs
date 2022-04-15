@@ -36,9 +36,16 @@ public class OfficeManager : MonoBehaviour
 
     public void ClearDungeon()
     {
-        foreach(Transform child in dungeonTileList.transform)
+       /* foreach(Transform child in dungeonTileList.transform)
         {
             GameObject.Destroy(child.gameObject);
+        }*/
+
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+
+        foreach (GameObject tile in tiles)
+        {
+            Destroy(tile);
         }
     }
 

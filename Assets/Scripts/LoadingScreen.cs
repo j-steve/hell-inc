@@ -371,11 +371,7 @@ public class LoadingScreen : MonoBehaviour
 
     public IEnumerator LoadOffice()
     {
-        inScreen = false;
-        gotTextForDay = false;
-        DontDestroyOnLoad(this.gameObject);
-        GameManager.SetLoadingScreen();
-        DontDestroyOnLoad(this.gameObject);
+       GameManager.SetLoadingScreen();
         //GameManager.loadingScreen.gameObject = gameObject;
         if (GameManager.WorkDay < 5)
         {
@@ -384,6 +380,8 @@ public class LoadingScreen : MonoBehaviour
             office.StartGame();
             yield return new WaitForSeconds(2);
             gameObject.SetActive(false);
+            inScreen = false;
+            gotTextForDay = false;
         }
         else if(GameManager.WorkDay == 6)
         {
