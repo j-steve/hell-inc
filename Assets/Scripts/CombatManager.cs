@@ -8,6 +8,8 @@ using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
+
+    const int TEXT_SPEED = 1;
     /** How long to display the outcome of the emoji selection, in seconds, before returning to the main screen. */
     const float EMOJI_OUTCOME_DISPLAY_SECONDS = 3f;
     static List<string> convoResponsePrompts = new List<string>() { "What do you think of that?", "How do you feel about that?", "Eh?", "Know what I mean?", "What do you think?", "Can you believe it?", "What do you say to that?", };
@@ -28,7 +30,7 @@ public class CombatManager : MonoBehaviour
     static Dictionary<Emoji, int> emojiUnicodeMap = new Dictionary<Emoji, int> { { Emoji.Happy, 0x1F600 }, { Emoji.Love, 0x1F601 }, { Emoji.Neutral, 0x1F609 }, { Emoji.Crying, 0x1F603 }, { Emoji.Shocked, 0x1F606 }, { Emoji.Anger, 0x1F605 } };
 
     public Enemy enemy;
-    public int textSpeed = 5;
+    public GameObject enemySprite;
     public Player player;
     public bool enemyMove;
     public TextMeshProUGUI enemyName;
@@ -58,6 +60,12 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        enemy = new Enemy().Initialize(((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom());
+        for (int i = 0; i < enemySprite.transform.childCount; i++) {
+            if (enemySprite.transform.GetChild(i).name == enemy.enemyName) {
+                enemySprite.transform.GetChild(i).gameObject.SetActive(true);
+            }
+        }
         gameObject.GetComponentsInParent<AudioSource>()[0].volume = Utilities.GetMasterVolume();
         gameObject.GetComponentsInParent<AudioSource>()[0].Play();
         player.LockPlayer = true;
@@ -111,7 +119,7 @@ public class CombatManager : MonoBehaviour
         enemyMove = true;
         displayText = false;
         battleLinePosition = 0;
-        textSpeedTrack = textSpeed;
+        textSpeedTrack = TEXT_SPEED;
     }
 
     void CreateEmojiMenu()
@@ -284,8 +292,8 @@ public class CombatManager : MonoBehaviour
     {
         if (enemyMove)
         {
-            enemy.transform.position = new Vector3(enemy.transform.position.x - .5f, enemy.transform.position.y, enemy.transform.position.z);
-            if (enemy.transform.position.x <= 70)
+            enemySprite.transform.position = new Vector3(enemySprite.transform.position.x - 2, enemySprite.transform.position.y, enemySprite.transform.position.z);
+            if (enemySprite.transform.position.x <= 70)
             {
                 enemyMove = false;
                 enemyName.text = enemy.enemyName;
@@ -301,7 +309,7 @@ public class CombatManager : MonoBehaviour
         }
         else if(displayText)
         {
-            if(textSpeed == textSpeedTrack)
+            if(TEXT_SPEED == textSpeedTrack)
             {
                 enemyLine.text = battleLine.Substring(0, battleLinePosition);
                 battleLinePosition++;
