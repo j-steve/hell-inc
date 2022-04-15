@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -163,6 +164,8 @@ public class Player : MonoBehaviour
         if (Random.Range(0, 1000) < randomCombatChance || Input.GetKey("c") && Input.GetKey("o"))
         {
             Debug.Log("Fight!");
+
+            Enemy encounter = GameManager.Coworkers.Values.Where(e => e.sin != Sin.Pride).ToList()[Random.Range(0, GameManager.Coworkers.Count - 1)];
             //officeManager.InitiateCombat("Lou");
             //LockPlayer = true;
             //GameManager.StartCombat();

@@ -137,6 +137,7 @@ public class LoadingScreen : MonoBehaviour
                 }
                 else if (Utilities.day == 5)
                 {
+                    Day5Setup();
                     text = day5;
                     sprites = day5Sprites;
                 }
@@ -240,6 +241,60 @@ public class LoadingScreen : MonoBehaviour
             StartCoroutine(LoadOffice());
         }*/
     }
+    public void Day5Setup()
+    {
+        day5 = new List<string>();
+        day5Sprites = new List<LoadingSpriteAnimation>();
+
+        day5.Add("The day has finally come and its time to see if your slacking has paid off.^");
+        day5.Add("You head towards Lou's office ready for a boss battle.^");
+        int numberOfLines = 2;
+
+        foreach (Enemy e in GameManager.Coworkers.Values)
+        {
+            if (e.relationshipPoints >= 500)
+            {
+                switch(e.sin)
+                {
+                    case Sin.Envy:
+                        day5.Add("Yo, I'm not saying I'm jealous of you or anything but I really liked what you were doing this past week.^");
+                        day5.Add("You feel like you can focus long hours, staring at every word someone says.^");
+                        day5Sprites.Add(new LoadingSpriteAnimation(beezlebob, numberOfLines, numberOfLines + 1, 2, false));
+                        numberOfLines += 2;
+                        break;
+                    case Sin.Gluttony:
+                        day5.Add("Hey, I really enjoyed getting to know you better this week. When I was talking to you I almost didn't feel hungry.^");
+                        day5.Add("You feel like your words are big, full, and ready to destroy.^");
+                        day5Sprites.Add(new LoadingSpriteAnimation(belphie, numberOfLines, numberOfLines + 1, 2, false));
+                        numberOfLines += 2;
+                        break;
+                    case Sin.Greed:
+                        day5.Add("Howdy there, ");
+                        day5.Add("You feel like you can talk so fast that no body has can get a word in.^");
+                        day5Sprites.Add(new LoadingSpriteAnimation(mams, numberOfLines, numberOfLines + 1, 2, false));
+                        numberOfLines += 2;
+                        break;
+                    case Sin.Lust:
+                        day5.Add("");
+                        day5.Add("You feel like you can move with confidence and strut your stuff faster than ever before.^");
+                        day5Sprites.Add(new LoadingSpriteAnimation(asmo, numberOfLines, numberOfLines + 1, 2, false));
+                        numberOfLines += 2;
+                        break;
+                    case Sin.Wrath:
+                        day5.Add("");
+                        day5.Add("You feel like you really know how to say the most damaging thing to a person at a given time.^");
+                        day5Sprites.Add(new LoadingSpriteAnimation(sathy, numberOfLines, numberOfLines + 1, 2, false));
+                        numberOfLines += 2;
+                        break;
+                }
+            }
+            else if(e.relationshipPoints > 750)
+            {
+
+            }
+        }
+    }
+
     public IEnumerator LoadOffice()
     {
         inScreen = false;
