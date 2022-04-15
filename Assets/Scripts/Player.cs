@@ -60,6 +60,7 @@ public class Player : MonoBehaviour
                         hit.collider.GetComponentInParent<Enemy>();
                         //LockPlayer = true;
                         //officeManager.InitiateCombat(hit.collider.name);
+                        GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.name == hit.collider.name).Single());
                     }
                     else
                     {
