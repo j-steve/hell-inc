@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     float lastY;
     float distanceMoved = 0f;
     Quaternion qTo = Quaternion.identity;  
-    int randomCombatChance = -10;
-    int randomCombatChangeIncrement = 0;
+    public int randomCombatChance = -10;
+    public int randomCombatChangeIncrement = 0;
 
     public List<ItemInfo> ItemInventory { get; set; }
     public bool LockPlayer { get; set; } = true;

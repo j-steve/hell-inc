@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Assets.Scripts;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class GameManager : MonoBehaviour
 
     public static void StartRandomCombat()
     {
-        StartCombat(Coworkers.GetRandom().Value);
+        StartCombat(Coworkers.Values.Where(c => c.enemyName != "Lou").GetRandom());
     }
 
     public static void StartCombat(Enemy enemy)
@@ -95,7 +96,9 @@ public class GameManager : MonoBehaviour
                 e.enemyInfo.LoadConversations(WorkDay);
             }
         }
-
+        GameManager.Player.randomCombatChance = -10;
+        GameManager.Player.randomCombatChangeIncrement = 0;
+        GameManager.Player.AttentionSpanCurrent = GameManager.Player.AttentionSpanMax;
         officeManager.gameObject.SetActive(true);
         officeManager.ClearDungeon();
         loadingScreen.gameObject.SetActive(true);
