@@ -138,6 +138,7 @@ public GameObject RootObject;
         ManifestTiles();
         yield return new WaitForSeconds(2);
         officeManager.DropCoworkers();
+        officeManager.DropItems();
         for (int i = 0; i < RootObject.transform.childCount; i++)
         {
             RootObject.transform.GetChild(i);
