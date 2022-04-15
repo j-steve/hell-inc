@@ -1495,7 +1495,12 @@ MonoBehaviour:
   Wrath: {fileID: 160161202}
   Envy: {fileID: 1015904215}
   Coworkers: []
-  Items: []
+  Items:
+  - {fileID: 146777677}
+  - {fileID: 1423395150}
+  - {fileID: 412602785}
+  - {fileID: 930184428}
+  - {fileID: 397242539}
   dungeonTileList: {fileID: 2099710222}
   NumberOfItemsPerDay: 5
 --- !u!82 &1862451335
