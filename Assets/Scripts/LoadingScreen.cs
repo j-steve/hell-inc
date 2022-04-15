@@ -341,7 +341,7 @@ public class LoadingScreen : MonoBehaviour
         }
         else if(GameManager.WorkDay == 6)
         {
-            GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.name == "lou").Single());
+            GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.name == "Lou").Single());
         }
         else
         {
