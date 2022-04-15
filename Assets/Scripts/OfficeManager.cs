@@ -34,6 +34,14 @@ public class OfficeManager : MonoBehaviour
         
     }
 
+    public void ClearDungeon()
+    {
+        foreach(Transform child in dungeonTileList.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+    }
+
     public void DropCoworkers()
     {
         

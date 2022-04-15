@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
                     if (collided && hit.collider.tag == "Item")
                     {
                         Debug.Log(hit.collider.name);
-                        AddItem(Utilities.GetRandomItem());
+                        GameManager.Player.AddItem(Utilities.GetRandomItem());
                         Destroy(hit.collider.gameObject);
                     }
                     else

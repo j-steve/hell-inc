@@ -41,12 +41,26 @@ public class GameManager : MonoBehaviour
     public static event Action OnDayEnd;
     public static bool GameWon = false;
 
+    private static LoadingScreen _loadingScreen;
+
+    public static LoadingScreen loadingScreen
+    {
+        get { if (_loadingScreen == null) { _loadingScreen = FindObjectOfType<LoadingScreen>(); }
+            return _loadingScreen;
+        }
+        set { }
+    }
     private static OfficeManager _officeManager;
-    private static OfficeManager officeManager {
+    public static OfficeManager officeManager {
         get {
             if (_officeManager == null) {_officeManager = FindObjectOfType<OfficeManager>();}
             return _officeManager;
         }
+    }
+
+    public static void SetLoadingScreen()
+    {
+        if (loadingScreen.gameObject.tag == "") ;
     }
 
     public static void StartRandomCombat()
@@ -75,6 +89,10 @@ public class GameManager : MonoBehaviour
         Enemy = null;
         WorkDay += 1;
         officeManager.gameObject.SetActive(true);
+        officeManager.ClearDungeon();
+        loadingScreen.gameObject.SetActive(true);
+        loadingScreen.StartNewDay();
+        //officeManager.gameObject.SetActive(true);
         OnDayEnd?.Invoke();
     }
 

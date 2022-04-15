@@ -130,51 +130,10 @@ public class LoadingScreen : MonoBehaviour
                 loadOffice = false;
                 StartCoroutine(LoadOffice());
             }
+            
+            if(!gotTextForDay)
+            { StartNewDay(); }
 
-            if (!gotTextForDay)
-            {
-                textSpeedTrack = textSpeed;
-                if (GameManager.WorkDay == 1)
-                {
-                    text = day1;
-                    sprites = day1Sprites;
-                }
-                else if (GameManager.WorkDay == 2)
-                {
-                    text = day2;
-                    sprites = day2Sprites;
-                }
-                else if (GameManager.WorkDay == 3)
-                {
-                    text = day3;
-                    sprites = day3Sprites;
-                }
-                else if (GameManager.WorkDay == 4)
-                {
-                    text = day4;
-                    sprites = day4Sprites;
-                }
-                else if (GameManager.WorkDay == 5)
-                {
-                    Day5Setup();
-                    text = day5;
-                    sprites = day5Sprites;
-                }
-                else if (GameManager.WorkDay == 6)
-                {
-                    Day6Setup();
-                    text = day6;
-                    sprites = day6Sprites;
-                }
-                else if (GameManager.WorkDay == 6)
-                {
-                    text = day7;
-                    sprites = day7Sprites;
-                }
-                gotTextForDay = true;
-                timeSpent = 0;
-                lineNumber = 0;
-            }
             if (gotTextForDay && !loadOffice)
             {
                 foreach (LoadingSpriteAnimation l in sprites.Where(s => s.Placed))
@@ -256,11 +215,11 @@ public class LoadingScreen : MonoBehaviour
                     battleLinePosition = 0;
                     lineNumber++;
                 }
-            }
 
-            if (lineNumber >= text.Count)
-            {
-                loadOffice = true;
+                if (lineNumber >= text.Count)
+                {
+                    loadOffice = true;
+                }
             }
         }
 
@@ -353,11 +312,74 @@ public class LoadingScreen : MonoBehaviour
             day6Sprites.Add(new LoadingSpriteAnimation(aba, 0, 6, 1, false));
         }
     }
+    public void StartNewDay()
+    {
+        inScreen = true;
+        textSpeedTrack = textSpeed;
+        textField.text = "";
+
+        Color tmp = sprite1.color;
+        tmp.a = 0;
+        sprite1.color = tmp;
+        sprite2.color = tmp;
+        sprite3.color = tmp;
+        sprite4.color = tmp;
+        sprite5.color = tmp;
+        battleLinePosition = 0;
+
+        if (GameManager.WorkDay == 1)
+        {
+            text = day1;
+            sprites = day1Sprites;
+        }
+        else if (GameManager.WorkDay == 2)
+        {
+            text = day2;
+            sprites = day2Sprites;
+        }
+        else if (GameManager.WorkDay == 3)
+        {
+            text = day3;
+            sprites = day3Sprites;
+        }
+        else if (GameManager.WorkDay == 4)
+        {
+            text = day4;
+            sprites = day4Sprites;
+        }
+        else if (GameManager.WorkDay == 5)
+        {
+            Day5Setup();
+            text = day5;
+            sprites = day5Sprites;
+        }
+        else if (GameManager.WorkDay == 6)
+        {
+            Day6Setup();
+            text = day6;
+            sprites = day6Sprites;
+        }
+        else if (GameManager.WorkDay == 6)
+        {
+            text = day7;
+            sprites = day7Sprites;
+        }
+        gotTextForDay = true;
+        timeSpent = 0;
+        lineNumber = 0;
+    }
+
     public IEnumerator LoadOffice()
     {
+        inScreen = false;
+        gotTextForDay = false;
+        DontDestroyOnLoad(this.gameObject);
+        GameManager.SetLoadingScreen();
+        DontDestroyOnLoad(this.gameObject);
+        //GameManager.loadingScreen.gameObject = gameObject;
         if (GameManager.WorkDay < 5)
         {
-            inScreen = false;
+            GameManager.officeManager.gameObject.SetActive(true);
             office.gameObject.SetActive(true);
             office.StartGame();
             yield return new WaitForSeconds(2);

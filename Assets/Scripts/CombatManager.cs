@@ -104,19 +104,6 @@ public class CombatManager : MonoBehaviour
         //List<ItemInfo> items = DatabaseManager.Instance.Items;
 
         //player.AddItem(Utilities.GetRandomItem());
-        if (player.ItemInventory == null)
-            player.ItemInventory = new List<ItemInfo>();
-
-        foreach (ItemInfo i in player.ItemInventory)
-        {
-            Button b = Instantiate(ItemSlotPrefab);
-            TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
-            textmeshPro.text = i.Name;
-            b.onClick.AddListener(delegate { ButtonOnClick(b); });
-
-
-            b.transform.SetParent(ItemInventoryContainer, false);
-        }
     }
 
     void SetBattleLine(string battleLine)
@@ -218,7 +205,7 @@ public class CombatManager : MonoBehaviour
         {
             Debug.Log(lastSelectedItem);
             ItemInventory.SetActive(false);
-            player.RemoveItem(lastSelectedItem);
+            GameManager.Player.RemoveItem(lastSelectedItem);
 
             if (enemy.enemyInfo.GetWantedtTrait().Category == DatabaseManager.Instance.Items.Find(i => i.Name == lastSelectedItem).Category)
             {
@@ -273,6 +260,23 @@ public class CombatManager : MonoBehaviour
 
     public void GiveItem()
     {
+        if (GameManager.Player.ItemInventory == null)
+            GameManager.Player.ItemInventory = new List<ItemInfo>();
+
+        foreach (Transform child in ItemInventoryContainer.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        foreach (ItemInfo i in GameManager.Player.ItemInventory)
+        {
+            Button b = Instantiate(ItemSlotPrefab);
+            TextMeshProUGUI textmeshPro = b.GetComponentInChildren<TextMeshProUGUI>();
+            textmeshPro.text = i.Name;
+            b.onClick.AddListener(delegate { ButtonOnClick(b); });
+
+            b.transform.SetParent(ItemInventoryContainer, false);
+        }
         ItemInventory.SetActive(true);
     }
 
@@ -290,8 +294,16 @@ public class CombatManager : MonoBehaviour
         }
         else
         {
-            //player loses health
+            GameManager.Player.AttentionSpanCurrent -= .1f;
             SetBattleLine("You're not getting away that easily");
+            if (GameManager.Player.AttentionSpanCurrent <= 0)
+            {
+                SetBattleLine(convoFailLines.GetRandom());
+                encounterStartMenu.SetActive(false);
+                conversationFailMenu.SetActive(true);
+                combatMenu.SetActive(true);
+            }
+            
         }
     }
 
