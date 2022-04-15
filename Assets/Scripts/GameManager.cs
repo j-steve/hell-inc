@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
 
     public static Player Player { get; private set; } = new Player();
 
+    public static Enemy Enemy { get; private set; }
+
     public static int WorkDay { get; private set; } = 1;
 
     public static event Action<Enemy> OnStartCombat;
@@ -58,6 +60,7 @@ public class GameManager : MonoBehaviour
     public static void StartCombat(Enemy enemy)
     {
         officeManager.gameObject.SetActive(false);
+        Enemy = enemy;
         SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
         OnStartCombat?.Invoke(enemy);
     }
@@ -65,12 +68,14 @@ public class GameManager : MonoBehaviour
     public static void ReturnToOffice()
     {
         SceneManager.UnloadSceneAsync("Combat");
+        Enemy = null;
         officeManager.gameObject.SetActive(true);
         OnCompleteCombat?.Invoke();
     }
     public static void EndDay()
     {
         SceneManager.UnloadSceneAsync("Combat");
+        Enemy = null;
         WorkDay += 1;
         officeManager.gameObject.SetActive(true);
         OnDayEnd?.Invoke();

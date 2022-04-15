@@ -60,7 +60,11 @@ public class CombatManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = new Enemy().Initialize(((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom());
+        if (GameManager.Enemy == null) {
+            enemy = new Enemy().Initialize(((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom());
+        } else {
+            enemy = GameManager.Enemy;
+        }
         for (int i = 0; i < enemySprite.transform.childCount; i++) {
             if (enemySprite.transform.GetChild(i).name == enemy.enemyName) {
                 enemySprite.transform.GetChild(i).gameObject.SetActive(true);
