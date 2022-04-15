@@ -16,10 +16,14 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Initialize();
+    }
+
+    public void Initialize()
+    {
         enemyInfo = new EnemyInfo();
         enemyInfo.LoadConversations(1);//This is the day
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
-
         BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();
     }
 
