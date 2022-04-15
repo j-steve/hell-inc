@@ -173,7 +173,10 @@ public class CombatManager : MonoBehaviour
 
         string extra = "";
 
-        if(enemy.relationshipPoints >= 25 && !enemyTrait.gameObject.activeSelf)
+        if(levelUps > 0)
+            extra += " You feel a little stronger.";
+
+        if (enemy.relationshipPoints >= 200 && !enemyTrait.gameObject.activeSelf)
         {
             enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
             extra = " [You now know something about " + enemy.enemyName + "]";
@@ -223,12 +226,12 @@ public class CombatManager : MonoBehaviour
                             break;
                     }
                     preCombatRelationsip += 50;
-
+                    extra += " You feel a little stronger.";
                     
                     if ((enemy.relationshipPoints / 100) == 2)
                     {
                         enemyTrait.text = "Likes " + enemy.enemyInfo.GetWantedtTrait().Category;
-                        extra = " You now know something about " + enemy.enemyName;
+                        extra = " [You now know something about " + enemy.enemyName + "]";
                         enemyTrait.gameObject.SetActive(true);
                     }
                 }
