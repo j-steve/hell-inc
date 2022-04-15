@@ -117,27 +117,27 @@ public class LoadingScreen : MonoBehaviour
             if (!gotTextForDay)
             {
                 textSpeedTrack = textSpeed;
-                if (Utilities.day == 1)
+                if (GameManager.WorkDay == 1)
                 {
                     text = day1;
                     sprites = day1Sprites;
                 }
-                else if (Utilities.day == 2)
+                else if (GameManager.WorkDay == 2)
                 {
                     text = day2;
                     sprites = day2Sprites;
                 }
-                else if (Utilities.day == 3)
+                else if (GameManager.WorkDay == 3)
                 {
                     text = day3;
                     sprites = day3Sprites;
                 }
-                else if (Utilities.day == 4)
+                else if (GameManager.WorkDay == 4)
                 {
                     text = day4;
                     sprites = day4Sprites;
                 }
-                else if (Utilities.day == 5)
+                else if (GameManager.WorkDay == 5)
                 {
                     Day5Setup();
                     text = day5;
