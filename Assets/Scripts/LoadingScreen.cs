@@ -21,6 +21,7 @@ public class LoadingScreen : MonoBehaviour
     List<string> day3;
     List<string> day4;
     List<string> day5;
+    List<string> day6;
     //public float timeDelay = 3;
     public float timeSpent = 0;
     public int lineNumber = 0;
@@ -45,6 +46,7 @@ public class LoadingScreen : MonoBehaviour
     List<LoadingSpriteAnimation> day3Sprites;
     List<LoadingSpriteAnimation> day4Sprites;
     List<LoadingSpriteAnimation> day5Sprites;
+    List<LoadingSpriteAnimation> day6Sprites;
 
     public void Initiate()
     {
@@ -59,15 +61,15 @@ public class LoadingScreen : MonoBehaviour
 
         day2 = new List<string>();
         day2.Add("Day 2^^"); 
-        day2.Add("Press enter to play.");
+        day2.Add("Press enter to continue.");
 
         day3 = new List<string>();
         day3.Add("Day 3^^");
-        day3.Add("Press enter to play.");
+        day3.Add("Press enter to continue.");
 
         day4 = new List<string>();
         day4.Add("Day 4^^");
-        day4.Add("Press enter to play.");
+        day4.Add("Press enter to continue.");
 
         day1Sprites = new List<LoadingSpriteAnimation>();
         day1Sprites.Add(new LoadingSpriteAnimation(aba, 0, 2, 1, false));
@@ -115,27 +117,27 @@ public class LoadingScreen : MonoBehaviour
             if (!gotTextForDay)
             {
                 textSpeedTrack = textSpeed;
-                if (Utilities.day == 1)
+                if (GameManager.WorkDay == 1)
                 {
                     text = day1;
                     sprites = day1Sprites;
                 }
-                else if (Utilities.day == 2)
+                else if (GameManager.WorkDay == 2)
                 {
                     text = day2;
                     sprites = day2Sprites;
                 }
-                else if (Utilities.day == 3)
+                else if (GameManager.WorkDay == 3)
                 {
                     text = day3;
                     sprites = day3Sprites;
                 }
-                else if (Utilities.day == 4)
+                else if (GameManager.WorkDay == 4)
                 {
                     text = day4;
                     sprites = day4Sprites;
                 }
-                else if (Utilities.day == 5)
+                else if (GameManager.WorkDay == 5)
                 {
                     Day5Setup();
                     text = day5;
@@ -269,30 +271,34 @@ public class LoadingScreen : MonoBehaviour
                         numberOfLines += 2;
                         break;
                     case Sin.Greed:
-                        day5.Add("Howdy there, ");
+                        day5.Add("Howdy there, I just want you to know that if I ever go and start my own company, I'm Jerry McGuireing you.^");
                         day5.Add("You feel like you can talk so fast that no body has can get a word in.^");
                         day5Sprites.Add(new LoadingSpriteAnimation(mams, numberOfLines, numberOfLines + 1, 2, false));
                         numberOfLines += 2;
                         break;
                     case Sin.Lust:
-                        day5.Add("");
+                        day5.Add("I couldn't keep my eyes off you this week. No matter how your meeting goes, know I'd love you take you out tonight.^");
                         day5.Add("You feel like you can move with confidence and strut your stuff faster than ever before.^");
                         day5Sprites.Add(new LoadingSpriteAnimation(asmo, numberOfLines, numberOfLines + 1, 2, false));
                         numberOfLines += 2;
                         break;
                     case Sin.Wrath:
-                        day5.Add("");
+                        day5.Add("Finally someone I can rage with!! You and me are going to a McDonalds this weekend and yelling at everyone who is taking too long to order!");
                         day5.Add("You feel like you really know how to say the most damaging thing to a person at a given time.^");
                         day5Sprites.Add(new LoadingSpriteAnimation(sathy, numberOfLines, numberOfLines + 1, 2, false));
                         numberOfLines += 2;
                         break;
                 }
             }
-            else if(e.relationshipPoints > 750)
-            {
-
-            }
         }
+
+        day5.Add("^You get to Lou's door and go in.^");
+        numberOfLines++;
+        day5Sprites.Add(new LoadingSpriteAnimation(lou, numberOfLines, numberOfLines + 2, 2, false));
+        day5Sprites.Add(new LoadingSpriteAnimation(aba, 0, numberOfLines + 2, 1, false));
+        day5.Add("Alright, lets get this over with so I can turn your cubicle into my suspender storage rack.^");
+        day5.Add("The final battle starts now.^");
+        day5.Add("Press enter to continue.");
     }
 
     public IEnumerator LoadOffice()
