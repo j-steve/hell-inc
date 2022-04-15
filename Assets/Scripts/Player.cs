@@ -168,11 +168,6 @@ public class Player : MonoBehaviour
             Enemy encounter = GameManager.Coworkers.Values.Where(e => e.sin != Sin.Pride).ToList()[Random.Range(0, GameManager.Coworkers.Count - 1)];
             //officeManager.InitiateCombat("Lou");
             //LockPlayer = true;
-            //GameManager.StartCombat();
-            SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
-            //SceneManager.LoadScene("Combat");
-            FindObjectOfType<OfficeManager>().gameObject.SetActive(false);
-            FindObjectOfType<OfficeMainMenu>().gameObject.SetActive(false);
             randomCombatChance = -10;
             randomCombatChangeIncrement = 0;
         }

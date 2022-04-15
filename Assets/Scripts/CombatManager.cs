@@ -266,7 +266,7 @@ public class CombatManager : MonoBehaviour
         int result = UnityEngine.Random.Range(0, 100);
         if((enemy.enemyInfo.GetCombatTrait().Modifiers.RunAwayChance * 50) > result)
         {
-            //go to office
+            GameManager.ReturnToOffice();
         }
         else
         {
