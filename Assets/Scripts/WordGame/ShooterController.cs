@@ -11,7 +11,7 @@ public class ShooterController : MonoBehaviour
     const float MAX_SHOOT_INTERVAL = MIN_SHOOT_INTERVAL / 10;
 
     static readonly List<string> PLAYER_RESPONSE_WORDS = new List<string>() {
-       "yup.", "totally.", "really?", "oh.", "wow.", "woah.", "huh.", "uh-huh.", "yikes." 
+       "yup.", "really?", "oh.", "wow.", "woah.", "huh.", "ok.", "oh.", "mm."
         // TODO: add support for multiple words, e.g.  "that's crazy.",   "say what?"  "no way."
     };
 

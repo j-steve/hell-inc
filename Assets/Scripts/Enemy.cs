@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,31 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Initialize();
+        Initialize(sin);
     }
 
-    public void Initialize()
+    public Enemy Initialize(Sin sin)
     {
+        this.sin = sin;
+        enemyName = getSinEnemyName(sin);
         enemyInfo = new EnemyInfo();
         enemyInfo.LoadConversations(1);//This is the day
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
         BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();
+        return this;
+    }
+
+    private static string getSinEnemyName(Sin sin)
+    {
+        switch (sin) {
+            case Sin.Envy: return "BeelzeBob";
+            case Sin.Gluttony: return "Belphie";
+            case Sin.Lust: return "Asmo";
+            case Sin.Greed: return "Mams";
+            case Sin.Wrath: return "Sathy";
+            case Sin.Pride: return "Lou";
+            default: return "Aba";
+        }
     }
 
     public string GetCombatLine()
@@ -35,5 +52,10 @@ public class Enemy : MonoBehaviour
     public Conversation GetRandomConversation()
     {
         return enemyInfo.Conversations.GetRandom();
+    }
+
+    internal object Initialize(IEnumerable<Sin> enumerable)
+    {
+        throw new NotImplementedException();
     }
 }

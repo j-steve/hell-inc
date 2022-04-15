@@ -52,9 +52,7 @@ public class GameManager : MonoBehaviour
     public static void StartRandomCombat()
     {
         Sin sin = ((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom();
-        Enemy enemy = new Enemy() { sin = sin };
-        enemy.Initialize();
-        StartCombat(enemy);
+        StartCombat(new Enemy().Initialize(sin));
     }
 
     public static void StartCombat(Enemy enemy)
