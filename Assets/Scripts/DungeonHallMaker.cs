@@ -19,7 +19,10 @@ public GameObject[] splitRoomTypes;
 public int numOfTilesInSection = 0;
 public Camera mainCamera;
 public Canvas loadingCanvas;
-public List<GameObject> FinalTileList;
+public GameObject[] FinalTileList;
+public int tileCounter = 0;
+public OfficeManager officeManager;
+public GameObject RootObject;
 
 
     // Start is called before the first frame update
@@ -40,7 +43,7 @@ public List<GameObject> FinalTileList;
         {
             PlaceTile();
             StartPlacing();
-            mainCamera.transform.position = this.transform.position + new Vector3(1,-.75f,0);//Increase by 1 to align to the tiles
+            mainCamera.transform.position = this.transform.position + new Vector3(0,-.75f,0);//Increase by 1 to align to the tiles
         }
     }
 
@@ -108,7 +111,7 @@ public List<GameObject> FinalTileList;
 
     public void ManifestTiles()
     {
-        BroadcastMessage("CallSpawnTile",this);
+        BroadcastMessage("CallSpawnTile",RootObject);
     }
 
     public void PlaceSplitRooms()
@@ -117,12 +120,10 @@ public List<GameObject> FinalTileList;
         {
             int rand = Random.Range(0, numOfTilesInSection);
             int randtype = Random.Range(0, splitRoomTypes.Length -1);
-            print("Rand is: " + rand);
-            print("RandType is: " + randtype);
-            print(tileList.Capacity);
             GameObject newSplitRoom = Instantiate(splitRoomTypes[randtype],tileList[rand].transform.position,Quaternion.identity,transform);
             splitRoomList.Add(newSplitRoom);
             newSplitRoom.transform.Rotate(transform.up * (Random.Range(0,3) * 90));
+            newSplitRoom.GetComponent<DungeonHallMaker>().RootObject = RootObject;
         }
         foreach (GameObject splitRoom in splitRoomList)
         {
@@ -135,12 +136,19 @@ public List<GameObject> FinalTileList;
     {
         yield return new WaitForSeconds(2);
         ManifestTiles();
+        yield return new WaitForSeconds(2);
+        officeManager.DropCoworkers();
+        for (int i = 0; i < RootObject.transform.childCount; i++)
+        {
+            RootObject.transform.GetChild(i);
+        }
         //loadingCanvas.gameObject.SetActive(false);
     } 
 
     public void AddTileToFinalList(GameObject tile)
     {
-        FinalTileList.Add(tile);
+        FinalTileList[tileCounter] = tile;
+        tileCounter += 1;
     }
 
 }
