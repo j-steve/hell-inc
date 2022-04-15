@@ -283,7 +283,6 @@ public class LoadingScreen : MonoBehaviour
 
         foreach (Enemy e in GameManager.Coworkers.Values)
         {
-            e.relationshipPoints = 500;
             if (e.relationshipPoints >= 500)
             {
                 switch(e.sin)
