@@ -8,15 +8,9 @@ public class NewDayScreen : MonoBehaviour
     const float SCREEN_DURATION_SECONDS = 3;
 
     private float? screenEndTime;
-
-    NewDayScreen()
-    {
-        GameManager.OnDayEnd += ShowNewDayScreen;
-    }
     
-    private void ShowNewDayScreen()
-    {
-        gameObject.SetActive(true);
+    private void Start()
+    { 
         GetComponentInChildren<TextMeshPro>().text = "Day " + GameManager.WorkDay;
         screenEndTime = Time.time + SCREEN_DURATION_SECONDS;
     }
