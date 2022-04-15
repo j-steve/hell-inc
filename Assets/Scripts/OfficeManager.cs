@@ -36,10 +36,12 @@ public class OfficeManager : MonoBehaviour
 
     public void ClearDungeon()
     {
-       /* foreach(Transform child in dungeonTileList.transform)
-        {
-            GameObject.Destroy(child.gameObject);
-        }*/
+        /* foreach(Transform child in dungeonTileList.transform)
+         {
+             GameObject.Destroy(child.gameObject);
+         }*/
+
+        //GameObject[] halls = GameObject.Fin
 
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
 
@@ -47,6 +49,14 @@ public class OfficeManager : MonoBehaviour
         {
             Destroy(tile);
         }
+
+        tiles = GameObject.FindGameObjectsWithTag("OfficeRoomMaker");
+
+        foreach (GameObject tile in tiles)
+        {
+            Destroy(tile);
+        }
+
     }
 
     public void DropCoworkers()
@@ -86,6 +96,7 @@ public class OfficeManager : MonoBehaviour
 
         foreach (Item item in Items)
         {
+            item.gameObject.SetActive(true);
             bool suitableDrop = false;
             print("hello from DropItems");
             while (suitableDrop == false)

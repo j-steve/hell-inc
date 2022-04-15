@@ -68,7 +68,8 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log(hit.collider.name);
                         GameManager.Player.AddItem(Utilities.GetRandomItem());
-                        Destroy(hit.collider.gameObject);
+                        //Destroy(hit.collider.gameObject);
+                        hit.collider.gameObject.SetActive(false);
                     }
                     else
                     {
