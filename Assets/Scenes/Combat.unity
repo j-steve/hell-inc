@@ -130,10 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3373432241388455931, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1217951489
+      objectReference: {fileID: 0}
     - target: {fileID: 3373432241979557703, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: enemy
       value: 
-      objectReference: {fileID: 3373432242613868933}
+      objectReference: {fileID: 0}
     - target: {fileID: 3373432242074233616, guid: fd159f79b3317534fbba1d403e2262d2, type: 3}
       propertyPath: isEnemy
       value: 1
