@@ -284,7 +284,7 @@ public class LoadingScreen : MonoBehaviour
         numberOfLines++;
         day5Sprites.Add(new LoadingSpriteAnimation(lou, numberOfLines, numberOfLines + 2, 2, false));
         day5Sprites.Add(new LoadingSpriteAnimation(aba, 0, numberOfLines + 2, 1, false));
-        day5.Add("Alright, lets get this over with so I can turn your cubicle into my suspender storage rack.^");
+        day5.Add("\"Alright, lets get this over with so I can turn your cubicle into my suspender storage rack.\"^");
         day5.Add("The final battle starts now.^");
         day5.Add("Press enter to continue.");
     }
