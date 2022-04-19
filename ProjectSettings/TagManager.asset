@@ -20,6 +20,7 @@ TagManager:
   - PlayerPixel
   - EnemyPixel
   - Item
+  - OfficeRoomMaker
   layers:
   - Default
   - TransparentFX

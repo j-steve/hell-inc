@@ -56,7 +56,9 @@ public class Enemy : MonoBehaviour
 
     public Conversation GetRandomConversation()
     {
-        return enemyInfo.Conversations.GetRandom();
+        Conversation c = enemyInfo.Conversations.GetRandom();
+        enemyInfo.Conversations.Remove(c);
+        return c;
     }
 
     internal object Initialize(IEnumerable<Sin> enumerable)
