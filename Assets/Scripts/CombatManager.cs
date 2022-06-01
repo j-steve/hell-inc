@@ -64,6 +64,7 @@ public class CombatManager : MonoBehaviour
             enemy = new Enemy().Initialize(((IEnumerable<Sin>)Enum.GetValues(typeof(Sin))).GetRandom());
         } else {
             enemy = GameManager.Enemy;
+            enemy.enemyInfo.LoadConversations(GameManager.WorkDay);
         }
         for (int i = 0; i < enemySprite.transform.childCount; i++) {
             if (enemySprite.transform.GetChild(i).name == enemy.enemyName) {
@@ -88,11 +89,18 @@ public class CombatManager : MonoBehaviour
             wordGameController.Initialize(currentConversation.Text, enemy.enemyInfo.GetCombatTrait().Modifiers);
         });
         CombatFailOkButton.onClick.AddListener(GameManager.EndDay);
-        wordGameController.OnGameWon += (delegate () { 
-            SetBattleLine(convoResponsePrompts.GetRandom());
-            encounterStartMenu.SetActive(false);
-            conversationResponseMenu.SetActive(true);
-            combatMenu.SetActive(true);
+        wordGameController.OnGameWon += (delegate () {
+            if (GameManager.WorkDay == 5)
+            {
+                GameManager.EndDay();
+            }
+            else
+            {
+                SetBattleLine(convoResponsePrompts.GetRandom());
+                encounterStartMenu.SetActive(false);
+                conversationResponseMenu.SetActive(true);
+                combatMenu.SetActive(true);
+            }
         });
         wordGameController.OnGameLost += (delegate () {
             SetBattleLine(convoFailLines.GetRandom());
@@ -342,6 +350,11 @@ public class CombatManager : MonoBehaviour
             if (battleLinePosition == battleLine.Length + 1)
                 displayText = false;
         } else if (returnToMainMenuTime.HasValue && Time.time >= returnToMainMenuTime) {
+            if(enemy.enemyInfo.Conversations.Count == 0)
+            {
+                GameManager.ReturnToOffice();
+            }
+
             foreach (Button button in conversationResponseMenu.GetComponentsInChildren<Button>()) { button.interactable=true; }
             conversationResponseMenu.SetActive(false);
             encounterStartMenu.SetActive(true);

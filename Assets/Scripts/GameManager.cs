@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Assets.Scripts;
+using System.Linq;
 
 public class GameManager : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class GameManager : MonoBehaviour
     public static event Action<Enemy> OnStartCombat;
     public static event Action OnCompleteCombat;
     public static event Action OnDayEnd;
-    public static bool GameWon = false;
+    public static bool GameWon = true;
 
     private static LoadingScreen _loadingScreen;
 
@@ -65,11 +66,15 @@ public class GameManager : MonoBehaviour
 
     public static void StartRandomCombat()
     {
-        StartCombat(Coworkers.GetRandom().Value);
+        StartCombat(Coworkers.Values.Where(c => c.enemyName != "Lou").GetRandom());
     }
 
     public static void StartCombat(Enemy enemy)
     {
+        if(enemy.enemyName == "Lou")
+        {
+            WorkDay = 5;
+        }
         officeManager.gameObject.SetActive(false);
         Enemy = enemy;
         SceneManager.LoadScene("Combat", LoadSceneMode.Additive);
@@ -88,6 +93,19 @@ public class GameManager : MonoBehaviour
         SceneManager.UnloadSceneAsync("Combat");
         Enemy = null;
         WorkDay += 1;
+        if (WorkDay < 5)
+        {
+            foreach (Enemy e in Coworkers.Values)
+            {
+                if (e.sin == Sin.Pride)
+                    e.enemyInfo.Conversations = DatabaseManager.Instance.GetConversationsForBoss();
+                else
+                    e.enemyInfo.LoadConversations(WorkDay);
+            }
+        }
+        GameManager.Player.randomCombatChance = -10;
+        GameManager.Player.randomCombatChangeIncrement = 0;
+        GameManager.Player.AttentionSpanCurrent = GameManager.Player.AttentionSpanMax;
         officeManager.gameObject.SetActive(true);
         officeManager.ClearDungeon();
         loadingScreen.gameObject.SetActive(true);

@@ -41,6 +41,10 @@ public GameObject RootObject;
     {
         if (isStarterHall)
         {
+            tileList.Clear();
+            splitRoomList.Clear();
+            numOfTilesInSection = 0;
+            tileCounter = 0;
             PlaceTile();
             StartPlacing();
             mainCamera.transform.position = this.transform.position + new Vector3(0,-.75f,0);//Increase by 1 to align to the tiles

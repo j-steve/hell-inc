@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     float lastY;
     float distanceMoved = 0f;
     Quaternion qTo = Quaternion.identity;  
-    int randomCombatChance = -10;
-    int randomCombatChangeIncrement = 0;
+    public int randomCombatChance = -10;
+    public int randomCombatChangeIncrement = 0;
 
     public List<ItemInfo> ItemInventory { get; set; }
     public bool LockPlayer { get; set; } = true;
@@ -64,11 +64,12 @@ public class Player : MonoBehaviour
                         //officeManager.InitiateCombat(hit.collider.name);
                         GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.enemyName == hit.collider.name).Single());
                     }
-                    if (collided && hit.collider.tag == "Item")
+                    else if (collided && hit.collider.tag == "Item")
                     {
                         Debug.Log(hit.collider.name);
                         GameManager.Player.AddItem(Utilities.GetRandomItem());
-                        Destroy(hit.collider.gameObject);
+                        //Destroy(hit.collider.gameObject);
+                        hit.collider.gameObject.SetActive(false);
                     }
                     else
                     {
@@ -101,8 +102,16 @@ public class Player : MonoBehaviour
                     {
                         Debug.Log(hit.collider.name);
                         hit.collider.GetComponentInParent<Enemy>();
+                        GameManager.StartCombat(GameManager.Coworkers.Values.Where(e => e.enemyName == hit.collider.name).Single());
                         //LockPlayer = true;
                         //officeManager.InitiateCombat(hit.collider.name);
+                    }
+                    else if (collided && hit.collider.tag == "Item")
+                    {
+                        Debug.Log(hit.collider.name);
+                        GameManager.Player.AddItem(Utilities.GetRandomItem());
+                        //Destroy(hit.collider.gameObject);
+                        hit.collider.gameObject.SetActive(false);
                     }
                     else
                     {

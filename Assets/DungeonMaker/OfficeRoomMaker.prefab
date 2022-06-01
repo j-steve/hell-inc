@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1966075974820838828}
   m_Layer: 0
   m_Name: OfficeRoomMaker
-  m_TagString: Untagged
+  m_TagString: OfficeRoomMaker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,12 @@ MonoBehaviour:
   splitRoomList: []
   splitRoomTypes: []
   numOfTilesInSection: 0
+  mainCamera: {fileID: 0}
+  loadingCanvas: {fileID: 0}
+  FinalTileList: []
+  tileCounter: 0
+  officeManager: {fileID: 0}
+  RootObject: {fileID: 0}
 --- !u!1 &1966075974972237393
 GameObject:
   m_ObjectHideFlags: 0

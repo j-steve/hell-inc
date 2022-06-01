@@ -26,6 +26,11 @@ public class Enemy : MonoBehaviour
         enemyName = getSinEnemyName(sin);
         enemyInfo = new EnemyInfo();
         enemyInfo.LoadConversations(1);//This is the day
+        if (sin == Sin.Pride)
+        {
+            enemyInfo.Conversations = DatabaseManager.Instance.GetConversationsForBoss();
+            enemyInfo.SetAsBoss();
+        }
         enemyData = DatabaseManager.Instance.EnemyData.Where(e => e.Key == sin).Select(e => e.Value).SingleOrDefault();
         BattleLines = DatabaseManager.Instance.BattleLines.Where(b => b.Sin == sin).ToList();
         return this;
@@ -51,7 +56,9 @@ public class Enemy : MonoBehaviour
 
     public Conversation GetRandomConversation()
     {
-        return enemyInfo.Conversations.GetRandom();
+        Conversation c = enemyInfo.Conversations.GetRandom();
+        enemyInfo.Conversations.Remove(c);
+        return c;
     }
 
     internal object Initialize(IEnumerable<Sin> enumerable)

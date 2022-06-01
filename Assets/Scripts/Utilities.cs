@@ -160,6 +160,12 @@ public class EnemyInfo
         Utilities.itemsWanted.Add(DatabaseManager.Instance.Items.Find(i => i.Category == t2.Category));
         Traits.Add(t2);
     }
+    
+    public void SetAsBoss()
+    {
+        Traits.Remove(Traits.Find(t => t.Type == TraitType.Conversation));
+        Traits.Add(DatabaseManager.Instance.BossTrait);
+    }
 
     public void LoadConversations(int day)
     {
@@ -188,7 +194,7 @@ public class EnemyInfo
     {
         foreach(Trait t in Traits)
         {
-            if (t.Type == TraitType.Conversation)
+            if (t.Type == TraitType.Conversation || t.Type == TraitType.Boss)
                 return t;
         }
         return null;

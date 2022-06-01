@@ -48,17 +48,28 @@ public class DatabaseManager
 
     public List<Conversation> GetConversationsForDay(int day)
     {
-        int split = Conversations.Count / 5;
-        int start = split * (day - 1);
-        int end = day == 5 ? Conversations.Count : split * day;
         List<Conversation> dayConversations = new List<Conversation>();
-
-        for (int i = start; i < end; i++)
+        if (day < 5)
         {
-            dayConversations.Add(Conversations[i]);
-        }
+            int split = Conversations.Count / 4;
+            int start = split * (day - 1);
+            int end = day == 4 ? Conversations.Count - 1 : split * day;
 
+
+            for (int i = start; i < end; i++)
+            {
+                dayConversations.Add(Conversations[i]);
+            }
+        }
         return dayConversations;
+    }
+
+    public List<Conversation> GetConversationsForBoss()
+    {
+        List<Conversation> bossConversations = new List<Conversation>();
+        bossConversations.Add(Conversations[Conversations.Count - 1]);
+
+        return bossConversations;
     }
 
     private void LoadFetches()

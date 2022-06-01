@@ -72,6 +72,10 @@ public class WordGameController : MonoBehaviour
     private void LoseGame()
     {
         gameObject.SetActive(false);
+        if(GameManager.WorkDay == 5)
+        {
+            GameManager.GameWon = false;
+        }
         OnGameLost();
     }
 
